@@ -26,7 +26,7 @@ mpl.rcParams.update({
     "mathtext.bf": "Open Sans:bold", "axes.linewidth": 0.7, "axes.edgecolor": PAL["ink"],
     "xtick.major.width": 0.7, "ytick.major.width": 0.7, "xtick.major.size": 2.5,
     "ytick.major.size": 2.5, "xtick.color": PAL["ink"], "ytick.color": PAL["ink"],
-    "axes.labelcolor": PAL["ink"], "text.color": PAL["ink"], "axes.grid": True,
+    "axes.labelcolor": PAL["ink"], "text.color": PAL["ink"], "axes.grid": False,
     "grid.color": "#edf0f3", "grid.linewidth": 0.5, "axes.spines.top": False,
     "axes.spines.right": False, "legend.frameon": False, "pdf.fonttype": 42,
     "savefig.bbox": "tight", "savefig.pad_inches": 0.02, "lines.solid_capstyle": "round",
@@ -253,7 +253,6 @@ def fig_scaling():
     ax.set_xticklabels([PROBLEM[p].replace(" ", "\n", 1) for p in probs])
     ax.set_ylabel("Total inversion time (s)")
     ax.set_title("Total time, noise 1%")
-    ax.grid(axis="x", visible=False)
     ax.set_ylim(0.1, 1e4)
     ax.legend(loc="upper left", fontsize=5.8, handlelength=1.2)
     fig.tight_layout(w_pad=1.0)

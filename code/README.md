@@ -32,6 +32,14 @@ Code for the paper in `../paper/`. Everything runs on CPU with PyTorch (double p
 | `run_all.sh`, `run_3d.sh`, `run_basin.sh`, `run_prototype.sh` | Experiments 3, 2, 4 / 7, 6 / 8 / 9 in sequence | |
 | `figures.py`, `make_tables.py` | Figures and tables written to `../paper/figures` and `../paper/tables` | |
 
+To regenerate all generated figures from the saved results, run from `experiments/`:
+
+```sh
+PYTHONPATH=.. python figures.py forward reconstruction accuracy_time convergence scaling frequency iterative three_d scaling3d basin prototyping
+```
+
+Plots use grid-free axes; scientific reference lines and the illustrated 3D mesh are retained.
+
 Each process uses `NTHREADS` CPU threads (default 4). Timings in the paper were measured on an
 Intel Core i9-13900H; the classical inversions and the scaling study ran alone on the machine,
 the BEM–PINN inversions three at a time and the forward reproductions five at a time.
