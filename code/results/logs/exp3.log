@@ -1,0 +1,6 @@
+{'n_el': 20, 'n_unknowns': 60, 'forward': 0.0058, 'assembly': 0.0056, 'adjoint': 0.0109, 'pinn_fixed': 0.0009, 'pinn_joint': 0.0116, 'solve': 0.0002, 'fd_jacobian': 0.0466}
+{'n_el': 40, 'n_unknowns': 120, 'forward': 0.0114, 'assembly': 0.0107, 'adjoint': 0.0214, 'pinn_fixed': 0.0009, 'pinn_joint': 0.0215, 'solve': 0.0007, 'fd_jacobian': 0.0911}
+{'n_el': 80, 'n_unknowns': 240, 'forward': 0.021, 'assembly': 0.0193, 'adjoint': 0.038, 'pinn_fixed': 0.0013, 'pinn_joint': 0.0405, 'solve': 0.0018, 'fd_jacobian': 0.1684}
+{'n_el': 160, 'n_unknowns': 480, 'forward': 0.0697, 'assembly': 0.0611, 'adjoint': 0.1382, 'pinn_fixed': 0.0027, 'pinn_joint': 0.1247, 'solve': 0.0086, 'fd_jacobian': 0.5575}
+{'n_el': 320, 'n_unknowns': 960, 'forward': 0.2928, 'assembly': 0.2443, 'adjoint': 0.5644, 'pinn_fixed': 0.0093, 'pinn_joint': 0.4908, 'solve': 0.0485, 'fd_jacobian': 2.3423}
+{'n_el': 640, 'n_unknowns': 1920, 'forward': 1.1381, 'assembly': 0.7406, 'adjoint': 3.8035, 'pinn_fixed': 0.0239, 'pinn_joint': 3.1864, 'solve': 0.3974, 'fd_jacobian': 9.1046}

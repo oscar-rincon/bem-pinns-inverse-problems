@@ -1,0 +1,27 @@
+interface 0.0 lm_fd {'shape': 0.012984264390211192} t 0.8s
+interface 0.0 lbfgs_adj {'shape': 0.012984259280667227} t 0.5s
+interface 0.0 lbfgs_adj_cont {'shape': 0.012984260162624708} t 0.9s
+interface 0.01 lm_fd {'shape': 0.013480761363029626} t 0.7s
+interface 0.01 lbfgs_adj {'shape': 0.013480768351798292} t 0.5s
+interface 0.01 lbfgs_adj_cont {'shape': 0.013480764718375888} t 0.9s
+interface 0.03 lm_fd {'shape': 0.0152911273939313} t 0.7s
+interface 0.03 lbfgs_adj {'shape': 0.015291133283640327} t 0.5s
+interface 0.03 lbfgs_adj_cont {'shape': 0.015291134285110563} t 0.8s
+surface 0.0 lm_fd {'shape': 0.002848585936376643} t 0.8s
+surface 0.0 lbfgs_adj {'shape': 0.0028485926056761573} t 0.4s
+surface 0.0 lbfgs_adj_cont {'shape': 0.0028485860614251533} t 0.6s
+surface 0.01 lm_fd {'shape': 0.00336557380062825} t 0.8s
+surface 0.01 lbfgs_adj {'shape': 0.0033655763928552487} t 0.3s
+surface 0.01 lbfgs_adj_cont {'shape': 0.003365572858388726} t 0.7s
+surface 0.03 lm_fd {'shape': 0.004950397485568099} t 0.9s
+surface 0.03 lbfgs_adj {'shape': 0.004950391451687054} t 0.4s
+surface 0.03 lbfgs_adj_cont {'shape': 0.004950391477227545} t 0.8s
+joint 0.0 lm_fd {'shape': 0.003441449166817521, 'mu1': 0.010043991449442902, 'rho1': 0.00543137032097929} t 2.0s
+joint 0.0 lbfgs_adj {'shape': 1.1003931783460572, 'mu1': 0.2975961318539566, 'rho1': 0.5222276848236336} t 1.0s
+joint 0.0 lbfgs_adj_cont {'shape': 0.0034414420865888874, 'mu1': 0.010043989668433784, 'rho1': 0.005431373783161275} t 1.3s
+joint 0.01 lm_fd {'shape': 0.006637368394195209, 'mu1': 0.011867314635383375, 'rho1': 0.004259652508856848} t 1.8s
+joint 0.01 lbfgs_adj {'shape': 1.100520747042227, 'mu1': 0.3071012419086996, 'rho1': 0.5188451900218259} t 0.8s
+joint 0.01 lbfgs_adj_cont {'shape': 0.006637351577094988, 'mu1': 0.011867312549588949, 'rho1': 0.004259666236004489} t 1.3s
+joint 0.03 lm_fd {'shape': 0.013403076157458976, 'mu1': 0.015767382817473585, 'rho1': 0.002167663347960702} t 1.9s
+joint 0.03 lbfgs_adj {'shape': 1.1008573645333135, 'mu1': 0.3229146287700828, 'rho1': 0.5128995499550789} t 0.8s
+joint 0.03 lbfgs_adj_cont {'shape': 0.013403016713670538, 'mu1': 0.015767324635382107, 'rho1': 0.0021676517229461956} t 1.3s

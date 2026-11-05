@@ -1,0 +1,199 @@
+\begin{thebibliography}{25}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bard(1982)]{Bard1982}
+Pierre-Yves Bard.
+\newblock Diffracted waves and displacement field over two-dimensional elevated
+  topographies.
+\newblock \emph{Geophysical Journal of the Royal Astronomical Society},
+  71\penalty0 (3):\penalty0 731--760, 1982.
+
+\bibitem[Kawase(1988)]{Kawase1988}
+Hiroshi Kawase.
+\newblock Time-domain response of a semi-circular canyon for incident {SV},
+  {P}, and {Rayleigh} waves calculated by the discrete wavenumber boundary
+  element method.
+\newblock \emph{Bulletin of the Seismological Society of America}, 78\penalty0
+  (4):\penalty0 1415--1437, 1988.
+
+\bibitem[Bignardi et~al.(2012)Bignardi, Fedele, Yezzi, Rix, and
+  Santarato]{Bignardi2012}
+Samuel Bignardi, Francesco Fedele, Anthony~J. Yezzi, Glenn~J. Rix, and Giovanni
+  Santarato.
+\newblock Geometric seismic-wave inversion by the boundary element method.
+\newblock \emph{Bulletin of the Seismological Society of America}, 102\penalty0
+  (2), 2012.
+\newblock \doi{10.1785/0120110091}.
+\newblock TODO: add page numbers.
+
+\bibitem[Wang et~al.(2018)Wang, Da, and Qian]{Wang2018}
+Bin Wang, Yihui Da, and Zhenghua Qian.
+\newblock Forward and inverse studies on scattering of {Rayleigh} wave at
+  surface flaws.
+\newblock \emph{Applied Sciences}, 8\penalty0 (3):\penalty0 427, 2018.
+\newblock \doi{10.3390/app8030427}.
+
+\bibitem[Bonnet and Guzina(2009)]{Bonnet2009}
+Marc Bonnet and Bojan~B. Guzina.
+\newblock Elastic-wave identification of penetrable obstacles using
+  shape-material sensitivity framework.
+\newblock \emph{Journal of Computational Physics}, 228\penalty0 (2):\penalty0
+  294--311, 2009.
+\newblock TODO: verify year, volume and pages.
+
+\bibitem[Kallivokas et~al.(2009)]{Kallivokas2009}
+Loukas~F. Kallivokas et~al.
+\newblock Near-surface localization and shape identification of a scatterer
+  embedded in a halfplane using scalar waves.
+\newblock \emph{Journal of Computational Acoustics}, 2009.
+\newblock \doi{10.1142/S0218396X09003963}.
+\newblock TODO: complete author list, volume and pages.
+
+\bibitem[Chien et~al.(2005)Chien, Chiu, and Li]{Chien2005}
+Wei Chien, Chien-Ching Chiu, and Ching-Lieh Li.
+\newblock Shape and conductivity reconstruction of a variable conducting
+  cylindrical body buried in a half-space by the genetic algorithm.
+\newblock \emph{International Journal of Applied Electromagnetics and
+  Mechanics}, 21\penalty0 (2):\penalty0 51--62, 2005.
+\newblock \doi{10.3233/JAE-2005-670}.
+\newblock TODO: title is paraphrased from the abstract; copy the exact title
+  from the publisher.
+
+\bibitem[Raissi et~al.(2019)Raissi, Perdikaris, and Karniadakis]{Raissi2019}
+Maziar Raissi, Paris Perdikaris, and George~E. Karniadakis.
+\newblock Physics-informed neural networks: A deep learning framework for
+  solving forward and inverse problems involving nonlinear partial differential
+  equations.
+\newblock \emph{Journal of Computational Physics}, 378:\penalty0 686--707,
+  2019.
+
+\bibitem[Song et~al.(2022)Song, Alkhalifah, and Waheed]{Song2022}
+Chao Song, Tariq Alkhalifah, and Umair~Bin Waheed.
+\newblock A versatile framework to solve the {Helmholtz} equation using
+  physics-informed neural networks.
+\newblock \emph{Geophysical Journal International}, 228\penalty0 (3), 2022.
+\newblock TODO: add pages and DOI.
+
+\bibitem[Rasht-Behesht et~al.(2022)Rasht-Behesht, Huber, Shukla, and
+  Karniadakis]{RashtBehesht2022}
+Majid Rasht-Behesht, Christian Huber, Khemraj Shukla, and George~Em
+  Karniadakis.
+\newblock Physics-informed neural networks ({PINNs}) for wave propagation and
+  full waveform inversions.
+\newblock \emph{Journal of Geophysical Research: Solid Earth}, 127\penalty0
+  (5), 2022.
+\newblock TODO: verify article number (e2021JB023120) and DOI.
+
+\bibitem[Barmada et~al.(2024)Barmada, Dodge, Tucci, Formisano, Di~Barba, and
+  Mognaschi]{Barmada2024}
+Sami Barmada, Shayan Dodge, Mauro Tucci, Alessandro Formisano, Paolo Di~Barba,
+  and Maria~Evelina Mognaschi.
+\newblock A novel hybrid boundary element--physics informed neural network
+  method for numerical solutions in electromagnetics.
+\newblock \emph{IEEE Access}, 2024.
+\newblock TODO: add volume, pages and DOI.
+
+\bibitem[Wu et~al.(2026)Wu, Yuan, Gao, Yang, and Hou]{wu_novel_2026}
+Yongxin Wu, Haochen Yuan, Yufeng Gao, Shangchuan Yang, and Yue Hou.
+\newblock A {Novel} {Fourier} {Feature} {Physics}‐{Informed} {Neural}
+  {Networks} {Based} on the {Boundary} {Element} {Method} for {Solving}
+  {Scattering} of {SH} {Wave} {Induced} by {Complex} {Topography}.
+\newblock \emph{Earthquake Engineering \& Structural Dynamics}, March 2026.
+\newblock \doi{10.1002/eqe.70162}.
+\newblock URL \url{https://synapsesocial.com/papers/69b79e538166e15b153ab747}.
+
+\bibitem[Haber et~al.(2000)Haber, Ascher, and Oldenburg]{Haber2000}
+Eldad Haber, Uri~M. Ascher, and Doug Oldenburg.
+\newblock On optimization techniques for solving nonlinear inverse problems.
+\newblock \emph{Inverse Problems}, 16\penalty0 (5):\penalty0 1263--1280, 2000.
+\newblock \doi{10.1088/0266-5611/16/5/309}.
+
+\bibitem[van Leeuwen and Herrmann(2013)]{vanLeeuwen2013}
+Tristan van Leeuwen and Felix~J. Herrmann.
+\newblock Mitigating local minima in full-waveform inversion by expanding the
+  search space.
+\newblock \emph{Geophysical Journal International}, 195\penalty0 (1):\penalty0
+  661--667, 2013.
+\newblock \doi{10.1093/gji/ggt258}.
+
+\bibitem[S{\'a}nchez-Sesma and Campillo(1991)]{SanchezSesma1991}
+Francisco~J. S{\'a}nchez-Sesma and Michel Campillo.
+\newblock Diffraction of {P}, {SV}, and {R}ayleigh waves by topographic
+  features: a boundary integral formulation.
+\newblock \emph{Bulletin of the Seismological Society of America}, 81\penalty0
+  (6):\penalty0 2234--2253, 1991.
+
+\bibitem[Tancik et~al.(2020)Tancik, Srinivasan, Mildenhall, Fridovich-Keil,
+  Raghavan, Singhal, Ramamoorthi, Barron, and Ng]{Tancik2020}
+Matthew Tancik, Pratul~P. Srinivasan, Ben Mildenhall, Sara Fridovich-Keil,
+  Nithin Raghavan, Utkarsh Singhal, Ravi Ramamoorthi, Jonathan~T. Barron, and
+  Ren Ng.
+\newblock Fourier features let networks learn high frequency functions in low
+  dimensional domains.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pages 7537--7547, 2020.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, et~al.]{Paszke2019}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et~al.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32, 2019.
+
+\bibitem[Loshchilov and Hutter(2019)]{Loshchilov2019}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+
+\bibitem[Liu and Nocedal(1989)]{Liu1989}
+Dong~C. Liu and Jorge Nocedal.
+\newblock On the limited memory {BFGS} method for large scale optimization.
+\newblock \emph{Mathematical Programming}, 45:\penalty0 503--528, 1989.
+
+\bibitem[Marquardt(1963)]{Marquardt1963}
+Donald~W. Marquardt.
+\newblock An algorithm for least-squares estimation of nonlinear parameters.
+\newblock \emph{Journal of the Society for Industrial and Applied Mathematics},
+  11\penalty0 (2):\penalty0 431--441, 1963.
+
+\bibitem[Trifunac(1973)]{Trifunac1973}
+Mihailo~D. Trifunac.
+\newblock Scattering of plane {SH} waves by a semi-cylindrical canyon.
+\newblock \emph{Earthquake Engineering \& Structural Dynamics}, 1\penalty0
+  (3):\penalty0 267--281, 1973.
+\newblock \doi{10.1002/eqe.4290010307}.
+
+\bibitem[Trifunac(1971)]{Trifunac1971}
+Mihailo~D. Trifunac.
+\newblock Surface motion of a semi-cylindrical alluvial valley for incident
+  plane {SH} waves.
+\newblock \emph{Bulletin of the Seismological Society of America}, 61\penalty0
+  (6):\penalty0 1755--1770, 1971.
+
+\bibitem[Tsaur and Chang(2008)]{TsaurChang2008}
+Deng-How Tsaur and Kao-Hao Chang.
+\newblock An analytical approach for the scattering of {SH} waves by a
+  symmetrical {V}-shaped canyon: shallow case.
+\newblock \emph{Geophysical Journal International}, 174\penalty0 (1):\penalty0
+  255--264, 2008.
+\newblock TODO: verify volume and pages.
+
+\bibitem[Saad and Schultz(1986)]{Saad1986}
+Youcef Saad and Martin~H. Schultz.
+\newblock {GMRES}: A generalized minimal residual algorithm for solving
+  nonsymmetric linear systems.
+\newblock \emph{SIAM Journal on Scientific and Statistical Computing},
+  7\penalty0 (3):\penalty0 856--869, 1986.
+
+\bibitem[Colton and Kress(2013)]{Colton2013}
+David Colton and Rainer Kress.
+\newblock \emph{Inverse Acoustic and Electromagnetic Scattering Theory}.
+\newblock Springer, New York, 3 edition, 2013.
+
+\end{thebibliography}

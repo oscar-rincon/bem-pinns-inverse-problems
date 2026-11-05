@@ -1,0 +1,19 @@
+\begin{tabular}{llccccccccc}
+\toprule
+ & & \multicolumn{3}{c}{BEM + LM (FD Jacobian)} & \multicolumn{3}{c}{BEM + L-BFGS (adjoint)} & \multicolumn{3}{c}{BEM--PINN (this work)}\\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+Problem & noise & error & time (s) & solves & error & time (s) & solves & error & time (s) & assemblies\\
+\midrule
+Interface identification & 0\% & 1.59\% & 0.839 & 64 & 1.59\% & 0.543 & 14 & 0.99\% & 259 & 3217\\
+ & 1\% & 1.65\% & 0.822 & 64 & 1.65\% & 0.587 & 14 & 1.26\% & 262 & 3219\\
+ & 3\% & 1.79\% & 0.933 & 71 & 1.79\% & 0.609 & 14 & 1.91\% & 259 & 3210\\
+\addlinespace
+Surface reconstruction & 0\% & 0.35\% & 0.997 & 73 & 0.35\% & 0.382 & 14 & 0.35\% & 204 & 3229\\
+ & 1\% & 0.38\% & 0.951 & 73 & 0.38\% & 0.371 & 14 & 0.43\% & 203 & 3245\\
+ & 3\% & 0.47\% & 0.802 & 64 & 0.47\% & 0.341 & 14 & 0.61\% & 202 & 3227\\
+\addlinespace
+Joint identification & 0\% & 0.75\% & 1.83 & 144 & 29.72\% & 1.75 & 67 & 0.65\% & 199 & 3216\\
+ & 1\% & 0.50\% & 1.92 & 144 & 41.19\% & 2.05 & 79 & 0.56\% & 197 & 3223\\
+ & 3\% & 0.34\% & 2.13 & 144 & 0.34\% & 1.36 & 54 & 0.47\% & 198 & 3217\\
+\bottomrule
+\end{tabular}

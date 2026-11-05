@@ -1,0 +1,138 @@
+% Geometry package for page layout
+
+% Tamaño de papel A4 (210 mm × 297 mm = 8.27 in × 11.7 in)
+% Tamaño de papel carta (Letter, 8.5 in × 11 in = 215.9 mm × 279.4 mm)
+% \usepackage[letterpaper]{geometry}
+
+% \geometry{
+%   top=25.4mm,
+%   bottom=25.4mm,
+%   left=25.4mm,
+%   right=25.4mm
+% }
+\setlength{\headheight}{13.59999pt}
+
+\usepackage{geometry}
+ \geometry{
+ letterpaper,
+ twoside=false,
+ total={170mm,230mm},
+ left=22mm,
+ top=25.4mm,
+ }
+\usepackage[margin=1cm]{caption}
+\captionsetup[figure]{font={sf, small}, labelfont={sf, small, bf}, labelsep=period}
+\captionsetup[table]{font={sf, small}, labelfont={sf, small, bf}, labelsep=period}
+\usepackage{hyperref}
+
+\renewcommand{\figurename}{Supplementary Figure}
+\renewcommand{\figureautorefname}{Supplementary Figure}
+
+% Packages for mathematical symbols and graphics
+\usepackage{amsmath} % For \boldsymbol
+\usepackage{amssymb} % For \mathbb
+\usepackage{graphicx} % For including graphics
+\usepackage{lineno}
+% Additional packages for color, boxes, headers, and floats
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{float} % For exact figure placement
+\usepackage{fontawesome}
+\usepackage{fancyvrb} % This package helps to use \Verbatim
+\usepackage{academicons}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{longtable} 
+% Bibliography and citation settings
+\usepackage{natbib}
+%\bibliographystyle{unsrtnat}
+\setcitestyle{square, numbers}
+
+% Definition of \iconbox command
+\newtcbox{\iconbox}[1][]{
+  nobeforeafter, tcbox raise base, 
+  boxrule=0.4pt, top=0pt, bottom=-1pt,
+  right=0.1pt, left=0.1pt, arc=1pt, boxsep=1pt,
+  fontupper={\tiny \sffamily}, before upper={\vphantom{dlg}},
+  colframe=white, colback=black!10!white, coltext=black, #1
+}
+
+% Packages for drawing lines and drop caps
+\usepackage{tikz} % For drawing lines
+\usepackage{lettrine} % For drop caps
+
+% Redefining citation commands with gray text
+\renewcommand{\citep}[2][]{\textcolor{gray}{(\citeauthor{#2}, \citeyear[#1]{#2})}}
+\renewcommand{\citeauthoryear}[2][]{\textcolor{gray}{\citeauthor{#2} (\textcolor{gray}{\citeyear[#1]{#2}})}}
+
+% Font settings
+% \usepackage{fontspec}
+% \setmainfont{newbask}[
+%   Path = ./fonts/,
+%   UprightFont = *n.ttf,
+%   BoldItalicFont = *z.ttf,
+%   BoldFont = *b.ttf,
+%   ItalicFont = *i.ttf,
+%   BoldFeatures = {SmallCapsFont = {nbaskervillecapbold}},
+%   ItalicFeatures = {SmallCapsFont = {lmromancaps10-oblique-webfont}},
+%   SmallCapsFont = {lmromancaps}
+% ]
+
+% Hyperref settings for clickable links
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  citecolor    = [rgb]{0.0, 0.0, 0.5}, % Darker blue
+  linkcolor    = [rgb]{0.5, 0.0, 0.0}, % Darker red
+  urlcolor     = gray
+  ,breaklinks
+}
+
+% Fancyhdr settings for custom headers
+\pagestyle{fancy}
+\fancyhf{} % Clear default header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+
+% Header configuration
+\fancyhead[LE]{\thepage\, / \textit{Supplementary Materials}} % Even pages header
+\fancyhead[RO]{} % Odd pages header
+
+% Page numbering settings
+\pagenumbering{arabic} % Arabic page numbers
+\setcounter{page}{1} % Start page numbering at 1
+
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{{Keywords:}} #1
+}
+
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\AtBeginDocument{
+    \setlength{\abovedisplayskip}{-1pt plus -1pt minus -1pt}
+    \setlength{\belowdisplayskip}{10pt plus 3pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{-1pt plus -1pt minus -1pt}
+    \setlength{\belowdisplayshortskip}{10pt plus 3pt minus 1pt}
+}
+
+\bibliographystyle{unsrtnat}
+\setcitestyle{square,numbers}
+\usepackage{xurl}
+
+
+ 
+ \raggedbottom
+\usepackage{titlesec}
+
+ \titleformat{\section}
+  {\bfseries\large} % format: bold + sans-serif + large
+  {S\thesection.}{0.3em}{}       % label (e.g., "1"), spacing, and before-code
+ 
+  \titleformat{\subsection}
+  {\bfseries\large} % format: bold + sans-serif + large
+  {\thesubsection.}{0.3em}{} 

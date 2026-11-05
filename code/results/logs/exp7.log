@@ -1,0 +1,6 @@
+{'n_rings': 6, 'n_tri': 216, 'matrix_MB': 2.1357, 'assembly': 0.0399, 'solve': 0.0009, 'forward': 0.0407, 'gmres_its_per_solve': 10.3333, 'adjoint': 0.0969, 'pinn_joint': 0.094, 'pinn_fixed': 0.0027}
+{'n_rings': 8, 'n_tri': 384, 'matrix_MB': 6.75, 'assembly': 0.0946, 'solve': 0.003, 'forward': 0.0975, 'gmres_its_per_solve': 10.5556, 'adjoint': 0.2603, 'pinn_joint': 0.239, 'pinn_fixed': 0.0032}
+{'n_rings': 12, 'n_tri': 864, 'matrix_MB': 34.1719, 'assembly': 0.6039, 'solve': 0.031, 'forward': 0.6349, 'gmres_its_per_solve': 11.3333, 'adjoint': 1.6326, 'pinn_joint': 1.5067, 'pinn_fixed': 0.0083}
+{'n_rings': 16, 'n_tri': 1536, 'matrix_MB': 108.0, 'assembly': 1.9501, 'solve': 0.1722, 'forward': 2.1223, 'gmres_its_per_solve': 11.3333, 'adjoint': 6.7733, 'pinn_joint': 6.9166, 'pinn_fixed': 0.0331}
+{'n_rings': 20, 'n_tri': 2400, 'matrix_MB': 263.6719, 'assembly': 6.0741, 'solve': 0.6636, 'forward': 6.7377, 'gmres_its_per_solve': 11.8889}
+{'n_rings': 24, 'n_tri': 3456, 'matrix_MB': 546.75, 'assembly': 14.2162, 'solve': 1.8479, 'forward': 16.0641, 'gmres_its_per_solve': 11.8889}

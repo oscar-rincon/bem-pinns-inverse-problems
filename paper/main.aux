@@ -1,0 +1,199 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{unsrtnat}
+\citation{Bard1982,Kawase1988}
+\citation{Bard1982,Kawase1988}
+\citation{Bignardi2012}
+\citation{Bignardi2012}
+\citation{Wang2018}
+\citation{Wang2018}
+\citation{Bonnet2009}
+\citation{Bonnet2009}
+\citation{Kallivokas2009,Chien2005}
+\citation{Kallivokas2009,Chien2005}
+\citation{Raissi2019}
+\citation{Raissi2019}
+\citation{Song2022}
+\citation{Song2022}
+\citation{RashtBehesht2022}
+\citation{RashtBehesht2022}
+\citation{Barmada2024}
+\citation{Barmada2024}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\newlabel{sec:introduction}{{}{1}{}{Doc-Start}{}}
+\citation{Haber2000,vanLeeuwen2013}
+\citation{Haber2000,vanLeeuwen2013}
+\citation{wu_novel_2026}
+\citation{Bignardi2012}
+\citation{Bonnet2009}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Geometric and Material Inversion in Irregular Topographies}{2}{section.1}\protected@file@percent }
+\newlabel{sec:problem_statement}{{1}{2}{Geometric and Material Inversion in Irregular Topographies}{section.1}{}}
+\citation{wu_novel_2026}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Problem setting. Top left: an irregularity $\Omega _1$ with properties $(\mu _1,\rho _1)$, bounded by the free surface $\Gamma _s$ and the interface $\Gamma _I$, embedded in a half-space $\Omega _2$ with properties $(\mu _2,\rho _2)$ and flat free surface $\Gamma _0$, excited by a plane SH wave with frequency $\eta $ and incidence angle $\alpha $; receivers $\mathbf  {x}_r$ are placed on $\Gamma _0$ and, when it is known, on $\Gamma _s$. Top right: types of irregularity considered. Bottom: inverse problems; dashed orange lines and orange shading denote unknowns, and all other quantities are known.}}{3}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:problem_statement}{{1}{3}{Problem setting. Top left: an irregularity $\Omega _1$ with properties $(\mu _1,\rho _1)$, bounded by the free surface $\Gamma _s$ and the interface $\Gamma _I$, embedded in a half-space $\Omega _2$ with properties $(\mu _2,\rho _2)$ and flat free surface $\Gamma _0$, excited by a plane SH wave with frequency $\eta $ and incidence angle $\alpha $; receivers $\mathbf {x}_r$ are placed on $\Gamma _0$ and, when it is known, on $\Gamma _s$. Top right: types of irregularity considered. Bottom: inverse problems; dashed orange lines and orange shading denote unknowns, and all other quantities are known}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Hybrid BEM--PINN Inversion}{3}{section.2}\protected@file@percent }
+\newlabel{sec:methodology}{{2}{3}{Hybrid BEM--PINN Inversion}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Forward model}{3}{subsection.2.1}\protected@file@percent }
+\citation{SanchezSesma1991,wu_novel_2026}
+\citation{SanchezSesma1991,wu_novel_2026}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Inverse-oriented BEM--PINN workflow. The selected geometric and material unknowns $\vartheta $ and the network densities feed the differentiable BEM, which evaluates boundary residuals and receiver responses. A single objective combines boundary consistency, agreement with seismic records and geometric regularization. Dashed blue arrows show the joint update of $\vartheta $ and the network weights $\theta $ by automatic differentiation, without a linear solve. The network uses Fourier features of $\hat  s$ and one output head per excitation $(\eta _f,\alpha _j)$; the lower strip summarizes the training stages.}}{4}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:methodology_scheme}{{2}{4}{Inverse-oriented BEM--PINN workflow. The selected geometric and material unknowns $\vartheta $ and the network densities feed the differentiable BEM, which evaluates boundary residuals and receiver responses. A single objective combines boundary consistency, agreement with seismic records and geometric regularization. Dashed blue arrows show the joint update of $\vartheta $ and the network weights $\theta $ by automatic differentiation, without a linear solve. The network uses Fourier features of $\hat s$ and one output head per excitation $(\eta _f,\alpha _j)$; the lower strip summarizes the training stages}{figure.caption.2}{}}
+\newlabel{eq:bcs}{{2}{4}{Forward model}{equation.2.2}{}}
+\newlabel{eq:u1}{{4}{4}{Forward model}{equation.2.4}{}}
+\newlabel{eq:u2}{{5}{4}{Forward model}{equation.2.5}{}}
+\citation{wu_novel_2026}
+\citation{Tancik2020,wu_novel_2026}
+\citation{Tancik2020,wu_novel_2026}
+\citation{wu_novel_2026}
+\newlabel{eq:discrete}{{7}{5}{Forward model}{equation.2.7}{}}
+\newlabel{eq:selfterm}{{8}{5}{Forward model}{equation.2.8}{}}
+\newlabel{eq:linear}{{9}{5}{Forward model}{equation.2.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Network representation of the source densities}{5}{subsection.2.2}\protected@file@percent }
+\citation{Paszke2019}
+\citation{Paszke2019}
+\citation{Loshchilov2019}
+\citation{Loshchilov2019}
+\citation{Liu1989}
+\citation{Liu1989}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Parametrization of the unknowns}{6}{subsection.2.3}\protected@file@percent }
+\newlabel{eq:shape}{{11}{6}{Parametrization of the unknowns}{equation.2.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Loss function and joint optimization}{6}{subsection.2.4}\protected@file@percent }
+\newlabel{eq:loss}{{14}{6}{Loss function and joint optimization}{equation.2.14}{}}
+\citation{Bignardi2012}
+\citation{Marquardt1963}
+\citation{Marquardt1963}
+\citation{Bonnet2009}
+\citation{Liu1989}
+\citation{Liu1989}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Extension to three dimensions}{7}{subsection.2.5}\protected@file@percent }
+\newlabel{sec:method3d}{{2.5}{7}{Extension to three dimensions}{subsection.2.5}{}}
+\newlabel{eq:canyon3d}{{16}{7}{Extension to three dimensions}{equation.2.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Reference BEM Inversion Methods}{7}{section.3}\protected@file@percent }
+\newlabel{sec:baselines}{{3}{7}{Reference BEM Inversion Methods}{section.3}{}}
+\newlabel{eq:classical}{{17}{7}{Reference BEM Inversion Methods}{equation.3.17}{}}
+\citation{wu_novel_2026}
+\citation{Trifunac1973}
+\citation{wu_novel_2026}
+\citation{Trifunac1971}
+\citation{Trifunac1971}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{TsaurChang2008}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Numerical Experiments}{8}{section.4}\protected@file@percent }
+\newlabel{sec:experiments}{{4}{8}{Numerical Experiments}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Verification and reproduction of the forward BEM--PINN}{8}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:forward}{{4.1}{8}{Verification and reproduction of the forward BEM--PINN}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Reproduction of the forward benchmarks of \citet  {wu_novel_2026} at $\eta =2$: surface displacement amplitude $|U|$ for the semicircular canyon (top), semicircular hill (middle) and V-shaped canyon (bottom). The error $\varepsilon $ of the FF-BEM--PINN against the reference is given in each panel.}}{9}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:forward}{{3}{9}{Reproduction of the forward benchmarks of \citet {wu_novel_2026} at $\eta =2$: surface displacement amplitude $|U|$ for the semicircular canyon (top), semicircular hill (middle) and V-shaped canyon (bottom). The error $\varepsilon $ of the FF-BEM--PINN against the reference is given in each panel}{figure.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Forward benchmarks at $\eta =2$: error $\varepsilon $ and wall-clock time. Values for \citet  {wu_novel_2026} are those reported in their Table~2 (FF PINN, GPU). Our IBEM time includes the assembly and the LU solve; our FF-BEM--PINN time includes the kernel assembly and training, with five runs sharing the CPU.}}{9}{table.caption.4}\protected@file@percent }
+\newlabel{tab:forward}{{1}{9}{Forward benchmarks at $\eta =2$: error $\varepsilon $ and wall-clock time. Values for \citet {wu_novel_2026} are those reported in their Table~2 (FF PINN, GPU). Our IBEM time includes the assembly and the LU solve; our FF-BEM--PINN time includes the kernel assembly and training, with five runs sharing the CPU}{table.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Frequency as network input (V-shaped canyon, $\alpha =0^\circ $): error $\varepsilon $ of the FF-BEM--PINN trained at three frequencies (dashed lines) and of the IBEM, which solves every frequency directly. The legends give the total wall-clock time of each method for the 11 frequencies.}}{10}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:frequency}{{4}{10}{Frequency as network input (V-shaped canyon, $\alpha =0^\circ $): error $\varepsilon $ of the FF-BEM--PINN trained at three frequencies (dashed lines) and of the IBEM, which solves every frequency directly. The legends give the total wall-clock time of each method for the 11 frequencies}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Inverse problems: set-up}{10}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:setup}{{4.2}{10}{Inverse problems: set-up}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Inverse problems: accuracy and computational time}{11}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:inverse_results}{{4.3}{11}{Inverse problems: accuracy and computational time}{subsection.4.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Inversion results. Error: relative $L^2$ error of the unknown curve (largest of shape and material errors for joint identification). Solves: number of forward evaluations of~\eqref  {eq:classical} (assembly and LU solve for four frequencies); assemblies: number of loss evaluations with re-assembly of the BEM matrices. Classical solvers ran alone on the machine; three BEM--PINN runs shared it.}}{11}{table.caption.6}\protected@file@percent }
+\newlabel{tab:inverse}{{2}{11}{Inversion results. Error: relative $L^2$ error of the unknown curve (largest of shape and material errors for joint identification). Solves: number of forward evaluations of~\eqref {eq:classical} (assembly and LU solve for four frequencies); assemblies: number of loss evaluations with re-assembly of the BEM matrices. Classical solvers ran alone on the machine; three BEM--PINN runs shared it}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Reconstructed curves for 3\% noise. Interface identification shows $\Gamma _I$; surface reconstruction and joint identification show $\Gamma _s$. The shaded region is the true irregularity.}}{11}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:reconstruction}{{5}{11}{Reconstructed curves for 3\% noise. Interface identification shows $\Gamma _I$; surface reconstruction and joint identification show $\Gamma _s$. The shaded region is the true irregularity}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Accuracy against wall-clock time for the three inverse problems and three noise levels. Each marker is one inversion; lines connect the noise levels of each solver.}}{12}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:accuracy_time}{{6}{12}{Accuracy against wall-clock time for the three inverse problems and three noise levels. Each marker is one inversion; lines connect the noise levels of each solver}{figure.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Joint identification: errors of the free surface and of the material properties.}}{12}{table.caption.10}\protected@file@percent }
+\newlabel{tab:joint}{{3}{12}{Joint identification: errors of the free surface and of the material properties}{table.caption.10}{}}
+\citation{Saad1986}
+\citation{Saad1986}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Convergence histories for 1\% noise: relative error of the unknowns against wall-clock time. The shaded interval is the BEM--PINN pre-training (forward solution at the initial guess).}}{13}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:convergence}{{7}{13}{Convergence histories for 1\% noise: relative error of the unknowns against wall-clock time. The shaded interval is the BEM--PINN pre-training (forward solution at the initial guess)}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Computational cost}{13}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:cost}{{4.4}{13}{Computational cost}{subsection.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Left: time per iteration against the number of unknown densities $N$ (three density sets of $N/3$ elements, four frequencies, three incidence angles). Right: total inversion time for 1\% noise.}}{13}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:cost}{{8}{13}{Left: time per iteration against the number of unknown densities $N$ (three density sets of $N/3$ elements, four frequencies, three incidence angles). Right: total inversion time for 1\% noise}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Iterative solvers: a regime favourable to the hybrid method?}{14}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:iterative}{{4.5}{14}{Iterative solvers: a regime favourable to the hybrid method?}{subsection.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Iterative regime (surface reconstruction, 1\% noise): total number of products with $\mathbf  {A}$ and $\mathbf  {A}^H$, wall-clock time and shape error against the number of unknown densities. The classical solvers use Jacobi-preconditioned GMRES for every forward and adjoint solve; the LU-based L-BFGS solver is shown for reference.}}{14}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:iterative}{{9}{14}{Iterative regime (surface reconstruction, 1\% noise): total number of products with $\mathbf {A}$ and $\mathbf {A}^H$, wall-clock time and shape error against the number of unknown densities. The classical solvers use Jacobi-preconditioned GMRES for every forward and adjoint solve; the LU-based L-BFGS solver is shown for reference}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Three-dimensional canyon}{14}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:three_d}{{4.6}{14}{Three-dimensional canyon}{subsection.4.6}{}}
+\citation{Haber2000}
+\citation{Haber2000}
+\citation{vanLeeuwen2013}
+\citation{vanLeeuwen2013}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Three-dimensional canyon reconstruction: relative $L^2$ error of the depth, wall-clock time, number of forward evaluations (classical) or loss evaluations (BEM--PINN), and number of products with $\mathbf  {A}$ and $\mathbf  {A}^H$ (iterative solvers and BEM--PINN).}}{15}{table.caption.13}\protected@file@percent }
+\newlabel{tab:three_d}{{4}{15}{Three-dimensional canyon reconstruction: relative $L^2$ error of the depth, wall-clock time, number of forward evaluations (classical) or loss evaluations (BEM--PINN), and number of products with $\mathbf {A}$ and $\mathbf {A}^H$ (iterative solvers and BEM--PINN)}{table.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Three-dimensional canyon reconstruction with 1\% noise. Left: true canyon (inversion mesh) and receivers. Right: true depth and depth errors of the reconstructions over the canyon footprint, with the relative $L^2$ error and the wall-clock time.}}{16}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:three_d}{{10}{16}{Three-dimensional canyon reconstruction with 1\% noise. Left: true canyon (inversion mesh) and receivers. Right: true depth and depth errors of the reconstructions over the canyon footprint, with the relative $L^2$ error and the wall-clock time}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Three-dimensional cost study (canyon, three frequencies, three excitations). Left: time per iteration against the number of triangles. Right: Jacobi-preconditioned GMRES iterations per solve, with the memory of the three dense matrices.}}{16}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:scaling3d}{{11}{16}{Three-dimensional cost study (canyon, three frequencies, three excitations). Left: time per iteration against the number of triangles. Right: Jacobi-preconditioned GMRES iterations per solve, with the memory of the three dense matrices}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Basin of attraction: is the hybrid method more robust?}{16}{subsection.4.7}\protected@file@percent }
+\newlabel{sec:basin}{{4.7}{16}{Basin of attraction: is the hybrid method more robust?}{subsection.4.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Basin of attraction (surface reconstruction, 1\% noise): number of the eight initial guesses from which each solver converged (final shape error below 2\%) and mean wall-clock time per inversion. Classical solvers ran alone on the machine; four BEM--PINN runs shared it.}}{17}{table.caption.16}\protected@file@percent }
+\newlabel{tab:basin}{{5}{17}{Basin of attraction (surface reconstruction, 1\% noise): number of the eight initial guesses from which each solver converged (final shape error below 2\%) and mean wall-clock time per inversion. Classical solvers ran alone on the machine; four BEM--PINN runs shared it}{table.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Basin of attraction (surface reconstruction, 1\% noise): final shape error against the first sine coefficient of the initial guess, for three frequency bands. Markers are shifted horizontally for visibility. The dotted line is the true value and the dashed line the convergence threshold of 2\%.}}{17}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:basin}{{12}{17}{Basin of attraction (surface reconstruction, 1\% noise): final shape error against the first sine coefficient of the initial guess, for three frequency bands. Markers are shifted horizontally for visibility. The dotted line is the true value and the dashed line the convergence threshold of 2\%}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}The hybrid method as a prototyping tool}{18}{subsection.4.8}\protected@file@percent }
+\newlabel{sec:prototype}{{4.8}{18}{The hybrid method as a prototyping tool}{subsection.4.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Inversion from amplitude-only records $|u^{obs}_r|$: shape error for three noise levels and mean wall-clock time per inversion. Same configuration as Table~\ref {tab:inverse}; only the data residual was changed.}}{18}{table.caption.19}\protected@file@percent }
+\newlabel{tab:prototype}{{6}{18}{Inversion from amplitude-only records $|u^{obs}_r|$: shape error for three noise levels and mean wall-clock time per inversion. Same configuration as Table~\ref {tab:inverse}; only the data residual was changed}{table.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Workflows of the two gradient-based inversions implemented on the same differentiable BEM. (a)~BEM--PINN: the network densities, the geometric and material unknowns $\vartheta $ and the data enter a single loss, and all gradients are obtained by automatic differentiation through the assembly; no linear system is solved. (b)~BEM + L-BFGS with adjoint gradients: each objective evaluation solves the BEM system, and the gradient requires the adjoint solve, which automatic differentiation provides for a dense LU factorization but which has to be written by hand for an iterative or fast BEM solver. Dashed boxes are the components that change when a new variant of the inverse problem is prototyped.}}{19}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:prototyping}{{13}{19}{Workflows of the two gradient-based inversions implemented on the same differentiable BEM. (a)~BEM--PINN: the network densities, the geometric and material unknowns $\vartheta $ and the data enter a single loss, and all gradients are obtained by automatic differentiation through the assembly; no linear system is solved. (b)~BEM + L-BFGS with adjoint gradients: each objective evaluation solves the BEM system, and the gradient requires the adjoint solve, which automatic differentiation provides for a dense LU factorization but which has to be written by hand for an iterative or fast BEM solver. Dashed boxes are the components that change when a new variant of the inverse problem is prototyped}{figure.caption.18}{}}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{vanLeeuwen2013}
+\citation{vanLeeuwen2013}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{20}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{20}{Discussion}{section.5}{}}
+\citation{wu_novel_2026}
+\citation{wu_novel_2026}
+\citation{Colton2013}
+\citation{Colton2013}
+\citation{Bignardi2012}
+\citation{Wang2018}
+\citation{Bonnet2009}
+\citation{Wang2018}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{21}{section.6}\protected@file@percent }
+\newlabel{sec:conclusions}{{6}{21}{Conclusions}{section.6}{}}
+\citation{wu_novel_2026}
+\bibdata{refs}
+\bibcite{Bard1982}{{1}{1982}{{Bard}}{{}}}
+\bibcite{Kawase1988}{{2}{1988}{{Kawase}}{{}}}
+\bibcite{Bignardi2012}{{3}{2012}{{Bignardi et~al.}}{{Bignardi, Fedele, Yezzi, Rix, and Santarato}}}
+\bibcite{Wang2018}{{4}{2018}{{Wang et~al.}}{{Wang, Da, and Qian}}}
+\bibcite{Bonnet2009}{{5}{2009}{{Bonnet and Guzina}}{{}}}
+\bibcite{Kallivokas2009}{{6}{2009}{{Kallivokas et~al.}}{{}}}
+\bibcite{Chien2005}{{7}{2005}{{Chien et~al.}}{{Chien, Chiu, and Li}}}
+\bibcite{Raissi2019}{{8}{2019}{{Raissi et~al.}}{{Raissi, Perdikaris, and Karniadakis}}}
+\bibcite{Song2022}{{9}{2022}{{Song et~al.}}{{Song, Alkhalifah, and Waheed}}}
+\bibcite{RashtBehesht2022}{{10}{2022}{{Rasht-Behesht et~al.}}{{Rasht-Behesht, Huber, Shukla, and Karniadakis}}}
+\bibcite{Barmada2024}{{11}{2024}{{Barmada et~al.}}{{Barmada, Dodge, Tucci, Formisano, Di~Barba, and Mognaschi}}}
+\bibcite{wu_novel_2026}{{12}{2026}{{Wu et~al.}}{{Wu, Yuan, Gao, Yang, and Hou}}}
+\bibcite{Haber2000}{{13}{2000}{{Haber et~al.}}{{Haber, Ascher, and Oldenburg}}}
+\bibcite{vanLeeuwen2013}{{14}{2013}{{van Leeuwen and Herrmann}}{{}}}
+\bibcite{SanchezSesma1991}{{15}{1991}{{S{\'a}nchez-Sesma and Campillo}}{{}}}
+\bibcite{Tancik2020}{{16}{2020}{{Tancik et~al.}}{{Tancik, Srinivasan, Mildenhall, Fridovich-Keil, Raghavan, Singhal, Ramamoorthi, Barron, and Ng}}}
+\bibcite{Paszke2019}{{17}{2019}{{Paszke et~al.}}{{Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, et~al.}}}
+\bibcite{Loshchilov2019}{{18}{2019}{{Loshchilov and Hutter}}{{}}}
+\bibcite{Liu1989}{{19}{1989}{{Liu and Nocedal}}{{}}}
+\bibcite{Marquardt1963}{{20}{1963}{{Marquardt}}{{}}}
+\bibcite{Trifunac1973}{{21}{1973}{{Trifunac}}{{}}}
+\bibcite{Trifunac1971}{{22}{1971}{{Trifunac}}{{}}}
+\bibcite{TsaurChang2008}{{23}{2008}{{Tsaur and Chang}}{{}}}
+\bibcite{Saad1986}{{24}{1986}{{Saad and Schultz}}{{}}}
+\bibcite{Colton2013}{{25}{2013}{{Colton and Kress}}{{}}}
+\gdef \@abspage@last{24}

@@ -1,0 +1,12 @@
+40 lbfgs_lu {'shape': 0.003842118262695822} t 0.6s products 0
+40 lbfgs_gmres {'shape': 0.0038421182625711296} t 8.5s products 14786
+40 lm_gmres {'shape': 0.003842120057909822} t 13.2s products 28290
+80 lbfgs_lu {'shape': 0.0016247801506594328} t 0.7s products 0
+80 lbfgs_gmres {'shape': 0.0016247801535271536} t 17.5s products 18042
+80 lm_gmres {'shape': 0.00162477974573802} t 21.6s products 28736
+160 lbfgs_lu {'shape': 0.0008967867596131121} t 2.1s products 0
+160 lbfgs_gmres {'shape': 0.0008967867642721356} t 26.0s products 20934
+160 lm_gmres {'shape': 0.0008967884928087061} t 40.5s products 33626
+320 lbfgs_lu {'shape': 0.0006396330011288348} t 9.3s products 0
+320 lbfgs_gmres {'shape': 0.0006396330009246565} t 152.3s products 24677
+320 lm_gmres {'shape': 0.0006396350701059882} t 66.9s products 40329

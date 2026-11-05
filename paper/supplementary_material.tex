@@ -1,0 +1,241 @@
+%-------------------------------------------------------------------------------
+% Literature review of recent advances in modeling seismic waves propagation using machine   
+% learning-based methods
+%-------------------------------------------------------------------------------
+% Author: oscar-rincon
+% Email: orincon@eafit.edu.co
+% Creation date: 2024-03-15
+% Version: 1.0
+%-------------------------------------------------------------------------------
+\documentclass[11pt,twoside]{article}
+%-------------------------------------------------------------------------------
+% Import the style file
+%-------------------------------------------------------------------------------
+\usepackage{supplementary_materials}
+%-------------------------------------------------------------------------------
+% Document starts here
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% Set the page style to empty (no headers or footers)
+\thispagestyle{empty}  
+
+%-------------------------------------------------------------------------------
+% Title, Author, and Affiliation
+%-------------------------------------------------------------------------------
+
+% Create a colored box with specific background and frame colors, and sharp corners
+%\begin{tcolorbox}[colback=white!20,colframe=gray!20,sharp corners]
+
+% Add vertical space adjustment
+\vspace{-2mm} 
+% Create a minipage for the title
+\begin{minipage}{15.0cm}
+    \begin{center}
+        % Title of the document
+        \textbf{\large Benchmarking Physics-Informed Neural Networks and Boundary Element Method: Accuracy\allowbreak--\allowbreak Efficiency Trade-offs in Wave Scattering}  
+    \end{center}                 
+\end{minipage}
+% Create a minipage for the first logo
+\begin{minipage}{0.0cm}
+    \begin{center}
+        % Include the first logo with specific width
+        %\hspace{-0.2cm}\includegraphics[width=2.8cm]{figs/format/eafit.pdf}
+    \end{center}
+\end{minipage}    
+ 
+% Add vertical space adjustment
+\vspace{-2mm} 
+%\end{tcolorbox}
+
+% Add vertical space adjustment
+\vspace{0.6cm}
+ 
+{\footnotesize\noindent O. Rincón-Cardeño$^1$, G. Pérez-Bernal$^1$, S. Montoya-Noguera$^2$, and N. Guarín-Zapata$^{1,*}$ \\
+$^1$ Mathematical Applications in Science and Engineering Research Group, School of Applied Sciences and Engineering, Universidad EAFIT, 
+  Medellín, Colombia \\
+$^2$ Nature and Cities Research Group, School of Applied Sciences and Engineering, Universidad EAFIT, Medellín, Colombia\\
+  $^*$ Correspondence: nguarinz@eafit.edu.co\\}
+
+ 
+This supplementary material provides additional methodological details supporting the analyses presented in the main manuscript. First, an analytical solution of the two-dimensional Helmholtz equation for plane-wave scattering by a cylindrical obstacle is presented and used as an exact reference to validate the numerical results. Subsequently, the hyperparameter optimization procedure adopted for the Physics-Informed Neural Networks is described, detailing the selection of architectural and training parameters that ensure a consistent and reliable baseline for the comparative study. References to equations in the main manuscript are explicitly indicated as “equation (·) in the main manuscript”.
+
+\section{Analytical solution}\label{sec:analytical}
+\fancyhead[RO]{\textit{Analytical solution}\, / \thepage}
+
+The Helmholtz equation in polar coordinates is expressed as: 
+
+\begin{equation}\label{polar}
+ \frac{\partial^2 R(r)}{\partial r^2} + \frac{1}{r} \frac{\partial R(r)}{\partial r}  + \frac{1}{r^2} \frac{\partial^2 u(r, \theta)}{\partial \theta^2} + k^2 u(r, \theta) = 0 .
+\end{equation}
+
+ Assuming the solution can be written as the product of radial and angular components:
+
+\begin{equation}\label{indenpendent}
+u(r, \theta) = R(r) \Theta(\theta) ,
+\end{equation}
+
+\noindent substituting equation (\ref{indenpendent}) into equation (\ref{polar}) yields to
+
+\begin{equation*} 
+\frac{r^2}{R(r)}\left[  \frac{\partial^2 R(r)}{\partial r^2} + \frac{1}{r} \frac{\partial R(r)}{\partial r}  + k^2R(r)  \right] + \frac{1}{\Theta(\theta)} \frac{d^2\Theta(\theta)}{d\theta^2}  = 0 , 
+\end{equation*}
+
+\noindent which separates into two ordinary differential equations, one for \( R(r) \) and other for \( \Theta(\theta) \). Since \( r \) and \( \theta \) are independent variables:
+
+\begin{equation}\label{variables-separadas}
+\frac{r^2}{R(r)}\left[  \frac{\partial^2 R(r)}{\partial r^2} + \frac{1}{r} \frac{\partial R(r)}{\partial r} + k^2R(r)  \right]  = 
+- \frac{1}{\Theta(\theta)} \frac{d^2\Theta(\theta)}{d\theta^2} = n^2 . 
+\end{equation}
+
+ From equation (\ref{variables-separadas}), we obtain the radial part:
+
+\begin{equation*} 
+r^2  \frac{d^2R(r)}{dr^2} + r \frac{dR(r)}{dr} + \left[ r^2k^2  - n^2 \right] R(r) = 0 .
+\end{equation*}
+
+ Now, introducing the substitution $\hat{r}=kr$ and $\hat{R}(\hat{r}) = R(\hat{r}/k) = R (r) $:
+
+\begin{equation}\label{bessel} 
+ \hat{r}^2  \frac{d^2\hat{R}(\hat{r})}{d\hat{r}^2} + \hat{r} \frac{d\hat{R}(\hat{r})}{d\hat{r}} + \left[ \hat{r}^2 - n^2 \right] \hat{R}(\hat{r}) = 0 .
+\end{equation}
+
+ This is Bessel's differential equation. Consequently, the solution to equation (\ref{bessel}) is:
+
+\begin{equation}\label{R}
+R(r) = B H_n^{(1)}(kr) + C H_n^{(2)}(kr)
+\end{equation}
+
+\noindent where \( H_n^{(1)}(kr) \) and \( H_n^{(2)}(kr) \) are the Hankel functions of the first and second kinds. Additionally, from equation (\ref{variables-separadas}), we obtain the angular equation:
+
+\begin{equation*}\label{theta_dif}
+\frac{d^2 \Theta(\theta)}{d \theta^2} + n^2 \Theta(\theta) = 0 . 
+\end{equation*}
+
+ Therefore, $\Theta(\theta)$ can be expressed as:
+
+\begin{equation}\label{Theta}
+\Theta(\theta) = D e^{in\theta} .
+\end{equation}
+ 
+
+ Substituting equations (\ref{R}) and (\ref{Theta}) into equation (\ref{indenpendent}), we obtain the exact solution for \( u(r, \theta) \):
+
+\begin{equation*} 
+u(r, \theta) = \sum_{n=-\infty}^{\infty} E_n J_{n}(kr)e^{in\theta} + F_n H_n^{(1)}(kr) e^{in\theta} .
+\end{equation*}
+
+ The incident and scattered fields \( u_{\text{inc}}(r, \theta) \) and \( u_{\text{sct}}(r, \theta) \) are given by:
+
+\begin{equation}\label{analytic-inc} 
+u_{\text{inc}}(r, \theta) = \sum_{n=-\infty}^{\infty} E_n J_{n}(kr) e^{in\theta},
+\end{equation}
+
+\vspace{-5pt}
+
+\noindent and
+
+\vspace{-5pt}
+
+\begin{equation}\label{analytic} 
+u_{\text{sct}}(r, \theta) = \sum_{n=-\infty}^{\infty} F_n H_n^{(1)}(kr) e^{in\theta} .
+\end{equation}
+
+ From equation (3) of the main manuscript and \ref{analytic-inc}, we have that \( E_n = i^n \). By applying the Neumann boundary condition expressed in equation (4) of the main manuscript, we can determine the scattered field coefficients \( F_n \) as:
+
+\begin{equation*} 
+F_n = -\frac{E_n J_n'(kr)}{H_n^{(1)'}(kr)}.
+\end{equation*}
+
+ Using equation (\ref{analytic}), the scattered field can be computed analytically. \autoref{fig:analytic} shows the resulting incident, scattered, and total fields. In our experiment, we used the parameters \( k = 3 \, \text{m}^{-1} \), \( r_{\text{i}} = \frac{\pi}{4} \, \text{m} \), and \( l_{\text{e}} = \pi \, \text{m} \).
+
+% The analytical solution to the 2D Helmholtz equation for the scattering of a plane wave by a circular obstacle can be expressed as a series expansion in cylindrical harmonics. The total field is written as the sum of the incident and scattered fields \citep{paoDiffractionElasticWaves1973}:
+
+% \begin{align}
+% u_{\text{inc}}(r, \theta) &= \sum_{n=-\infty}^{\infty} i^n J_n(kr) e^{in\theta}, \label{analytic-inc} \\
+% u_{\text{sct}}(r, \theta) &= \sum_{n=-\infty}^{\infty} F_n H_n^{(1)}(kr) e^{in\theta}, \label{analytic}
+% \end{align}
+
+% \noindent where \( J_n \) and \( H_n^{(1)} \) denote the Bessel and Hankel functions of the first kind and order \( n \) \cite{NIST:DLMF}. The coefficients \( F_n \) are determined by enforcing the boundary condition on the surface of the obstacle. For a Neumann boundary condition, they are given by:
+
+% \begin{equation*}
+% F_n = -\frac{i^n J_n'(kr_i)}{H_n^{(1)\prime}(kr_i)},
+% \end{equation*}
+
+% \noindent where \( r_i \) is the radius of the obstacle. The analytical expression in Equation~\ref{analytic} was used as the ground truth to validate the numerical results. \autoref{fig:analytic} shows the incident, scattered, and total displacement fields. The parameters used in all simulations were: wavenumber \( k = 3 \), obstacle radius \( r_{\text{i}} = \frac{\pi}{4} \), and element length \( l_{\text{e}} = \pi \), corresponding to a circular obstacle. This analytical solution was used to compute the relative error of the numerical methods evaluated in this study.
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=1.0\textwidth]{figs/displacement_exact.pdf}
+    \vspace{-12pt} 
+    \caption{Analytical estimation of wave scattering. The first column shows the incident plane wave field ($u_{\text{inc}}$), the second column shows the corresponding scattered wave field ($u_{\text{sct}}$), and the third column shows their superposition ($u$). The top row presents the field amplitudes ($\Re(u(x,y))$), while the bottom row shows the corresponding phases ($\Im(u(x,y))$).}
+    \label{fig:analytic}
+\end{figure}
+
+\section{Hyperparameter optimization}
+\fancyhead[RO]{\textit{Hyperparameter optimization}\, / \thepage}
+
+The performance of the PINN depends on the choice of hyperparameters, which define the network architecture and the training procedure. In this study, the activation function $\sigma$, the number of hidden layers $L$, the number of neurons per layer $N$, and the learning rate $\alpha$ were tuned, following the procedure described in \citeauthoryear{escapil-inchauspe_hyper-parameter_2023}. We specified  a fixed random seed to make the hyperparameters suggested by Optuna reproducible.\\
+
+The hyperparameter ranges explored were: $\alpha$ $\in$ $\{10^{-2},$ $10^{-3},$ $10^{-4}\}$, $L$ $\in$ $\{1,$ $2,$ $3\}$, $N$ $\in$ $\{25,$ $50,$ $75\}$, and $\sigma$ $\in$ $\{\text{Tanh},$ $\text{Sigmoid},$ $\text{Sine}\}$. This procedure involves a bi-level optimization scheme. In the outer loop, the hyperparameters are optimized, while in the inner loop the coefficients (weights and biases) of the neural network are trained.  This scheme allows the network parameters to be estimated under the chosen hyperparameters. \autoref{fig:hyperparameter_tunning} summarizes the optimization results across 50 trials, highlighting both the effect of each hyperparameter and the training dynamics of the selected configuration. From these results, it is possible to identify which settings lead to lower objective values.\\
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=6.5 in]{figs/hyperparameter_tunning.pdf}
+    \vspace{-6pt} 
+\caption{Hyperparameter optimization results obtained with Optuna. The top panel shows the optimization history, i.e., the evolution of the objective value across trials. The middle panels present slice plots, illustrating the relationship between each hyperparameter—the activation function $\sigma$, the number of hidden layers $L$, the number of neurons per layer $N$, and the learning rate $\alpha$ of the Adam optimizer—and the corresponding objective value. The bottom panel displays the training history, with Adam applied during the first phase (1,000 iterations) and L-BFGS during the second phase (5,000 iterations).}
+    \label{fig:hyperparameter_tunning}
+\end{figure}
+ 
+The scatter plots in the middle row of \autoref{fig:hyperparameter_tunning} illustrate the influence of each hyperparameter on the objective value. Among the activation functions, both Sine and Tanh achieve similar errors on the order of $10^{-2}$. This level of accuracy is obtained with different combinations of the remaining hyperparameters. Among these, the configuration with three layers and 25 neurons achieved the lowest error with the fewest coefficients (2,026 coefficients). Consequently, for the configuration with $L = 3$ and $N = 25$, an optimal choice was $\sigma = \text{Sine}$ and $\alpha = 10^{-2}$, yielding the lowest error in our study of $7.326 \times 10^{-2}$. This result indicates that the selected configuration provides sufficient accuracy to represent the governing equations and serves us as a reliable baseline for the subsequent comparative analysis.\\
+ 
+The bottom panel shows the training dynamics of the selected configuration using two optimization methods: Adam followed by L-BFGS. Adam rapidly reduced the objective value during the first 1,000 iterations. Subsequent optimization with L-BFGS over the next 5,000 iterations further decreased the objective value, demonstrating the effectiveness of combining first-order and quasi-Newton methods for training PINNs. 
+
+\section{Convergence analysis and computational time}
+\fancyhead[RO]{\textit{Convergence analysis and computational time}\, / \thepage}
+
+ 
+A convergence analysis with respect to the number of integration points is presented in Fig.~\ref{fig:bem_pinn_convergence}. This analysis is performed to assess the accuracy and computational cost of the numerical integration scheme used in the BEM formulation.  As shown in Fig.~\ref{fig:bem_pinn_convergence}(top-left), the relative error decreases as the number of integration points increases from 5 to 45, demonstrating a convergence behavior. The most significant reduction in error is observed for coarse discretizations, while for $n \gtrsim 30$ the solution begins to stabilize, indicating that convergence is effectively achieved. In addition to accuracy, Fig.~\ref{fig:bem_pinn_convergence}(bottom-left) shows the total computational time, defined as the sum of solution and evaluation times. As expected, the computational cost increases moderately with the number of integration points. For comparison, Fig.~\ref{fig:bem_pinn_convergence}(top-right)--(bottom-right) present the corresponding results for the PINN models. In this case, the horizontal axis represents different network architectures (Models 1--9), ordered by increasing model complexity, defined in terms of the number of hidden layers and hidden units. The PINN results exhibit an initial decrease in error with increasing model complexity, followed by a clear saturation, where further increases in model size do not lead to significant improvements. 
+ 
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=6.2 in]{figs/bem_pinn_convergence.pdf}
+    \vspace{-2pt} 
+\caption{
+Comparison of accuracy and total computational time for BEM and PINN approaches. The top row shows the relative error. For BEM, it is presented as a function of the number of boundary elements, exhibiting convergence with mesh refinement, while for PINNs it is shown across different model configurations (Models 1–9, corresponding to architectures with 1–3 hidden layers and 25–75 neurons per layer). The middle row presents the total computational time. For BEM, it is defined as the sum of assembly and evaluation times, while for PINNs it corresponds to the sum of training and evaluation times. The bottom row provides additional insight. On the left, a zoomed-in view of the BEM computational time in the range 0–8 s highlights its growth behavior. On the right, the boundary discretizations illustrate the refinement of the geometry representation.
+}
+    \label{fig:bem_pinn_convergence}
+\end{figure}
+
+\section{PINNs sampling points analysis}
+\fancyhead[RO]{\textit{Sampling points analysis}\, / \thepage}
+
+To further investigate the influence of the training points distribution on the performance of PINNs, two complementary experiments were conducted (\autoref{fig:pinns_sampling_analysis}). The effect of increasing the number of training points was analyzed to determine whether the prediction accuracy can be systematically improved. In this setting, the baseline number of collocation points in the interior domain ($N_{\Omega_{\text{P}}}=10{,}000$) and on the boundaries ($N_{\Gamma_{\text{I}}}=100$ and $N_{\Gamma_{\text{E}}}=1{,}000$) was selected based on values previously reported as effective for scattering problems \cite{nair_multiple_2024}. The results show that reducing the number of training points by a factor of $1/8$ leads to a reduction in accuracy, with the relative error increasing to the order of $10^{-1}$. Increasing the number of points by factors of $4$ and $8$ does not resulted in a significant improvement, as the relative error remains on the order of $10^{-2}$.\\  
+
+This behavior indicates that, for the chosen hyperparameter configuration, insufficient sampling negatively impacts accuracy, while increasing the number of points can improve prediction accuracy, as it enhances the enforcement of the governing equations. However, this improvement is limited by other hyperparameters, including the expressiveness of the network.
+
+\begin{figure}[ht!]
+\centering
+    \includegraphics[width=6.2 in]{figs/sampling_points_analysis.pdf}
+    \vspace{-0.1cm}
+\caption{Sampling in PINNs. 
+Top: Relative error as a function of the sampling factor ($1/8$, $1/4$, $1$, $4$, $8$). 
+Middle: Training loss (left) and maximum residual (right) as functions of the training iterations for uniform and adaptive strategies. Vertical gray lines indicate the iterations at which resampling is performed in the adaptive approach. 
+Bottom: Spatial distribution of collocation points and corresponding  sampling densities.}
+    \label{fig:pinns_sampling_analysis}
+\end{figure} 
+
+A comparison between a uniform sampling strategy and an adaptive sampling approach was performed to evaluate their impact on prediction accuracy. The adaptive sampling strategy was based on the work of Wu et al., specifically the residual-based adaptive distribution proposed in \cite{wu_comprehensive_2022}. Regarding the training procedure, both strategies were trained for a total of 15,000 L-BFGS iterations following an initial stage of 1,000 Adam iterations. In the case of uniform sampling, the same fixed set of collocation points was used throughout the entire training process. In contrast, the adaptive approach employed a resampling strategy, where the collocation points were updated during training. Specifically, after the initial 1,000 Adam iterations, the model was trained for 5,000 L-BFGS iterations, followed by two additional cycles of 5,000 L-BFGS iterations with intermediate resampling of the collocation points using the adaptive method.\\
+
+This procedure ensures that the total number of L-BFGS iterations remains the same for both strategies. The adaptive strategy concentrates points in regions with high residuals (e.g., near the inner boundary), resulting in similar values of the training loss and maximum residual, as well as a more uniform spatial distribution of the residuals.\\
+
+%-------------------------------------------------------------------------------
+% Import references from the bibliography file
+%-------------------------------------------------------------------------------
+\bibliography{refs}
+
+\end{document}
+%-------------------------------------------------------------------------------
+% Document finish here
+%-------------------------------------------------------------------------------

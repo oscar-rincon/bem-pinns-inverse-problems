@@ -1,767 +1,116 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="7in"
-   height="2.722in"
-   viewBox="0 0 504 196"
-   font-family="'Open Sans', 'OpenSans', Arial, sans-serif"
-   version="1.1"
-   id="svg127"
-   sodipodi:docname="problem_statement.svg"
-   inkscape:version="1.4.2 (1:1.4.2+202505120737+ebf0e940d0)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:c2pa="http://c2pa.org/manifest">
-  <sodipodi:namedview
-     id="namedview127"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="in"
-     showguides="true"
-     inkscape:zoom="0.73866749"
-     inkscape:cx="403.42916"
-     inkscape:cy="140.79407"
-     inkscape:window-width="1920"
-     inkscape:window-height="995"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg127" />
-  <metadata
-     id="metadata1">
-    <c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYToxZjRlNzZjMy0wZDA4LTQ1MzUtOTVjZC0yNGQ2MjcwOGExY2QAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaKe7PMlPDHfmamBQbEK8eesAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo1MWQ5MmY0Ni01ODg2LTRjZDctYjFlYi1hMjc1YjE3Y2FlY2RscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo2SUyEtAPilwaAkpBKGWNAAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggpWajBzlRuq17guCnVQU47gPwk868awYFO7K/laHj16mkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHT9l2WljwTT0ieEmhVpI24AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBIVXG6PbkJBPdKoIDpYsd3atcAE0mTmTsAJW7v1pNcGmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBj6Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjFmNGU3NmMzLTBkMDgtNDUzNS05NWNkLTI0ZDYyNzA4YTFjZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmVmZWI0ZTNkLTJiOTAtNGMzOC05N2NjLTUwOTA4MWEwZmQwMnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCClZqMHOVG6rXuC4KdVBTjuA/CTzrxrBgU7sr+VoePXqaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggC+lByXRJx/vGKdybVbv5XuKy1uZNlxw/0962iBBFB/WiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggEoD3c548mnu+cvRxV6Z199nB6VDWU/RnCRae3/Og6N10Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQEGNHDzFsM1xQrz9QSq7Xg+Ppg20aw8UpY2NFJi9ITiNJImj9m+FeIFOs96O8C474KliMOpsh7AM7uo3K3G4Wqs=</c2pa:manifest>
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:title>Inverse problems in irregular topographies</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <title
-     id="title1">Inverse problems in irregular topographies</title>
-  <desc
-     id="desc1">Three configurations: (a) unknown buried interface, (b) unknown free-surface geometry, (c) joint unknown geometry and material properties.</desc>
-  <defs
-     id="defs1">
-    <marker
-       id="ah"
-       viewBox="0 0 6 6"
-       refX="5"
-       refY="3"
-       markerWidth="5"
-       markerHeight="5"
-       markerUnits="userSpaceOnUse"
-       orient="auto">
-      <path
-         d="M0,0 L6,3 L0,6 z"
-         fill="#0072B2"
-         id="path1" />
-    </marker>
-  </defs>
-  <rect
-     width="504"
-     height="196"
-     fill="#FFFFFF"
-     id="rect1" />
-  <text
-     x="33.040123"
-     y="21.000488"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text2"
-     style="font-size:8.00065px"><tspan
-       font-size="8px"
-       id="tspan2"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.00065px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Interface identification</tspan></text>
-  <g
-     transform="translate(6)"
-     id="g26">
-    <path
-       d="m 0,78 h 36 c 14,20 28,26 42,22 16,-4 30,-8 42,-22 h 36 v 62 H 0 Z"
-       fill="#d6e0ea"
-       id="path2" />
-    <path
-       d="M 36,78 C 52,78 62,48 78,48 94,48 104,78 120,78 108,92 94,96 78,100 64,104 50,98 36,78 Z"
-       fill="#f3d9b1"
-       id="path3" />
-    <path
-       d="M 0.5,78 H 36 m 84,0 h 35.5"
-       fill="none"
-       stroke="#222222"
-       stroke-width="1"
-       id="path4" />
-    <path
-       d="m 36,78 c 14,20 28,26 42,22 16,-4 30,-8 42,-22"
-       fill="none"
-       stroke="#d55e00"
-       stroke-width="1.3"
-       stroke-dasharray="3.5, 2"
-       id="path5" />
-    <path
-       d="m 36,78 c 16,0 26,-30 42,-30 16,0 26,30 42,30"
-       fill="none"
-       stroke="#222222"
-       stroke-width="1"
-       id="path6" />
-    <polygon
-       points="8,78 5,72 11,72 "
-       fill="#009e73"
-       id="polygon6" />
-    <polygon
-       points="18,78 15,72 21,72 "
-       fill="#009e73"
-       id="polygon7" />
-    <polygon
-       points="28,78 25,72 31,72 "
-       fill="#009e73"
-       id="polygon8" />
-    <polygon
-       points="128,78 125,72 131,72 "
-       fill="#009e73"
-       id="polygon9" />
-    <polygon
-       points="138,78 135,72 141,72 "
-       fill="#009e73"
-       id="polygon10" />
-    <polygon
-       points="148,78 145,72 151,72 "
-       fill="#009e73"
-       id="polygon11" />
-    <line
-       x1="6"
-       y1="128"
-       x2="26"
-       y2="100"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line11" />
-    <line
-       x1="20"
-       y1="132"
-       x2="40"
-       y2="104"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line12" />
-    <text
-       x="46"
-       y="132"
-       text-anchor="start"
-       fill="#0072b2"
-       font-weight="400"
-       id="text12"><tspan
-         font-size="6px"
-         id="tspan12"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">incident wave</tspan></text>
-    <text
-       x="104"
-       y="54"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text14"><tspan
-         font-size="7px"
-         id="tspan13">Γ</tspan><tspan
-         font-size="6px"
-         dy="1.6"
-         id="tspan14">s</tspan></text>
-    <text
-       x="75.510002"
-       y="113"
-       text-anchor="start"
-       fill="#d55e00"
-       font-weight="400"
-       font-style="italic"
-       id="text16"><tspan
-         font-size="7px"
-         id="tspan15"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 1.6">ΓI</tspan></text>
-    <text
-       x="66.889999"
-       y="82"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text21"><tspan
-         font-size="7px"
-         id="tspan17"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ1, ρ1)</tspan></text>
-    <text
-       x="100.89"
-       y="128"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text26"><tspan
-         font-size="7px"
-         id="tspan22"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ2, ρ2)</tspan></text>
-  </g>
-  <text
-     x="14"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text27"><tspan
-       font-size="7px"
-       id="tspan27"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Known:</tspan></text>
-  <text
-     x="52"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="400"
-     font-style="italic"
-     id="text38"><tspan
-       font-size="7px"
-       id="tspan28"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6 -1.6 0 0 0 1.6 -1.6 0 0 1.6 -1.6 0 0 0 0 1.6 -1.6 0 0 1.6 -1.6">Γs, (μ1, ρ1), (μ2, ρ2)</tspan></text>
-  <text
-     x="14"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="700"
-     id="text39"><tspan
-       font-size="7px"
-       id="tspan39"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Unknown:</tspan></text>
-  <text
-     x="52"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="400"
-     font-style="italic"
-     id="text41"><tspan
-       font-size="7px"
-       id="tspan40"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6">ΓI</tspan></text>
-  <text
-     x="201.52013"
-     y="21.000488"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text42"
-     style="font-size:8.00065px"><tspan
-       font-size="8px"
-       id="tspan42"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.00065px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Surface reconstruction</tspan></text>
-  <g
-     transform="translate(174)"
-     id="g66">
-    <path
-       d="m 0,78 h 36 c 14,20 28,26 42,22 16,-4 30,-8 42,-22 h 36 v 62 H 0 Z"
-       fill="#d6e0ea"
-       id="path42" />
-    <path
-       d="M 36,78 C 52,78 62,48 78,48 94,48 104,78 120,78 108,92 94,96 78,100 64,104 50,98 36,78 Z"
-       fill="#f3d9b1"
-       id="path43" />
-    <path
-       d="M 0.5,78 H 36 m 84,0 h 35.5"
-       fill="none"
-       stroke="#222222"
-       stroke-width="1"
-       id="path44" />
-    <path
-       d="m 36,78 c 14,20 28,26 42,22 16,-4 30,-8 42,-22"
-       fill="none"
-       stroke="#222222"
-       stroke-width="0.8"
-       id="path45" />
-    <path
-       d="m 36,78 c 16,0 26,-30 42,-30 16,0 26,30 42,30"
-       fill="none"
-       stroke="#d55e00"
-       stroke-width="1.3"
-       stroke-dasharray="3.5, 2"
-       id="path46" />
-    <polygon
-       points="8,78 5,72 11,72 "
-       fill="#009e73"
-       id="polygon46" />
-    <polygon
-       points="18,78 15,72 21,72 "
-       fill="#009e73"
-       id="polygon47" />
-    <polygon
-       points="28,78 25,72 31,72 "
-       fill="#009e73"
-       id="polygon48" />
-    <polygon
-       points="128,78 125,72 131,72 "
-       fill="#009e73"
-       id="polygon49" />
-    <polygon
-       points="138,78 135,72 141,72 "
-       fill="#009e73"
-       id="polygon50" />
-    <polygon
-       points="148,78 145,72 151,72 "
-       fill="#009e73"
-       id="polygon51" />
-    <line
-       x1="6"
-       y1="128"
-       x2="26"
-       y2="100"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line51" />
-    <line
-       x1="20"
-       y1="132"
-       x2="40"
-       y2="104"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line52" />
-    <text
-       x="46"
-       y="132"
-       text-anchor="start"
-       fill="#0072b2"
-       font-weight="400"
-       id="text52"><tspan
-         font-size="6px"
-         id="tspan52"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">incident wave</tspan></text>
-    <text
-       x="104"
-       y="54"
-       text-anchor="start"
-       fill="#d55e00"
-       font-weight="400"
-       font-style="italic"
-       id="text54"><tspan
-         font-size="7px"
-         id="tspan53"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 1.6">Γs</tspan></text>
-    <text
-       x="75.510002"
-       y="113"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text56"><tspan
-         font-size="7px"
-         id="tspan55"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 1.6">ΓI</tspan></text>
-    <text
-       x="66.889999"
-       y="82"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text61"><tspan
-         font-size="7px"
-         id="tspan57"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ1, ρ1)</tspan></text>
-    <text
-       x="100.89"
-       y="128"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text66"><tspan
-         font-size="7px"
-         id="tspan62"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ2, ρ2)</tspan></text>
-  </g>
-  <text
-     x="182"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text67"><tspan
-       font-size="7px"
-       id="tspan67">Known:</tspan></text>
-  <text
-     x="220"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="400"
-     font-style="italic"
-     id="text78"><tspan
-       font-size="7px"
-       id="tspan68"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6 -1.6 0 0 0 1.6 -1.6 0 0 1.6 -1.6 0 0 0 0 1.6 -1.6 0 0 1.6 -1.6">ΓI, (μ1, ρ1), (μ2, ρ2)</tspan></text>
-  <text
-     x="182"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="700"
-     id="text79"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'"><tspan
-       font-size="7px"
-       id="tspan79"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Unknown:</tspan></text>
-  <text
-     x="220"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="400"
-     font-style="italic"
-     id="text81"><tspan
-       font-size="7px"
-       id="tspan80"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6">Γs</tspan></text>
-  <text
-     x="378.26013"
-     y="21.000488"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text82"
-     style="font-size:8.00065px"><tspan
-       font-size="8px"
-       id="tspan82"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.00065px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Bold'">Joint identification</tspan></text>
-  <g
-     transform="translate(342)"
-     id="g106">
-    <path
-       d="m 0,78 h 36 c 14,20 28,26 42,22 16,-4 30,-8 42,-22 h 36 v 62 H 0 Z"
-       fill="#d6e0ea"
-       id="path82" />
-    <path
-       d="M 36,78 C 52,78 62,48 78,48 94,48 104,78 120,78 108,92 94,96 78,100 64,104 50,98 36,78 Z"
-       fill="#f3d9b1"
-       id="path83" />
-    <path
-       d="M 0.5,78 H 36 m 84,0 h 35.5"
-       fill="none"
-       stroke="#222222"
-       stroke-width="1"
-       id="path84" />
-    <path
-       d="m 36,78 c 14,20 28,26 42,22 16,-4 30,-8 42,-22"
-       fill="none"
-       stroke="#222222"
-       stroke-width="0.8"
-       id="path85" />
-    <path
-       d="m 36,78 c 16,0 26,-30 42,-30 16,0 26,30 42,30"
-       fill="none"
-       stroke="#d55e00"
-       stroke-width="1.3"
-       stroke-dasharray="3.5, 2"
-       id="path86" />
-    <polygon
-       points="8,78 5,72 11,72 "
-       fill="#009e73"
-       id="polygon86" />
-    <polygon
-       points="18,78 15,72 21,72 "
-       fill="#009e73"
-       id="polygon87" />
-    <polygon
-       points="28,78 25,72 31,72 "
-       fill="#009e73"
-       id="polygon88" />
-    <polygon
-       points="128,78 125,72 131,72 "
-       fill="#009e73"
-       id="polygon89" />
-    <polygon
-       points="138,78 135,72 141,72 "
-       fill="#009e73"
-       id="polygon90" />
-    <polygon
-       points="148,78 145,72 151,72 "
-       fill="#009e73"
-       id="polygon91" />
-    <line
-       x1="6"
-       y1="128"
-       x2="26"
-       y2="100"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line91" />
-    <line
-       x1="20"
-       y1="132"
-       x2="40"
-       y2="104"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line92" />
-    <text
-       x="46"
-       y="132"
-       text-anchor="start"
-       fill="#0072b2"
-       font-weight="400"
-       id="text92"><tspan
-         font-size="6px"
-         id="tspan92"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">incident wave</tspan></text>
-    <text
-       x="104"
-       y="54"
-       text-anchor="start"
-       fill="#d55e00"
-       font-weight="400"
-       font-style="italic"
-       id="text94"><tspan
-         font-size="7px"
-         id="tspan93"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 1.6">Γs</tspan></text>
-    <text
-       x="75.510002"
-       y="113"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text96"><tspan
-         font-size="7px"
-         id="tspan95"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 1.6">ΓI</tspan></text>
-    <text
-       x="66.889999"
-       y="82"
-       text-anchor="start"
-       fill="#d55e00"
-       font-weight="400"
-       font-style="italic"
-       id="text101"><tspan
-         font-size="7px"
-         id="tspan97"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ1, ρ1)</tspan></text>
-    <text
-       x="100.89"
-       y="128"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       font-style="italic"
-       id="text106"><tspan
-         font-size="7px"
-         id="tspan102"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-         dy="0 0 1.6 -1.6 0 0 1.6 -1.6">(μ2, ρ2)</tspan></text>
-  </g>
-  <text
-     x="350"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="700"
-     id="text107"><tspan
-       font-size="7px"
-       id="tspan107">Known:</tspan></text>
-  <text
-     x="388"
-     y="155"
-     text-anchor="start"
-     fill="#222222"
-     font-weight="400"
-     font-style="italic"
-     id="text114"><tspan
-       font-size="7px"
-       id="tspan108"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6 -1.6 0 0 0 1.6 -1.6 0 0 1.6 -1.6">ΓI, (μ2, ρ2)</tspan></text>
-  <text
-     x="350"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="700"
-     id="text115"><tspan
-       font-size="7px"
-       id="tspan115">Unknown:</tspan></text>
-  <text
-     x="388"
-     y="167"
-     text-anchor="start"
-     fill="#d55e00"
-     font-weight="400"
-     font-style="italic"
-     id="text121"><tspan
-       font-size="7px"
-       id="tspan116"
-       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans Italic'"
-       dy="0 1.6 -1.6 0 0 1.6 -1.6 0 0 1.6">Γs, μ1, ρ1</tspan></text>
-  <g
-     id="g127"
-     transform="translate(4.5003678)">
-    <line
-       x1="24"
-       y1="186.5"
-       x2="40"
-       y2="186.5"
-       stroke="#222222"
-       stroke-width="1"
-       id="line121" />
-    <text
-       x="44"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text122"><tspan
-         font-size="7px"
-         id="tspan122"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">known</tspan></text>
-  </g>
-  <g
-     id="g128"
-     transform="translate(10.526928)">
-    <line
-       x1="78"
-       y1="186.5"
-       x2="94"
-       y2="186.5"
-       stroke="#d55e00"
-       stroke-width="1.3"
-       stroke-dasharray="3.5, 2"
-       id="line122" />
-    <text
-       x="98"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text123"><tspan
-         font-size="7px"
-         id="tspan123"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">unknown</tspan></text>
-  </g>
-  <g
-     id="g129"
-     transform="translate(10.644221)">
-    <polygon
-       points="205,183 211,183 208,189 "
-       fill="#009e73"
-       id="polygon123"
-       transform="translate(-58.504794)" />
-    <text
-       x="161.49524"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text124"><tspan
-         font-size="7px"
-         id="tspan124"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">receivers</tspan></text>
-  </g>
-  <g
-     id="g130"
-     transform="translate(13.494513)">
-    <line
-       x1="206.49524"
-       y1="186.5"
-       x2="222.49524"
-       y2="186.5"
-       stroke="#0072b2"
-       stroke-width="1"
-       marker-end="url(#ah)"
-       id="line124" />
-    <text
-       x="226.49524"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text125"><tspan
-         font-size="7px"
-         id="tspan125"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">incident wave</tspan></text>
-  </g>
-  <g
-     id="g131"
-     transform="translate(13.768437)">
-    <rect
-       x="289.49524"
-       y="183"
-       width="12"
-       height="8"
-       fill="#f3d9b1"
-       stroke="#999999"
-       stroke-width="0.4"
-       id="rect125"
-       style="stroke:none" />
-    <text
-       x="307.49524"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text126"><tspan
-         font-size="7px"
-         id="tspan126"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">topography</tspan></text>
-  </g>
-  <g
-     id="g132"
-     transform="translate(4.5003678)">
-    <rect
-       x="373.49524"
-       y="183"
-       width="12"
-       height="8"
-       fill="#d6e0ea"
-       stroke="#999999"
-       stroke-width="0.4"
-       id="rect126"
-       style="stroke:none" />
-    <text
-       x="391.49524"
-       y="189"
-       text-anchor="start"
-       fill="#222222"
-       font-weight="400"
-       id="text127"><tspan
-         font-size="7px"
-         id="tspan127"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans'">semi-infinite domain</tspan></text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="7in" height="3.500in" viewBox="0 0 504 252" font-family="'Open Sans', 'OpenSans', Arial, sans-serif">
+<title>Inverse problems in irregular topographies</title>
+<desc>Top left: system and notation. Top right: types of irregularity. Bottom: interface identification, surface reconstruction and joint identification.</desc>
+<defs>
+<marker id="ab" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#2f6690"/></marker>
+</defs>
+<rect x="0" y="0" width="504" height="252" rx="0" fill="#FFFFFF" stroke="none" stroke-width="0.6"/>
+<rect x="4" y="4" width="296" height="13" rx="0" fill="#e9e9e9" stroke="none" stroke-width="0.6"/>
+<text x="152.00" y="13.50" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:bold">System and notation</tspan></text>
+<rect x="4" y="19" width="296" height="131" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<rect x="10" y="86" width="284" height="58" fill="#b9cbe0"/>
+<path d="M 102.00,86.00 C 121.05,86.00 132.95,42.00 152.00,42.00 C 171.05,42.00 182.95,86.00 202.00,86.00 L 202.00,86.00 C 187.70,103.22 171.05,108.14 152.00,113.07 C 135.35,118.00 118.65,110.61 102.00,86.00 Z" fill="#dce5ef"/>
+<path d="M 10,86 H 102 M 202,86 H 294" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 102.00,86.00 C 118.65,110.61 135.35,118.00 152.00,113.07 C 171.05,108.14 187.70,103.22 202.00,86.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 102.00,86.00 C 121.05,86.00 132.95,42.00 152.00,42.00 C 171.05,42.00 182.95,86.00 202.00,86.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<polygon points="22.00,86.00 19.00,80.00 25.00,80.00" fill="#14324d"/>
+<polygon points="36.00,86.00 33.00,80.00 39.00,80.00" fill="#14324d"/>
+<polygon points="50.00,86.00 47.00,80.00 53.00,80.00" fill="#14324d"/>
+<polygon points="254.00,86.00 251.00,80.00 257.00,80.00" fill="#14324d"/>
+<polygon points="268.00,86.00 265.00,80.00 271.00,80.00" fill="#14324d"/>
+<polygon points="282.00,86.00 279.00,80.00 285.00,80.00" fill="#14324d"/>
+<polygon points="124.68,67.29 122.08,62.09 127.28,62.09" fill="#14324d"/>
+<polygon points="141.31,46.58 138.71,41.38 143.91,41.38" fill="#14324d"/>
+<polygon points="162.69,46.58 160.09,41.38 165.29,41.38" fill="#14324d"/>
+<polygon points="179.32,67.29 176.72,62.09 181.92,62.09" fill="#14324d"/>
+<line x1="102" y1="84" x2="102" y2="28" stroke="#4e6479" stroke-width="0.4" stroke-dasharray="1.5,1.2"/>
+<line x1="202" y1="84" x2="202" y2="28" stroke="#4e6479" stroke-width="0.4" stroke-dasharray="1.5,1.2"/>
+<line x1="102" y1="31" x2="202" y2="31" stroke="#4e6479" stroke-width="0.5"/>
+<path d="M 102,31 l 4,-1.6 v 3.2 z" fill="#4e6479"/>
+<path d="M 202,31 l -4,-1.6 v 3.2 z" fill="#4e6479"/>
+<rect x="145" y="26" width="14" height="9" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<text x="152.00" y="33.50" text-anchor="middle" fill="#4e6479" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">2</tspan><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">a</tspan></text>
+<line x1="18" y1="140" x2="40" y2="109" stroke="#2f6690" stroke-width="1" marker-end="url(#ab)"/>
+<line x1="34" y1="144" x2="56" y2="113" stroke="#2f6690" stroke-width="1" marker-end="url(#ab)"/>
+<line x1="34" y1="144" x2="34" y2="125" stroke="#2f6690" stroke-width="0.5" stroke-dasharray="1.5,1.2"/>
+<path d="M 34,131 A 13,13 0 0 1 41.53,133.40" fill="none" stroke="#2f6690" stroke-width="0.5"/>
+<text x="38.50" y="127.00" text-anchor="middle" fill="#2f6690" xml:space="preserve"><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">α</tspan></text>
+<text x="60.00" y="140.00" text-anchor="start" fill="#2f6690" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">incident SH wave, frequency </tspan><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">η</tspan></text>
+<text x="152.00" y="66.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:normal">Ω</tspan><tspan dy="1.65" style="font-size:5.40px;font-style:normal;font-weight:normal">1</tspan></text>
+<text x="152.00" y="77.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">(</tspan><tspan style="font-size:7.00px;font-style:italic;font-weight:normal">μ</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">1</tspan><tspan dy="-1.54" style="font-size:7.00px;font-style:normal;font-weight:normal">, </tspan><tspan style="font-size:7.00px;font-style:italic;font-weight:normal">ρ</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">1</tspan><tspan dy="-1.54" style="font-size:7.00px;font-style:normal;font-weight:normal">)</tspan></text>
+<text x="190.00" y="52.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:normal">Γ</tspan><tspan dy="1.65" style="font-size:5.40px;font-style:normal;font-weight:normal">s</tspan></text>
+<text x="156.00" y="129.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:normal">Γ</tspan><tspan dy="1.65" style="font-size:5.40px;font-style:normal;font-weight:normal">I</tspan></text>
+<text x="288.00" y="98.00" text-anchor="end" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:normal">Γ</tspan><tspan dy="1.65" style="font-size:5.40px;font-style:normal;font-weight:normal">0</tspan></text>
+<text x="288.00" y="126.00" text-anchor="end" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:normal">Ω</tspan><tspan dy="1.65" style="font-size:5.40px;font-style:normal;font-weight:normal">2</tspan></text>
+<text x="288.00" y="137.00" text-anchor="end" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">(</tspan><tspan style="font-size:7.00px;font-style:italic;font-weight:normal">μ</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">2</tspan><tspan dy="-1.54" style="font-size:7.00px;font-style:normal;font-weight:normal">, </tspan><tspan style="font-size:7.00px;font-style:italic;font-weight:normal">ρ</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">2</tspan><tspan dy="-1.54" style="font-size:7.00px;font-style:normal;font-weight:normal">)</tspan></text>
+<text x="14.00" y="76.00" text-anchor="start" fill="#14324d" xml:space="preserve"><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">x</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:italic;font-weight:normal">r</tspan></text>
+<rect x="306" y="4" width="194" height="13" rx="0" fill="#e9e9e9" stroke="none" stroke-width="0.6"/>
+<text x="403.00" y="13.50" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:bold">Types of irregularity</tspan></text>
+<rect x="306" y="19" width="194" height="131" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<text x="403.00" y="32.00" text-anchor="middle" fill="#4e6479" xml:space="preserve"><tspan style="font-size:6.00px;font-style:normal;font-weight:normal">Ω</tspan><tspan dy="1.32" style="font-size:4.32px;font-style:normal;font-weight:normal">1</tspan><tspan dy="-1.32" style="font-size:6.00px;font-style:normal;font-weight:normal"> lies between Γ</tspan><tspan dy="1.32" style="font-size:4.32px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.32" style="font-size:6.00px;font-style:normal;font-weight:normal"> and Γ</tspan><tspan dy="1.32" style="font-size:4.32px;font-style:normal;font-weight:normal">I</tspan><tspan dy="-1.32" style="font-size:6.00px;font-style:normal;font-weight:normal">; Γ</tspan><tspan dy="1.32" style="font-size:4.32px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.32" style="font-size:6.00px;font-style:normal;font-weight:normal"> ∪ Γ</tspan><tspan dy="1.32" style="font-size:4.32px;font-style:normal;font-weight:normal">0</tspan><tspan dy="-1.32" style="font-size:6.00px;font-style:normal;font-weight:normal"> is traction-free</tspan></text>
+<rect x="308" y="80" width="60" height="34" fill="#b9cbe0"/>
+<path d="M 318.00,80.00 C 325.62,80.00 330.38,48.00 338.00,48.00 C 345.62,48.00 350.38,80.00 358.00,80.00 L 358.00,80.00 C 352.28,90.76 345.62,93.84 338.00,96.92 C 331.34,100.00 324.66,95.38 318.00,80.00 Z" fill="#dce5ef"/>
+<path d="M 308,80 H 318 M 358,80 H 368" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 318.00,80.00 C 324.66,95.38 331.34,100.00 338.00,96.92 C 345.62,93.84 352.28,90.76 358.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 318.00,80.00 C 325.62,80.00 330.38,48.00 338.00,48.00 C 345.62,48.00 350.38,80.00 358.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<text x="338.00" y="127.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:bold">Hill</tspan></text>
+<text x="338.00" y="138.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal"> above Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan></text>
+<rect x="373" y="80" width="60" height="34" fill="#b9cbe0"/>
+<path d="M 383.00,80.00 C 390.62,80.00 395.38,96.00 403.00,96.00 C 410.62,96.00 415.38,80.00 423.00,80.00 L 423.00,80.00 C 417.28,96.14 410.62,100.76 403.00,105.38 C 396.34,110.00 389.66,103.07 383.00,80.00 Z" fill="#dce5ef"/>
+<path d="M 383.00,80.00 C 390.62,80.00 395.38,96.00 403.00,96.00 C 410.62,96.00 415.38,80.00 423.00,80.00 Z" fill="#FFFFFF"/>
+<path d="M 373,80 H 383 M 423,80 H 433" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 383.00,80.00 C 389.66,103.07 396.34,110.00 403.00,105.38 C 410.62,100.76 417.28,96.14 423.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 383.00,80.00 C 390.62,80.00 395.38,96.00 403.00,96.00 C 410.62,96.00 415.38,80.00 423.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<text x="403.00" y="127.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:bold">Canyon</tspan></text>
+<text x="403.00" y="138.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal"> below Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan></text>
+<rect x="438" y="80" width="60" height="34" fill="#b9cbe0"/>
+<path d="M 448.00,80.00 C 455.62,80.00 460.38,80.00 468.00,80.00 C 475.62,80.00 480.38,80.00 488.00,80.00 L 488.00,80.00 C 482.28,92.91 475.62,96.61 468.00,100.30 C 461.34,104.00 454.66,98.46 448.00,80.00 Z" fill="#dce5ef"/>
+<path d="M 438,80 H 448 M 488,80 H 498" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 448.00,80.00 C 454.66,98.46 461.34,104.00 468.00,100.30 C 475.62,96.61 482.28,92.91 488.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 448.00,80.00 C 455.62,80.00 460.38,80.00 468.00,80.00 C 475.62,80.00 480.38,80.00 488.00,80.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<text x="468.00" y="127.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:bold">Sedimentary basin</tspan></text>
+<text x="468.00" y="138.00" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">flat Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal"> on Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan></text>
+<rect x="4" y="156" width="496" height="13" rx="0" fill="#e9e9e9" stroke="none" stroke-width="0.6"/>
+<text x="252.00" y="165.50" text-anchor="middle" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.50px;font-style:normal;font-weight:bold">Inverse problems</tspan></text>
+<rect x="4.0" y="171" width="162" height="58" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<rect x="10.0" y="208" width="60.0" height="17" fill="#b9cbe0"/>
+<path d="M 20.00,208.00 C 27.62,208.00 32.38,184.00 40.00,184.00 C 47.62,184.00 52.38,208.00 60.00,208.00 L 60.00,208.00 C 54.28,216.07 47.62,218.38 40.00,220.69 C 33.34,223.00 26.66,219.53 20.00,208.00 Z" fill="#dce5ef"/>
+<path d="M 10.0,208 H 20.0 M 60.0,208 H 70.0" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 20.00,208.00 C 26.66,219.53 33.34,223.00 40.00,220.69 C 47.62,218.38 54.28,216.07 60.00,208.00" fill="none" stroke="#2f6690" stroke-width="1.3" stroke-dasharray="3.5,2"/>
+<path d="M 20.00,208.00 C 27.62,208.00 32.38,184.00 40.00,184.00 C 47.62,184.00 52.38,208.00 60.00,208.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<text x="78.00" y="186.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:bold">Interface identification</tspan></text>
+<text x="78.00" y="199.00" text-anchor="start" fill="#2f6690" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Unknown: Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">I</tspan></text>
+<text x="78.00" y="211.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Receivers on Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal"> ∪ Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan></text>
+<rect x="171.3" y="171" width="162" height="58" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<rect x="177.3" y="208" width="60.0" height="17" fill="#b9cbe0"/>
+<path d="M 187.30,208.00 C 194.92,208.00 199.68,184.00 207.30,184.00 C 214.92,184.00 219.68,208.00 227.30,208.00 L 227.30,208.00 C 221.58,216.07 214.92,218.38 207.30,220.69 C 200.64,223.00 193.96,219.53 187.30,208.00 Z" fill="#dce5ef"/>
+<path d="M 177.3,208 H 187.3 M 227.3,208 H 237.3" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 187.30,208.00 C 193.96,219.53 200.64,223.00 207.30,220.69 C 214.92,218.38 221.58,216.07 227.30,208.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 187.30,208.00 C 194.92,208.00 199.68,184.00 207.30,184.00 C 214.92,184.00 219.68,208.00 227.30,208.00" fill="none" stroke="#2f6690" stroke-width="1.3" stroke-dasharray="3.5,2"/>
+<text x="245.30" y="186.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:bold">Surface reconstruction</tspan></text>
+<text x="245.30" y="199.00" text-anchor="start" fill="#2f6690" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Unknown: Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan></text>
+<text x="245.30" y="211.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Receivers on Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan></text>
+<rect x="338.6" y="171" width="162" height="58" rx="0" fill="#f4f6f8" stroke="none" stroke-width="0.6"/>
+<rect x="344.6" y="208" width="60.0" height="17" fill="#b9cbe0"/>
+<path d="M 354.60,208.00 C 362.22,208.00 366.98,184.00 374.60,184.00 C 382.22,184.00 386.98,208.00 394.60,208.00 L 394.60,208.00 C 388.88,216.07 382.22,218.38 374.60,220.69 C 367.94,223.00 361.26,219.53 354.60,208.00 Z" fill="#e9e9e9"/>
+<path d="M 344.6,208 H 354.6 M 394.6,208 H 404.6" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 354.60,208.00 C 361.26,219.53 367.94,223.00 374.60,220.69 C 382.22,218.38 388.88,216.07 394.60,208.00" fill="none" stroke="#2b3138" stroke-width="1"/>
+<path d="M 354.60,208.00 C 362.22,208.00 366.98,184.00 374.60,184.00 C 382.22,184.00 386.98,208.00 394.60,208.00" fill="none" stroke="#2f6690" stroke-width="1.3" stroke-dasharray="3.5,2"/>
+<text x="412.60" y="186.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:bold">Joint identification</tspan></text>
+<text x="412.60" y="199.00" text-anchor="start" fill="#2f6690" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Unknown: Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">s</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal">, </tspan><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">μ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">1</tspan><tspan dy="-1.43" style="font-size:6.50px;font-style:normal;font-weight:normal">, </tspan><tspan style="font-size:6.50px;font-style:italic;font-weight:normal">ρ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">1</tspan></text>
+<text x="412.60" y="211.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:6.50px;font-style:normal;font-weight:normal">Receivers on Γ</tspan><tspan dy="1.43" style="font-size:4.68px;font-style:normal;font-weight:normal">0</tspan></text>
+<line x1="20" y1="242.5" x2="36" y2="242.5" stroke="#2b3138" stroke-width="1"/>
+<text x="40.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">known</tspan></text>
+<line x1="78" y1="242.5" x2="94" y2="242.5" stroke="#2f6690" stroke-width="1.3" stroke-dasharray="3.5,2"/>
+<text x="98.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">unknown</tspan></text>
+<polygon points="149.00,245.00 146.00,239.00 152.00,239.00" fill="#14324d"/>
+<text x="156.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">receivers</tspan></text>
+<line x1="200" y1="242.5" x2="216" y2="242.5" stroke="#2f6690" stroke-width="1" marker-end="url(#ab)"/>
+<text x="220.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">incident wave</tspan></text>
+<rect x="280" y="238" width="12" height="8" rx="0" fill="#dce5ef" stroke="none" stroke-width="0.6"/>
+<text x="296.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">irregularity Ω</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">1</tspan></text>
+<rect x="358" y="238" width="12" height="8" rx="0" fill="#e9e9e9" stroke="none" stroke-width="0.6"/>
+<text x="374.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">unknown material</tspan></text>
+<rect x="438" y="238" width="12" height="8" rx="0" fill="#b9cbe0" stroke="none" stroke-width="0.6"/>
+<text x="454.00" y="245.00" text-anchor="start" fill="#2b3138" xml:space="preserve"><tspan style="font-size:7.00px;font-style:normal;font-weight:normal">half-space Ω</tspan><tspan dy="1.54" style="font-size:5.04px;font-style:normal;font-weight:normal">2</tspan></text>
 </svg>

@@ -1,0 +1,12 @@
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{2}{c}{$\eta\in\{0.25,\dots,1\}$} & \multicolumn{2}{c}{$\eta\in\{0.5,\dots,2\}$} & \multicolumn{2}{c}{$\eta\in\{1.5,\dots,2.25\}$}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Solver & converged & time (s) & converged & time (s) & converged & time (s)\\
+\midrule
+BEM + LM (FD) & 7/8 & 1.76 & 4/8 & 3.43 & 1/8 & 5.18\\
+BEM + L-BFGS (adjoint) & 7/8 & 0.355 & 4/8 & 0.69 & 1/8 & 0.631\\
+BEM + L-BFGS (adjoint) + continuation & 8/8 & 0.752 & 8/8 & 0.899 & 2/8 & 1.02\\
+BEM--PINN & 8/8 & 197 & 6/8 & 196 & 2/8 & 206\\
+\bottomrule
+\end{tabular}

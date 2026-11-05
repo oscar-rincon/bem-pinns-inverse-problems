@@ -1,0 +1,22 @@
+\begin{tabular}{llcccc}
+\toprule
+ & & \multicolumn{3}{c}{shape error (\%)} & \\
+\cmidrule(lr){3-5}
+Problem & Solver & 0\% & 1\% & 3\% & time (s)\\
+\midrule
+Interface & BEM + LM (FD) & 1.30 & 1.35 & 1.53 & 0.76\\
+ & BEM + L-BFGS (adjoint) & 1.30 & 1.35 & 1.53 & 0.492\\
+ & BEM + L-BFGS (adjoint) + cont. & 1.30 & 1.35 & 1.53 & 0.884\\
+ & BEM--PINN & 1.33 & 1.30 & 1.92 & 251\\
+\midrule
+Free surface & BEM + LM (FD) & 0.28 & 0.34 & 0.50 & 0.836\\
+ & BEM + L-BFGS (adjoint) & 0.28 & 0.34 & 0.50 & 0.375\\
+ & BEM + L-BFGS (adjoint) + cont. & 0.28 & 0.34 & 0.50 & 0.689\\
+ & BEM--PINN & 0.31 & 0.36 & 0.47 & 198\\
+\midrule
+Joint & BEM + LM (FD) & 0.34 & 0.66 & 1.34 & 1.89\\
+ & BEM + L-BFGS (adjoint) & 110.04 & 110.05 & 110.09 & 0.867\\
+ & BEM + L-BFGS (adjoint) + cont. & 0.34 & 0.66 & 1.34 & 1.33\\
+ & BEM--PINN & 0.55 & 0.67 & 1.48 & 191\\
+\bottomrule
+\end{tabular}

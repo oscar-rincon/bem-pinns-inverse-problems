@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="7in" height="3.75in" viewBox="0 0 504 270" font-family="'Open Sans', 'OpenSans', Arial, sans-serif">
+<title>Joint geometric and material identification with BEM-PINN</title>
+<desc>Unknown geometry and material parameters and a source-density network feed a differentiable BEM. Boundary residuals and receiver predictions define an inverse objective with observed records and a geometry penalty. Automatic differentiation updates both sets of trainable quantities without a linear solve. Training consists of density pretraining, joint training with frequency continuation and joint refinement.</desc>
+<defs>
+  <marker id="forward" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4.5" markerHeight="4.5" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2b3138"/></marker>
+  <marker id="gradient" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4.5" markerHeight="4.5" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2f6690"/></marker>
+</defs>
+<rect width="504" height="270" fill="#ffffff"/>
+
+<text x="80.5" y="18" text-anchor="middle" fill="#14324d" font-size="8" font-weight="bold">Trainable quantities</text>
+<rect x="8" y="30" width="145" height="66" fill="#dce5ef" stroke="#2f6690" stroke-width="0.7"/>
+<text x="80.5" y="45" text-anchor="middle" fill="#2f6690" font-size="7.5" font-weight="bold">Unknown parameters <tspan font-style="italic">ϑ</tspan></text>
+<text x="80.5" y="64" text-anchor="middle" fill="#2b3138" font-size="7">Geometry: Γ<tspan baseline-shift="sub" font-size="5">s</tspan>(ξ<tspan baseline-shift="sub" font-size="5">s</tspan>), Γ<tspan baseline-shift="sub" font-size="5">I</tspan>(ξ<tspan baseline-shift="sub" font-size="5">I</tspan>)</text>
+<text x="80.5" y="80" text-anchor="middle" fill="#2b3138" font-size="7">Materials: μ<tspan baseline-shift="sub" font-size="5">1</tspan>, ρ<tspan baseline-shift="sub" font-size="5">1</tspan></text>
+<text x="80.5" y="91" text-anchor="middle" fill="#4e6479" font-size="6">Selected for each inverse problem</text>
+
+<rect x="8" y="112" width="145" height="51" fill="#b9cbe0"/>
+<text x="80.5" y="127" text-anchor="middle" fill="#14324d" font-size="7.5" font-weight="bold">Source-density network</text>
+<text x="80.5" y="142" text-anchor="middle" fill="#2b3138" font-size="8">ŝ → N<tspan baseline-shift="sub" font-size="5.5">θ</tspan> → φ̂<tspan baseline-shift="sub" font-size="5.5">fj</tspan></text>
+<text x="80.5" y="155" text-anchor="middle" fill="#4e6479" font-size="6">Fourier features; one head per excitation</text>
+
+<rect x="178" y="8" width="130" height="26" fill="#f4f6f8"/>
+<text x="243" y="24" text-anchor="middle" fill="#4e6479" font-size="7">Known excitations (η<tspan baseline-shift="sub" font-size="5">f</tspan>, α<tspan baseline-shift="sub" font-size="5">j</tspan>)</text>
+<rect x="178" y="51" width="130" height="112" fill="#e9e9e9"/>
+<text x="243" y="67" text-anchor="middle" fill="#14324d" font-size="7.5" font-weight="bold">Differentiable BEM</text>
+<text x="243" y="87" text-anchor="middle" fill="#4e6479" font-size="6.5">Boundary residual</text>
+<text x="243" y="102" text-anchor="middle" fill="#2b3138" font-size="8"><tspan font-weight="bold">A</tspan>(ϑ) φ̂ − <tspan font-weight="bold">b</tspan>(ϑ)</text>
+<text x="243" y="123" text-anchor="middle" fill="#4e6479" font-size="6.5">Receiver prediction</text>
+<text x="243" y="138" text-anchor="middle" fill="#2b3138" font-size="8">u(x<tspan baseline-shift="sub" font-size="5.5">r</tspan>; θ, ϑ)</text>
+<text x="243" y="155" text-anchor="middle" fill="#4e6479" font-size="5.8">Radiation through Green's functions</text>
+
+<rect x="334" y="8" width="162" height="26" fill="#f4f6f8"/>
+<text x="415" y="24" text-anchor="middle" fill="#4e6479" font-size="7">Observed records u<tspan baseline-shift="super" font-size="5">obs</tspan><tspan baseline-shift="sub" font-size="5">r</tspan></text>
+<rect x="334" y="51" width="162" height="112" fill="#ffffff" stroke="#2b3138" stroke-width="0.7"/>
+<text x="415" y="67" text-anchor="middle" fill="#14324d" font-size="7.5" font-weight="bold">Inverse objective</text>
+<text x="415" y="86" text-anchor="middle" fill="#2b3138" font-size="8">L = L<tspan baseline-shift="sub" font-size="5.5">BC</tspan> + λ<tspan baseline-shift="sub" font-size="5.5">d</tspan>L<tspan baseline-shift="sub" font-size="5.5">d</tspan> + λ<tspan baseline-shift="sub" font-size="5.5">r</tspan>R</text>
+<text x="347" y="109" fill="#2b3138" font-size="7">Boundary conditions: L<tspan baseline-shift="sub" font-size="5">BC</tspan></text>
+<text x="347" y="128" fill="#2b3138" font-size="7">Seismic records: L<tspan baseline-shift="sub" font-size="5">d</tspan></text>
+<text x="347" y="147" fill="#2b3138" font-size="7">Geometry penalty: R(ϑ)</text>
+
+<g fill="none" stroke="#2b3138" stroke-width="0.8" marker-end="url(#forward)">
+  <path d="M153,64 H178"/>
+  <path d="M153,138 H178"/>
+  <path d="M243,34 V51"/>
+  <path d="M308,107 H334"/>
+  <path d="M415,34 V51"/>
+</g>
+<rect x="178" y="184" width="318" height="33" fill="#e9e9e9"/>
+<text x="337" y="197" text-anchor="middle" fill="#2f6690" font-size="7.5" font-weight="bold">Joint update of θ and ϑ</text>
+<text x="337" y="210" text-anchor="middle" fill="#4e6479" font-size="6.5">Gradients through the BEM assembly; no linear solve</text>
+<g fill="none" stroke="#2f6690" stroke-width="0.8" stroke-dasharray="3,2" marker-end="url(#gradient)">
+  <path d="M415,163 V184"/>
+  <path d="M178,200 H4 V64 H8"/>
+  <path d="M4,138 H8"/>
+</g>
+<text x="80.5" y="212" text-anchor="middle" fill="#2f6690" font-size="6">Automatic differentiation</text>
+
+<rect x="8" y="234" width="148" height="28" fill="#f4f6f8"/>
+<rect x="176" y="234" width="154" height="28" fill="#f4f6f8"/>
+<rect x="350" y="234" width="146" height="28" fill="#f4f6f8"/>
+<g text-anchor="middle" fill="#14324d" font-size="6.5" font-weight="bold">
+  <text x="82" y="245">1. Pretrain densities</text>
+  <text x="253" y="245">2. Joint training</text>
+  <text x="423" y="245">3. Joint refinement</text>
+</g>
+<g text-anchor="middle" fill="#4e6479" font-size="6">
+  <text x="82" y="256">Fixed geometry</text>
+  <text x="253" y="256">AdamW + frequency continuation</text>
+  <text x="423" y="256">L-BFGS</text>
+</g>
+<g fill="none" stroke="#2b3138" stroke-width="0.7" marker-end="url(#forward)">
+  <path d="M158,248 H173"/>
+  <path d="M332,248 H347"/>
+</g>
+</svg>
