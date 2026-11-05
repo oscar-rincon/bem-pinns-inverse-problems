@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1793908812.2616 "main.aux" "main.bbl" "main" 1793908813.1194 0
+["bibtex main"] 1793909851.10463 "main.aux" "main.bbl" "main" 1793909851.94214 0
   "./refs.bib" 1793899282.79634 10798 6442a32dd7d35cd09cd91130d5dd4371 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1233624470 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "main.aux" 1793908812.89709 23952 7fbb426b6a8b0ca554b419616a46ab07 "pdflatex"
+  "main.aux" 1793909851.73807 22527 b033ae6cf45814e623fe532ff24cf4e4 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1793908812.33753 "main.tex" "main.pdf" "main" 1793908813.11954 0
+["pdflatex"] 1793909851.18213 "main.tex" "main.pdf" "main" 1793909851.94227 0
   "/etc/texmf/web2c/texmf.cnf" 1760206022.17727 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -243,15 +243,14 @@
   "figures/inverse_convergence.pdf" 1793907192.26529 24547 577a9d68b51d9b7da6f8fb1158b7acbd ""
   "figures/inverse_reconstruction.pdf" 1793907190.89326 31845 8b5437116700d77afcb29e237b056678 ""
   "figures/iterative_regime.pdf" 1793907193.88933 25628 7aea86611e26c3ed97e32d4c65b52b8b ""
-  "figures/methodology_scheme.pdf" 1793908796.71282 32050 b0f7a98f884e4967215cde8282dbaa29 ""
   "figures/problem_statement.pdf" 1793908608.47416 35836 da013571b1f616dd9b1657fec91352a7 ""
-  "figures/prototyping_workflow.pdf" 1793907375.08896 42701 cd0209c46bd24817cce414c35af74bde ""
+  "figures/prototyping_workflow.pdf" 1793909250.89094 42597 77d98351f4bbcfde0f42ccb494a05b48 ""
   "figures/scaling_3d.pdf" 1793907195.57736 21891 942782e354aa9c25a95adaf47847699a ""
   "figures/three_d_reconstruction.pdf" 1793907195.16135 90944 edf74297c9b3d8c970e360e50a4b1f0c ""
-  "main.aux" 1793908812.89709 23952 7fbb426b6a8b0ca554b419616a46ab07 "pdflatex"
-  "main.bbl" 1793908812.32909 8968 bf18708c342541def3b0e84f2e2dc92a "bibtex main"
-  "main.out" 1793908812.89709 4370 b366995ac6d899a6f50230a71f3deb19 "pdflatex"
-  "main.tex" 1793908788.84868 76924 b93a3ca523f9fc97f76a1cbf115fe11b ""
+  "main.aux" 1793909851.73807 22527 b033ae6cf45814e623fe532ff24cf4e4 "pdflatex"
+  "main.bbl" 1793909851.17406 8968 bf18708c342541def3b0e84f2e2dc92a "bibtex main"
+  "main.out" 1793909851.73807 4370 b366995ac6d899a6f50230a71f3deb19 "pdflatex"
+  "main.tex" 1793909237.85478 76235 ea09f3c7f900f58def76d4e8517f382b ""
   "preprint.sty" 1793841520 3904 36ed75090b1d197af782c298a744c491 ""
   "tables/basin.tex" 1793907782.67666 600 cb3c9b1e08a857f0edd57f08ba31438f ""
   "tables/forward.tex" 1793907782.68066 1646 44e20f7de2e6c9ed43bb0f6ff02ce1fa ""

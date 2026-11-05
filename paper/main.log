@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.11)  5 NOV 2026 15:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.11)  5 NOV 2026 15:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1002,75 +1002,71 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
-<figures/methodology_scheme.pdf, id=155, 505.89pt x 271.0125pt>
-File: figures/methodology_scheme.pdf Graphic file (type pdf)
-<use figures/methodology_scheme.pdf>
-Package pdftex.def Info: figures/methodology_scheme.pdf  used on input line 113
-.
-(pdftex.def)             Requested size: 469.75499pt x 251.65855pt.
+<figures/prototyping_workflow.pdf, id=157, 508.7808pt x 380.29662pt>
+File: figures/prototyping_workflow.pdf Graphic file (type pdf)
+<use figures/prototyping_workflow.pdf>
+Package pdftex.def Info: figures/prototyping_workflow.pdf  used on input line 1
+13.
+(pdftex.def)             Requested size: 469.75499pt x 351.14215pt.
 [3 <./figures/problem_statement.pdf>] [4{/usr/share/texmf/fonts/enc/dvips/lm/lm
--mathex.enc} <./figures/methodology_scheme.pdf>] [5]
-Overfull \hbox (0.80605pt too wide) in paragraph at lines 198--200
+-mathex.enc} <./figures/prototyping_workflow.pdf>] [5]
+Overfull \hbox (0.80605pt too wide) in paragraph at lines 199--201
 \OT1/lmr/m/n/10.95 so a trun-cated sine se-ries with co-ef-fi-cients $[][]\OML/
 lmm/m/it/10.95 ; [][] \OMS/lmsy/m/n/10.95 2 \U/msb/m/n/10.95 R[]$ \OT1/lmr/m/n/
 10.95 de-ter-mines the ge-om-e-try. The same parametriza-
  []
 
-[6] [7]
-<figures/forward_reproduction.pdf, id=338, 500.42773pt x 336.65976pt>
+[6] [7] [8]
+<figures/forward_reproduction.pdf, id=358, 500.42773pt x 336.65976pt>
 File: figures/forward_reproduction.pdf Graphic file (type pdf)
 <use figures/forward_reproduction.pdf>
 Package pdftex.def Info: figures/forward_reproduction.pdf  used on input line 2
-70.
+71.
 (pdftex.def)             Requested size: 469.75499pt x 316.03384pt.
- (./tables/forward.tex) [8]
-
-LaTeX Warning: Text page 9 contains only floats.
-
-[9 <./figures/forward_reproduction.pdf>]
-<figures/frequency_input.pdf, id=396, 491.77759pt x 162.40875pt>
+ (./tables/forward.tex) [9 <./figures/forward_reproduction.pdf>]
+<figures/frequency_input.pdf, id=410, 491.77759pt x 162.40875pt>
 File: figures/frequency_input.pdf Graphic file (type pdf)
 <use figures/frequency_input.pdf>
-Package pdftex.def Info: figures/frequency_input.pdf  used on input line 289.
+Package pdftex.def Info: figures/frequency_input.pdf  used on input line 290.
 (pdftex.def)             Requested size: 469.75499pt x 155.14238pt.
- [10 <./figures/frequency_input.pdf>]
-(./tables/inverse.tex)
-<figures/inverse_reconstruction.pdf, id=439, 497.96979pt x 156.90486pt>
+
+[10] (./tables/inverse.tex)
+<figures/inverse_reconstruction.pdf, id=419, 497.96979pt x 156.90486pt>
 File: figures/inverse_reconstruction.pdf Graphic file (type pdf)
 <use figures/inverse_reconstruction.pdf>
 Package pdftex.def Info: figures/inverse_reconstruction.pdf  used on input line
- 311.
+ 312.
 (pdftex.def)             Requested size: 469.75499pt x 148.02208pt.
- [11 <./figures/inverse_reconstruction.pdf>]
-<figures/inverse_accuracy_time.pdf, id=481, 493.90128pt x 170.14566pt>
+ [11 <./figures/frequency_input.pdf>]
+<figures/inverse_accuracy_time.pdf, id=471, 493.90128pt x 170.14566pt>
 File: figures/inverse_accuracy_time.pdf Graphic file (type pdf)
 <use figures/inverse_accuracy_time.pdf>
 Package pdftex.def Info: figures/inverse_accuracy_time.pdf  used on input line 
-324.
+325.
 (pdftex.def)             Requested size: 469.75499pt x 161.83476pt.
-<figures/inverse_convergence.pdf, id=482, 493.26817pt x 161.97914pt>
+<figures/inverse_convergence.pdf, id=472, 493.26817pt x 161.97914pt>
 File: figures/inverse_convergence.pdf Graphic file (type pdf)
 <use figures/inverse_convergence.pdf>
 Package pdftex.def Info: figures/inverse_convergence.pdf  used on input line 33
-1.
+2.
 (pdftex.def)             Requested size: 469.75499pt x 154.2624pt.
 
 (./tables/joint.tex)
-<figures/computational_cost.pdf, id=483, 493.22299pt x 159.5472pt>
+<figures/computational_cost.pdf, id=473, 493.22299pt x 159.5472pt>
 File: figures/computational_cost.pdf Graphic file (type pdf)
 <use figures/computational_cost.pdf>
-Package pdftex.def Info: figures/computational_cost.pdf  used on input line 349
+Package pdftex.def Info: figures/computational_cost.pdf  used on input line 350
 .
 (pdftex.def)             Requested size: 469.75499pt x 151.95604pt.
- [12 <./figures/inverse_accuracy_time.pdf>] [13 <./figures/inverse_convergence.
-pdf> <./figures/computational_cost.pdf>]
-<figures/iterative_regime.pdf, id=552, 491.91447pt x 172.24551pt>
+ [12 <./figures/inverse_reconstruction.pdf>] [13 <./figures/inverse_accuracy_ti
+me.pdf> <./figures/inverse_convergence.pdf>]
+<figures/iterative_regime.pdf, id=545, 491.91447pt x 172.24551pt>
 File: figures/iterative_regime.pdf Graphic file (type pdf)
 <use figures/iterative_regime.pdf>
-Package pdftex.def Info: figures/iterative_regime.pdf  used on input line 362.
+Package pdftex.def Info: figures/iterative_regime.pdf  used on input line 363.
 (pdftex.def)             Requested size: 469.75499pt x 164.48647pt.
-
-Overfull \hbox (26.55423pt too wide) in paragraph at lines 371--372
+ [14 <./figures/computational_cost.pdf>]
+Overfull \hbox (26.55423pt too wide) in paragraph at lines 372--373
 []\OT1/lmr/m/n/10.95 The in-verse prob-lem is the re-con-struc-tion of the cany
 on [] with $[] = (0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 55\OML/lmm/m/it/10.9
 5 ; \OT1/lmr/m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 12\OML/lmm/m/it
@@ -1081,40 +1077,32 @@ OT1/lmr/m/n/10.95 06\OML/lmm/m/it/10.95 ; \OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/1
 m/n/10.95 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 10)$
  []
 
-[14 <./figures/iterative_regime.pdf>] (./tables/three_d.tex)
-<figures/three_d_reconstruction.pdf, id=595, 428.25183pt x 133.12282pt>
+(./tables/three_d.tex)
+<figures/three_d_reconstruction.pdf, id=576, 428.25183pt x 133.12282pt>
 File: figures/three_d_reconstruction.pdf Graphic file (type pdf)
 <use figures/three_d_reconstruction.pdf>
 Package pdftex.def Info: figures/three_d_reconstruction.pdf  used on input line
- 384.
+ 385.
 (pdftex.def)             Requested size: 469.75499pt x 146.02316pt.
-<figures/scaling_3d.pdf, id=596, 491.85692pt x 152.36725pt>
+<figures/scaling_3d.pdf, id=577, 491.85692pt x 152.36725pt>
 File: figures/scaling_3d.pdf Graphic file (type pdf)
 <use figures/scaling_3d.pdf>
-Package pdftex.def Info: figures/scaling_3d.pdf  used on input line 391.
+Package pdftex.def Info: figures/scaling_3d.pdf  used on input line 392.
 (pdftex.def)             Requested size: 469.75499pt x 145.52225pt.
- [15]
-(./tables/basin.tex) [16 <./figures/three_d_reconstruction.pdf> <./figures/scal
-ing_3d.pdf>]
-<figures/basin_of_attraction.pdf, id=655, 493.26817pt x 173.00534pt>
+ [15 <./figures/iterative_regime.pdf>] [16 <./figures/three_d_reconstruction.pd
+f> <./figures/scaling_3d.pdf>] (./tables/basin.tex)
+<figures/basin_of_attraction.pdf, id=668, 493.26817pt x 173.00534pt>
 File: figures/basin_of_attraction.pdf Graphic file (type pdf)
 <use figures/basin_of_attraction.pdf>
 Package pdftex.def Info: figures/basin_of_attraction.pdf  used on input line 41
-3.
+4.
 (pdftex.def)             Requested size: 469.75499pt x 164.76329pt.
- [17 <./figures/basin_of_attraction.pdf>]
-<figures/prototyping_workflow.pdf, id=701, 508.7808pt x 380.29662pt>
-File: figures/prototyping_workflow.pdf Graphic file (type pdf)
-<use figures/prototyping_workflow.pdf>
-Package pdftex.def Info: figures/prototyping_workflow.pdf  used on input line 4
-28.
-(pdftex.def)             Requested size: 469.75499pt x 351.14215pt.
- (./tables/prototype.tex)
-[18] [19 <./figures/prototyping_workflow.pdf>] [20] [21]
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-473.
 
-(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
+[17 <./figures/basin_of_attraction.pdf>] (./tables/prototype.tex) [18] [19]
+[20] [21]
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
+467.
+ (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./main.bbl [22{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}] [23]) [24] 
 (./main.aux)
@@ -1126,13 +1114,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B366995AC6D899A6F50230A71F3DEB19;4370.
  ) 
 Here is how much of TeX's memory you used:
- 28165 strings out of 474222
- 525108 string characters out of 5748732
+ 28156 strings out of 474222
+ 524792 string characters out of 5748732
  1950975 words of memory out of 5000000
- 49827 multiletter control sequences out of 15000+600000
+ 49819 multiletter control sequences out of 15000+600000
  630597 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,12n,107p,3118b,582s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,12n,107p,3118b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/p
@@ -1149,10 +1137,10 @@ m/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 /fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
 pfb>
-Output written on main.pdf (24 pages, 896746 bytes).
+Output written on main.pdf (24 pages, 868093 bytes).
 PDF statistics:
- 947 PDF objects out of 1000 (max. 8388607)
- 666 compressed objects within 7 object streams
- 106 named destinations out of 1000 (max. 500000)
- 230 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 904 PDF objects out of 1000 (max. 8388607)
+ 636 compressed objects within 7 object streams
+ 105 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 
