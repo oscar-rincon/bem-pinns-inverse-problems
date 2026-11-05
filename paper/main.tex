@@ -127,11 +127,11 @@ The inversion strategy extends the BEM--PINN formulation of \citet{wu_novel_2026
 \subsection{Forward model}
 
 We consider antiplane (SH) motion with time dependence $e^{i\omega t}$, horizontal coordinate $x$ and vertical coordinate $y$ pointing upwards, so that the half-space occupies $y<0$. The irregularity $\Omega_1$, with shear modulus $\mu_1$ and density $\rho_1$, is bounded by the free surface $\Gamma_s$ and the interface $\Gamma_I$. It may be a hill ($\Gamma_s$ above $\Gamma_0$), a canyon ($\Gamma_s$ below it) or a sedimentary basin (flat $\Gamma_s$). It is embedded in the half-space $\Omega_2$, with properties $(\mu_2,\rho_2)$, whose flat free surface outside the irregularity is $\Gamma_0$. The out-of-plane displacement $u_j$ in $\Omega_j$ satisfies
-\begin{equation}
+\begin{equation*}
   \nabla^2 u_j + k_j^2 u_j = 0 \quad \text{in } \Omega_j,
   \qquad k_j = \frac{\omega}{\beta_j},\quad \beta_j = \sqrt{\mu_j/\rho_j},
   \qquad j = 1,2,
-\end{equation}
+\end{equation*}
 subject to
 \begin{equation}\label{eq:bcs}
   t_1 = 0 \ \text{on } \Gamma_s, \qquad
@@ -139,33 +139,33 @@ subject to
   u_1 = u_2,\ \ t_1 = t_2 \ \text{on } \Gamma_I,
 \end{equation}
 where $t_j = \mu_j\,\partial u_j/\partial n$ is the traction, the normal $\mathbf{n}$ on $\Gamma_s$ points out of the solid, and $\mathbf{n}$ on $\Gamma_I$ points from $\Omega_1$ into $\Omega_2$. The excitation is a unit plane SH wave with incidence angle $\alpha$, measured from the vertical, and normalized frequency $\eta = \omega a/(\pi\beta_2)$, where $a$ is the half-width of the irregularity. In the absence of the irregularity, the incident and reflected waves form the free field
-\begin{equation}
+\begin{equation*}
   u^{f\!f}(\mathbf{x}) = 2\, e^{-ik_2 x\sin\alpha}\cos(k_2 y\cos\alpha).
-\end{equation}
+\end{equation*}
 
 Following the indirect BEM \citep{SanchezSesma1991,wu_novel_2026}, each field is written as a single-layer potential:
-\begin{align}
+\begin{align*}
   u_1(\mathbf{x}) &= \int_{\Gamma_s\cup\Gamma_I}
      \phi^{(1)}(\mathbf{x}_0)\, G_1(\mathbf{x},\mathbf{x}_0)\, dS(\mathbf{x}_0),
-     & \mathbf{x}&\in\Omega_1, \label{eq:u1}\\
+     & \mathbf{x}&\in\Omega_1,\\
   u_2(\mathbf{x}) &= u^{f\!f}(\mathbf{x}) + \int_{\Gamma_I}
      \phi^{(2)}(\mathbf{x}_0)\, G_2(\mathbf{x},\mathbf{x}_0)\, dS(\mathbf{x}_0),
-     & \mathbf{x}&\in\Omega_2. \label{eq:u2}
-\end{align}
+     & \mathbf{x}&\in\Omega_2.
+\end{align*}
 Here $G_1 = \frac{1}{4i\mu_1}H_0^{(2)}(k_1 r)$ is the full-space Green's function and
-\begin{equation}
+\begin{equation*}
   G_2(\mathbf{x},\mathbf{x}_0) = \frac{1}{4i\mu_2}\Bigl[H_0^{(2)}(k_2 r) + H_0^{(2)}(k_2 \bar r)\Bigr]
-\end{equation}
+\end{equation*}
 is the half-space Green's function, where $\bar r$ is the distance to the image of $\mathbf{x}_0$ with respect to $y=0$. With this choice $t_2=0$ on $\Gamma_0$ holds identically, so $\Gamma_0$ does not need to be discretized, unlike in \citet{wu_novel_2026}, where the flat surface is meshed up to eight wavelengths on each side of the topography. When the irregularity has no material of its own (an empty canyon), only $u_2$ is used and its density lives on $\Gamma_s$. Both representations satisfy the Helmholtz equation and the scattered part of $u_2$ satisfies the radiation condition, so only the conditions on $\Gamma_s$ and $\Gamma_I$ remain to be imposed.
 
 The curves are divided into $N$ straight elements $\Delta S_l$ whose end points are clustered towards the corners where $\Gamma_s$, $\Gamma_I$ and $\Gamma_0$ meet, with a cosine law in the curve parameter. The element midpoints $\mathbf{x}_{0,l}$ serve as both source and collocation points. With a constant density per element,
-\begin{equation}\label{eq:discrete}
+\begin{equation*}
   \begin{gathered}
   u_1(\mathbf{x}) = \sum_{l} \hat\phi^{(1)}_l\, G_{1,l}(\mathbf{x}),\qquad
   u_2(\mathbf{x}) = u^{f\!f}(\mathbf{x}) + \sum_{l} \hat\phi^{(2)}_l\, G_{2,l}(\mathbf{x}),\\
   G_{j,l}(\mathbf{x}) = \int_{\Delta S_l} G_j(\mathbf{x},\mathbf{x}_0)\, dS(\mathbf{x}_0),
   \end{gathered}
-\end{equation}
+\end{equation*}
 and the tractions follow by differentiating $G_{j,l}$ along $\mathbf{n}$. Regular integrals use four-point Gauss quadrature. On the self-element, the logarithmic singularity of $G_j$ is removed by the substitution $t=\Delta S_l\,u^2/2$ before Gauss integration, and the traction receives the free term plus the principal value over the curved element,
 \begin{equation}\label{eq:selfterm}
   T_{ll} = \pm\tfrac12 + \frac{\kappa_l\,\Delta S_l}{4\pi},
@@ -181,12 +181,12 @@ whose rows are $t_1=0$ on $\Gamma_s$, $u_1-u_2=0$ and $t_1-t_2=0$ on $\Gamma_I$,
 \subsection{Network representation of the source densities}
 
 The densities are represented by a fully connected network $\mathcal{N}_\theta$ with Fourier-feature input \citep{Tancik2020,wu_novel_2026}. Its input is the uniform boundary coordinate $\hat s = \arccos(1-2s)/\pi$, where $s\in[0,1]$ is the curve parameter shared by $\Gamma_s$ and $\Gamma_I$; with the cosine-clustered mesh, $\hat s$ is uniform in the element index, which removes the steep variation of the densities near the corners from the input space. For each of the $F\times J$ excitations $(\eta_f,\alpha_j)$ used in the inversion, the network has an output head with the real and imaginary parts of the three densities:
-\begin{equation}
+\begin{equation*}
   \bigl(\hat\phi_s,\ \hat\phi_I^{(1)},\ \hat\phi_I^{(2)}\bigr)_{fj}(\hat s)
   = c_\phi\,\mathcal{N}_\theta\bigl(\gamma(\hat s)\bigr)_{fj},
   \qquad
   \gamma(\hat s) = \bigl[\sin(2\pi\mathbf{B}\hat s),\ \cos(2\pi\mathbf{B}\hat s)\bigr],
-\end{equation}
+\end{equation*}
 where $\hat\phi_s$ and $\hat\phi_I^{(1)}$ are the restrictions of $\hat\phi^{(1)}$ to $\Gamma_s$ and $\Gamma_I$, and $\hat\phi_I^{(2)}$ is the density radiating into $\Omega_2$. The entries of $\mathbf{B}\in\mathbb{R}^{m}$ are drawn from $\mathcal{N}(0,\sigma^2)$ and kept fixed. The hidden layers are $\mathbf{h}^l = \mathrm{GELU}(\mathbf{W}^l\mathbf{h}^{l-1} + \mathbf{b}^l)$, with trainable parameters $\theta = \{\mathbf{W}^l,\mathbf{b}^l\}$. The constant $c_\phi$ is the root-mean-square of the Jacobi estimate $b_i/A_{ii}$ of the densities, which requires no linear solve. We also tested the formulation of \citet{wu_novel_2026}, in which the excitation parameters are additional network inputs; in the inversion setting it reached boundary residuals about one order of magnitude larger for the same training time, so we use one output head per excitation. The parametric input is retained in the forward frequency-interpolation test of Section~\ref{sec:forward}.
 
 \subsection{Parametrization of the unknowns}
@@ -202,16 +202,16 @@ so a truncated sine series with coefficients $\boldsymbol{\xi}_s,\boldsymbol{\xi
 \subsection{Loss function and joint optimization}
 
 For all excitations, the boundary conditions on $\Gamma_s$ and $\Gamma_I$ are imposed at the collocation points through the relative residual
-\begin{equation}
+\begin{equation*}
   L_{BC} = \frac{\sum_{f,j}\bigl\|\mathbf{A}(\vartheta,\eta_f)\,\boldsymbol{\phi}_{fj}(\theta) - \mathbf{b}(\vartheta,\eta_f,\alpha_j)\bigr\|^2}
   {\sum_{f,j}\bigl\|\mathbf{b}(\vartheta,\eta_f,\alpha_j)\bigr\|^2},
-\end{equation}
+\end{equation*}
 which contains the three residuals $t_1$ on $\Gamma_s$ and $u_1-u_2$, $t_1-t_2$ on $\Gamma_I$. The seismic records $u^{obs}_r = u^{obs}(\mathbf{x}_r;\eta_f,\alpha_j)$ enter through the data misfit. The receivers $\mathbf{x}_r$ lie on $\Gamma_0$ and, when the free surface is known (interface identification), also on $\Gamma_s$; the predicted response is $u = u_2$ on $\Gamma_0$ and $u = u_1$ on $\Gamma_s$:
-\begin{equation}
+\begin{equation*}
   L_d = \frac{\sum_{r,f,j} |u(\mathbf{x}_r) - u^{obs}_r|^2}{\sum_{r,f,j} |u^{obs}_r|^2},
   \qquad
   R(\vartheta) = \sum_{k=1}^{K} k^{2p}\bigl(\xi_{s,k}^2 + \xi_{I,k}^2\bigr),
-\end{equation}
+\end{equation*}
 where $R$ is a Sobolev-type penalty on the unknown coefficients that favours smooth geometries. The total loss is
 \begin{equation}\label{eq:loss}
   L(\theta,\vartheta) = L_{BC} + \lambda_d L_d + \lambda_r R(\vartheta),
@@ -223,9 +223,9 @@ Training proceeds in three stages. (1)~With $\vartheta$ fixed at the initial gue
 \subsection{Extension to three dimensions}\label{sec:method3d}
 
 In three dimensions the SH problem has no counterpart, because P, SV and SH motions are coupled. To study how the method behaves when the boundary element model is three-dimensional, we consider the scalar analogue of the formulation above: the Helmholtz equation $\mu(\nabla^2 u + k^2 u)=0$ in the solid $z<0$, with traction-free (Neumann) surfaces. This is the model of acoustic scattering by a rigid surface, not of three-dimensional elastodynamics, and we use it only as a computational analogue. The half-space Green's function is
-\begin{equation}
+\begin{equation*}
   G(\mathbf{x},\mathbf{x}_0) = \frac{1}{4\pi\mu}\left[\frac{e^{-ikr}}{r} + \frac{e^{-ik\bar r}}{\bar r}\right],
-\end{equation}
+\end{equation*}
 so that the flat surface $z=0$ is again traction-free by construction, and the free field is the sum of an incident plane wave with polar angle $\alpha$ and azimuth $\varphi$ and its reflection. We study the reconstruction of the free surface of a canyon of radius $a$, parametrized over the unit disk $(u,v)$ as
 \begin{equation}\label{eq:canyon3d}
   \Gamma_s:\ \bigl(x,y,z\bigr) = \Bigl(au,\ av,\ -\sum_{k=1}^{6}\xi_k\,\psi_k(u,v)\Bigr),\qquad
@@ -261,9 +261,9 @@ All quantities are dimensionless with $a=\mu_2=\rho_2=\beta_2=1$. All computatio
 We first reproduce the forward benchmarks of \citet{wu_novel_2026}: a semicircular canyon, a semicircular hill of the same material as the half-space, and a V-shaped canyon with half-width $b=a$ and depth $d=a$, at $\eta=2$ and $\alpha=0^\circ,30^\circ,60^\circ,90^\circ$ (their Figs.~4--6 and Table~2). The canyon is compared with the exact solution of \citet{Trifunac1973}, which we evaluate as the mirror-symmetric problem of a cylindrical cavity in a full space. For the hill, the reference is our IBEM with 1200 elements per curve; it agrees with an independent solution obtained with the meshed-surface formulation described below to within $1.5\times10^{-3}$--$4.6\times10^{-3}$. For the V-shaped canyon, the half-space formulation cannot be used at $\eta=2$: the canyon and its image enclose a square of side $\sqrt2\,a$ whose interior Dirichlet eigenvalues include $k=2\pi$ (and $k=\pi$, i.e.\ $\eta=1$), so the single-layer system is singular there (Section~\ref{sec:discussion}). For this geometry we therefore use the formulation of \citet{wu_novel_2026}: the full-space Green's function, the flat surface meshed over eight wavelengths on each side with 240 elements per side, and 100 elements on the canyon. The reference is the same formulation with 400 elements on the canyon and 960 per side over sixteen wavelengths. We also verified the two-region formulation against the exact solution for a semicircular alluvial valley \citep{Trifunac1971} with $\beta_1/\beta_2=1/2$ and $\rho_1/\rho_2=2/3$, obtaining a maximum error of $5.6\times10^{-4}$ on the free surface with 400 elements per curve at $\eta=1$.
 
 We use 100 elements on the topography, as \citet{wu_novel_2026}, and the network and training settings of their Section~3: six hidden layers of 150 neurons, $m=64$ Fourier features with $\sigma=1$, $4\times10^4$ AdamW steps with learning rate $10^{-3}$ and 200 L-BFGS iterations. The loss is the boundary-condition residual, and one network is trained per case. Accuracy is measured with the error of \citet{wu_novel_2026},
-\begin{equation}
+\begin{equation*}
   \varepsilon = \frac{1}{M}\sum_{i=1}^{M}\frac{\bigl|\,|U_i| - |U_i^{ref}|\,\bigr|}{|U_i^{ref}|},
-\end{equation}
+\end{equation*}
 over $M$ points on $\Gamma_0$ ($|x|\le 3a$) and on the topography. In the half-space formulation the network input is the curve parameter $s$; in the meshed-surface formulation it is the source position $(x_0,y_0)$, as in \citet{wu_novel_2026}.
 
 \begin{figure*}[ht!]
