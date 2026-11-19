@@ -1,0 +1,11 @@
+.build/
+__pycache__/
+guia_bem.aux
+guia_bem.fdb_latexmk
+guia_bem.fls
+guia_bem.log
+guia_bem.lof
+guia_bem.lot
+guia_bem.out
+guia_bem.synctex.gz
+guia_bem.toc

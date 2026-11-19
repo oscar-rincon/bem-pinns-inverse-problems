@@ -1,0 +1,231 @@
+{
+  "notebook_sha256": "8cf97a70f7c6b85f9c48906bac2e72812d1b774c6b75adb78b436af6a4d1e2b5",
+  "omega1": 59.73838903034835,
+  "x1": 2.0693984992575727,
+  "static_undamped_magnitude": 0.00015,
+  "static_damped_magnitude": 0.00014925557853149836,
+  "checks": {
+    "shape_functions_quadrature_static_translation": "passed",
+    "traction_finite_difference_relative_error": 3.122825922868959e-09,
+    "navier_finite_difference_relative_error": 4.5908641726623455e-06
+  },
+  "verification": [
+    {
+      "omega": 10.0,
+      "analytical_amplitude": 0.00015267310795083074,
+      "bem8_amplitude": 0.00015262222986456035,
+      "bem8_amplitude_error": 0.0003332485134629969,
+      "bem8_complex_rms_error": 0.0003511894838298554,
+      "bem8_tangential_rms": 0.0001684644629133799,
+      "bem8_backward_residual": 5.1701199797376183e-17,
+      "bem32_amplitude": 0.00015267325669715445,
+      "bem32_amplitude_error": 9.742797910698114e-07,
+      "bem32_complex_rms_error": 0.0001947996868627617,
+      "bem32_tangential_rms": 0.000584955935643864,
+      "bem32_backward_residual": 4.480756647660634e-17
+    },
+    {
+      "omega": 40.0,
+      "analytical_amplitude": 0.00024333363541070746,
+      "bem8_amplitude": 0.00024309427050707598,
+      "bem8_amplitude_error": 0.0009836901636202811,
+      "bem8_complex_rms_error": 0.0010024212126131962,
+      "bem8_tangential_rms": 1.3256626465881578e-06,
+      "bem8_backward_residual": 3.300728467128971e-17,
+      "bem32_amplitude": 0.00024333297977490625,
+      "bem32_amplitude_error": 2.694390358753112e-06,
+      "bem32_complex_rms_error": 1.0940357809119085e-05,
+      "bem32_tangential_rms": 3.013689366539977e-05,
+      "bem32_backward_residual": 3.580124966306418e-17
+    },
+    {
+      "omega": 59.73838903034835,
+      "analytical_amplitude": 0.0011830266193102147,
+      "bem8_amplitude": 0.0011805927996117126,
+      "bem8_amplitude_error": 0.0020572822781630383,
+      "bem8_complex_rms_error": 0.008445459123231178,
+      "bem8_tangential_rms": 7.931777264252039e-07,
+      "bem8_backward_residual": 3.934027375046641e-17,
+      "bem32_amplitude": 0.001183012812466145,
+      "bem32_amplitude_error": 1.1670780559261183e-05,
+      "bem32_complex_rms_error": 3.7420283941575734e-05,
+      "bem32_tangential_rms": 1.1266891093150635e-05,
+      "bem32_backward_residual": 3.258415679176647e-17
+    },
+    {
+      "omega": 100.0,
+      "analytical_amplitude": 2.4486691861520947e-05,
+      "bem8_amplitude": 2.4524754812968897e-05,
+      "bem8_amplitude_error": 0.0015544342070871419,
+      "bem8_complex_rms_error": 0.0018498852146530108,
+      "bem8_tangential_rms": 1.2393476649827645e-07,
+      "bem8_backward_residual": 4.688511405428917e-17,
+      "bem32_amplitude": 2.448660409860403e-05,
+      "bem32_amplitude_error": 3.5841067226103945e-06,
+      "bem32_complex_rms_error": 1.2969897198693065e-05,
+      "bem32_tangential_rms": 6.363959948613482e-06,
+      "bem32_backward_residual": 4.138454989257519e-17
+    },
+    {
+      "omega": 150.0,
+      "analytical_amplitude": 0.0001172056239388839,
+      "bem8_amplitude": 0.00011727512983202667,
+      "bem8_amplitude_error": 0.0005930252389510904,
+      "bem8_complex_rms_error": 0.011511223464043296,
+      "bem8_tangential_rms": 6.224196054200488e-08,
+      "bem8_backward_residual": 3.5483705465604624e-17,
+      "bem32_amplitude": 0.00011720398374542867,
+      "bem32_amplitude_error": 1.399415318231831e-05,
+      "bem32_complex_rms_error": 3.2691059633487726e-05,
+      "bem32_tangential_rms": 2.05386799851049e-06,
+      "bem32_backward_residual": 2.724925624300562e-17
+    }
+  ],
+  "sweep8_max_amplitude_error": 0.004787103736621274,
+  "sweep32_max_amplitude_error": 2.1582124911991345e-05,
+  "convergence": [
+    {
+      "omega": 30.0,
+      "elements": [
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "errors": [
+        0.007021824800278561,
+        0.0005979754872061668,
+        3.7451763898887245e-05,
+        7.369510415961591e-07,
+        8.052582634490407e-07
+      ],
+      "slopes": [
+        3.5536877499722888,
+        3.996980771992015,
+        5.667321079048468,
+        -0.12788278152497562
+      ]
+    },
+    {
+      "omega": 59.73838903034835,
+      "elements": [
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "errors": [
+        0.009313646102879441,
+        0.0020572822781630383,
+        0.00017151345574420706,
+        1.1670780559261183e-05,
+        5.812237547273672e-07
+      ],
+      "slopes": [
+        2.1786063055556784,
+        3.5843460888552983,
+        3.8773488055972143,
+        4.327663576247863
+      ]
+    },
+    {
+      "omega": 120.0,
+      "elements": [
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "errors": [
+        0.026421857043432844,
+        0.0021527492007212407,
+        0.00012321398304367015,
+        3.3702562141400246e-06,
+        5.970530639429078e-06
+      ],
+      "slopes": [
+        3.6174797112956734,
+        4.126942356733909,
+        5.192163908210183,
+        -0.8250008864063163
+      ]
+    }
+  ],
+  "quadrature_study": [
+    {
+      "gauss": 12,
+      "elements": 32,
+      "error": 3.1999222213845674e-06
+    },
+    {
+      "gauss": 12,
+      "elements": 64,
+      "error": 2.7623427197430138e-06
+    },
+    {
+      "gauss": 16,
+      "elements": 32,
+      "error": 7.369510415961591e-07
+    },
+    {
+      "gauss": 16,
+      "elements": 64,
+      "error": 8.052582634490407e-07
+    },
+    {
+      "gauss": 24,
+      "elements": 32,
+      "error": 2.0861576186675486e-06
+    },
+    {
+      "gauss": 24,
+      "elements": 64,
+      "error": 2.146567184437303e-06
+    },
+    {
+      "gauss": 32,
+      "elements": 32,
+      "error": 2.6467548423604377e-05
+    },
+    {
+      "gauss": 32,
+      "elements": 64,
+      "error": 0.000978308949464941
+    }
+  ],
+  "small_distance_cancellation": [
+    {
+      "distance": 0.01,
+      "chi_real": -0.3333397260576021,
+      "dchi_real": -0.0011795908212661743
+    },
+    {
+      "distance": 0.001,
+      "chi_real": -0.33333341777324677,
+      "dchi_real": -0.00017547607421875
+    },
+    {
+      "distance": 0.0001,
+      "chi_real": -0.33333349227905273,
+      "dchi_real": 0.0078125
+    },
+    {
+      "distance": 1e-05,
+      "chi_real": -0.333282470703125,
+      "dchi_real": -16.0
+    },
+    {
+      "distance": 1e-06,
+      "chi_real": -0.32421875,
+      "dchi_real": -16384.0
+    },
+    {
+      "distance": 1e-07,
+      "chi_real": 0.0,
+      "dchi_real": -16777216.0
+    }
+  ]
+}

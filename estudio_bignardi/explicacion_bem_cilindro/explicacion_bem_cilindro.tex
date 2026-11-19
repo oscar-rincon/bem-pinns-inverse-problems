@@ -1,0 +1,1496 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-noquoting,es-lcroman]{babel}
+\spanishplainpercent
+\usepackage{lmodern}
+\usepackage[margin=2.3cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,array,longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,matrix,decorations.pathreplacing}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!50!black,
+ pdftitle={BEMCilindro explicado linea por linea},
+ pdfauthor={Documento de estudio del notebook bigardi.ipynb}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setcounter{tocdepth}{2}
+\numberwithin{equation}{section}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \texttt{BEMCilindro}: explicaci\'on paso a paso}
+\fancyhead[R]{\small Documento independiente}
+\fancyfoot[C]{\thepage}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareRobustCommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newtcolorbox{idea}[1][Idea clave]{colback=blue!3,colframe=blue!45!black,
+ title={#1},fonttitle=\bfseries,breakable}
+\newtcolorbox{cuidado}[1][No confundir]{colback=orange!4,
+ colframe=orange!60!black,title={#1},fonttitle=\bfseries,breakable}
+\lstset{language=Python,basicstyle=\ttfamily\small,
+ keywordstyle=\color{blue!60!black},commentstyle=\color{green!35!black},
+ stringstyle=\color{orange!55!black},frame=single,
+ rulecolor=\color{black!20},breaklines=true,columns=fullflexible,
+ keepspaces=true,showstringspaces=false,upquote=true,
+ escapeinside={(*@}{@*)},numberstyle=\tiny\color{black!55},
+ numbersep=8pt,xleftmargin=1em,
+ postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space}}
+
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{1.4cm}
+{\Large Lectura guiada de c\'odigo cient\'ifico\par}
+\vspace{1.1cm}
+{\Huge\bfseries \texttt{BEMCilindro}\\[0.35cm]
+explicado l\'inea por l\'inea\par}
+\vspace{0.8cm}
+{\Large Qu\'e hace cada instrucci\'on, qu\'e guarda cada arreglo\\
+y c\'omo se construye y resuelve el sistema BEM\par}
+\vspace{1.5cm}
+\begin{tikzpicture}[>=Stealth,node distance=0.65cm,
+ box/.style={draw,rounded corners,align=center,text width=10cm,
+ minimum height=1.1cm,fill=blue!4}]
+ \node[box] (a){\code{__init__}\\Preparar la geometr\'ia, la cuadratura y $H^s$};
+ \node[box,below=of a] (b){\code{matrices(w)}\\Construir $H(\omega)$ y $G(\omega)$};
+ \node[box,below=of b] (c){\code{resolver(w, p)}\\Aplicar la presi\'on, resolver y proyectar radialmente};
+ \draw[->,thick] (a)--(b);
+ \draw[->,thick] (b)--(c);
+\end{tikzpicture}
+\vfill
+{\large Documento complementario a la gu\'ia general del BEM\par}
+{\large Ejemplo comprobado: $R=6$ m, 8 elementos, $\omega=40$ rad/s\par}
+\vspace{0.7cm}
+{\large Noviembre de 2026\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Objetivo y manera de leer este documento}
+Este documento explica exclusivamente la clase \code{BEMCilindro}
+compartida por el usuario. No reemplaza la gu\'ia general ni modifica el
+notebook. El c\'odigo compartido se compar\'o con la celda de la clase
+en \code{estudio_bignardi/bigardi.ipynb}: sus instrucciones coinciden.
+
+La explicaci\'on combina tres lecturas de cada operaci\'on:
+\begin{enumerate}
+ \item \textbf{Python:} qu\'e hace la instrucci\'on.
+ \item \textbf{Arreglos:} cu\'ales son las dimensiones y los \'indices.
+ \item \textbf{BEM:} qu\'e cantidad f\'isica o integral se est\'a calculando.
+\end{enumerate}
+Las l\'ineas citadas corresponden al listado completo de la
+secci\'on~\ref{sec:listado}. Una l\'inea larga puede continuar visualmente
+en otro rengl\'on, sin cambiar su n\'umero.
+
+\begin{idea}[Lo que resuelve la clase]
+Con geometr\'ia y material conocidos, se prescribe la presi\'on en todo
+el borde. El BEM produce
+\begin{equation}
+ \boxed{H(\omega)\vect u=G(\omega)\vect t,\qquad
+ \vect t=-p\vect n.}
+ \label{eq:sistema}
+\end{equation}
+$\vect t$ es conocido y $\vect u$ es desconocido. La clase resuelve ese
+sistema y devuelve el desplazamiento radial complejo en cada nodo.
+\end{idea}
+
+\subsection{Qu\'e no se volver\'a a deducir}
+Se da por conocida la funci\'on de cada n\'ucleo:
+$U$ relaciona fuerzas auxiliares con desplazamientos y $T$ con tracciones.
+La deducci\'on completa de esos n\'ucleos pertenece a la gu\'ia general.
+Aqu\'i se explica \emph{c\'omo se utilizan e integran}, con sus dimensiones,
+signos e \'indices.
+
+\subsection{Caso concreto que acompa\~na la lectura}
+Se utilizar\'a
+\begin{equation}
+ R=6\ {\rm m},\quad N_e=8,\quad N=16,\quad
+ p=100\ {\rm Pa},\quad\omega=40\ {\rm rad/s}.
+\end{equation}
+El material es el del notebook:
+$\rho=100$ kg/m$^3$, $\mu_0=10^6$ Pa, $\nu=0.25$ y $\beta=0.05$.
+Los n\'umeros de ejemplo se obtuvieron ejecutando las funciones originales,
+no estim\'andolos a partir de una figura.
+
+\clearpage
+\section{El listado completo y su numeraci\'on}
+\label{sec:listado}
+El listado conserva las 49 l\'ineas del fragmento, incluidos los comentarios
+y los separadores en blanco. Los comentarios acentuados se representan
+tipogr\'aficamente en \LaTeX{}; las instrucciones Python son las mismas.
+
+\begin{lstlisting}[numbers=left,firstnumber=1,label=lst:clase,
+ basicstyle=\ttfamily\footnotesize,breakautoindent=false,breakindent=1em]
+class BEMCilindro:
+    def __init__(self, R, ne, m):
+        self.R, self.ne, self.m = R, ne, m
+        self.nodes, self.conn = malla_circulo(R, ne)
+        self.N = len(self.nodes)
+        # Prec(*@\'a@*)lculo de cuadratura para cada par (nodo de colocaci(*@\'o@*)n, elemento)
+        self.quad = []
+        Hs = np.zeros((2*self.N, 2*self.N))
+        for ic, xi in enumerate(self.nodes):
+            fila = []
+            for cn in self.conn:
+                loc = np.where(cn == ic)[0]
+                eta_s = [-1.0, 0.0, 1.0][loc[0]] if len(loc) else None
+                eta, wq = puntos_cuadratura(eta_s)
+                Pn, dP = shape(eta), dshape(eta)
+                X, dX = Pn @ self.nodes[cn], dP @ self.nodes[cn]
+                J = np.linalg.norm(dX, axis=-1)
+                nrm = np.stack([dX[:, 1], -dX[:, 0]], -1)/J[:, None]
+                W = Pn*(J*wq)[:, None]                          # P_n(eta) J w_q
+                Ts = kernel_Ts(X, xi, nrm, m["nu"])
+                for a, g in enumerate(cn):
+                    if g != ic:                                 # bloque diagonal: s(*@\'o@*)lido r(*@\'i@*)gido
+                        Hs[2*ic:2*ic+2, 2*g:2*g+2] += np.einsum("q,qij->ij", W[:, a], Ts)
+                fila.append((cn, X, nrm, W, Ts))
+            self.quad.append(fila)
+        for ic in range(self.N):
+            Hs[2*ic:2*ic+2, 2*ic:2*ic+2] = -sum(Hs[2*ic:2*ic+2, 2*g:2*g+2] for g in range(self.N) if g != ic)
+        self.Hs = Hs
+
+    def matrices(self, w):
+        N = self.N
+        G = np.zeros((2*N, 2*N), complex)
+        H = self.Hs.astype(complex)
+        for ic, xi in enumerate(self.nodes):
+            for cn, X, nrm, W, Ts in self.quad[ic]:
+                U, T = kernels(X, xi, nrm, w, self.m)
+                Gb = np.einsum("qa,qij->aij", W, U)
+                Hb = np.einsum("qa,qij->aij", W, T - Ts)       # parte din(*@\'a@*)mica regular
+                for a, g in enumerate(cn):
+                    G[2*ic:2*ic+2, 2*g:2*g+2] += Gb[a]
+                    H[2*ic:2*ic+2, 2*g:2*g+2] += Hb[a]
+        return H, G
+
+    def resolver(self, w, p=P):
+        H, G = self.matrices(w)
+        nrm = self.nodes/self.R
+        t = (-p*nrm).ravel()                                   # t = -p n en todos los nodos
+        u = np.linalg.solve(H, G @ t).reshape(-1, 2)
+        return (u*nrm).sum(-1)                                 # u_r en cada nodo
+\end{lstlisting}
+
+\clearpage
+\section{Panorama: tres m\'etodos y tres momentos distintos}
+\subsection{Crear un objeto no es resolver una frecuencia}
+La instrucci\'on
+\begin{lstlisting}
+bem = BEMCilindro(R, 8, mat)
+\end{lstlisting}
+crea una instancia y ejecuta autom\'aticamente \code{__init__}.
+Prepara la malla, los datos de integraci\'on y $H^s$.
+No se ha elegido una frecuencia de resoluci\'on en ese constructor.
+
+Despu\'es:
+\begin{lstlisting}
+H, G = bem.matrices(40.0)
+ur = bem.resolver(40.0)
+\end{lstlisting}
+La primera llamada entrega matrices, sin resolver el desplazamiento.
+La segunda \emph{vuelve a construir las matrices} internamente y resuelve.
+No aprovecha autom\'aticamente las variables locales \code{H} y \code{G}
+de la llamada anterior.
+
+\begin{cuidado}
+Para usar normalmente la clase basta crear el objeto y llamar a
+\code{resolver}. Llamar antes a \code{matrices} solo es necesario si
+se quieren inspeccionar las matrices; de otro modo se duplica
+innecesariamente ese ensamblaje.
+\end{cuidado}
+
+\subsection{Qu\'e permanece y qu\'e se recalcula}
+\begin{center}
+\begin{tabular}{p{0.29\textwidth}p{0.61\textwidth}}
+\toprule
+Momento & Datos principales\\
+\midrule
+Una vez, en \code{__init__}
+& Nodos, conectividad, puntos f\'isicos de cuadratura, normales,
+pesos combinados, $T^s$ y $H^s$.\\
+Cada \code{matrices(w)}
+& $U(\omega)$, $T(\omega)$, $G(\omega)$ y $H(\omega)$.\\
+Cada \code{resolver(w,p)}
+& Lo anterior, la carga, la soluci\'on cartesiana y su proyecci\'on radial.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Qu\'e significa \texttt{self}}
+\code{self} es la referencia al objeto que recibe la llamada.
+En \code{bem.resolver(40.0)}, Python suministra \code{bem} como
+primer argumento del m\'etodo. El usuario no debe escribirlo de nuevo.
+
+\begin{lstlisting}
+self.R = R
+\end{lstlisting}
+guarda el radio en el objeto. En cambio:
+\begin{lstlisting}
+N = self.N
+\end{lstlisting}
+crea un nombre local dentro del m\'etodo. El atributo
+\code{self.N} sigue existiendo cuando el m\'etodo termina;
+el nombre local \code{N} no se convierte en un nuevo atributo.
+
+\section{Diccionario de nombres, \'indices y dimensiones}
+\label{sec:dimensiones}
+\subsection{No confundir nombres parecidos}
+\begin{longtable}{p{0.20\textwidth}p{0.70\textwidth}}
+\toprule
+Nombre & Significado\\
+\midrule
+\endhead
+\code{ne} & N\'umero de elementos.\\
+\code{self.N}, \code{N} & N\'umero de nodos, no de elementos.\\
+\code{w} & Frecuencia angular $\omega$, escalar, en rad/s.\\
+\code{wq} & Pesos de cuadratura; no son frecuencias.\\
+\code{W} & Funciones de forma por jacobiano por peso de cuadratura.\\
+\code{P} & Presi\'on global que fija el valor predeterminado del m\'etodo.\\
+\code{p} & Presi\'on suministrada a \code{resolver}.\\
+\code{Pn} & Valores de funciones de forma, no presiones.\\
+\code{xi} & Coordenadas del nodo fuente/de colocaci\'on.\\
+\code{X} & Coordenadas de todos los puntos de cuadratura de un elemento.\\
+\code{Ts} & Valores del n\'ucleo est\'atico en puntos de cuadratura.\\
+\code{Hs} & Matriz est\'atica global ensamblada.\\
+\code{Hb}, \code{Gb} & Tres bloques locales, a\'un no matrices globales.\\
+\bottomrule
+\end{longtable}
+
+\subsection{Los cuatro tipos de \'indice}
+Utilizaremos:
+\begin{equation}
+ c=\text{nodo de colocaci\'on},\quad
+ e=\text{elemento},\quad
+ a=\text{nodo local},\quad g=\text{nodo global}.
+\end{equation}
+En el c\'odigo, $c$ se llama \code{ic}.
+El bucle de elementos no guarda expl\'icitamente $e$:
+usa directamente su conectividad \code{cn}.
+Adem\'as:
+\begin{equation}
+ q=\text{punto de cuadratura},\qquad i,j=0,1
+   =\text{componentes espaciales}.
+\end{equation}
+Los \'indices $i,j$ de los n\'ucleos no son n\'umeros de nodo.
+En la convenci\'on del notebook, el primero identifica la direcci\'on
+de la fuerza auxiliar y la ecuaci\'on; el segundo, la componente
+de campo que se integra.
+
+\subsection{Tabla de formas}
+Si $n_q$ es el n\'umero de puntos usados en el par actual:
+\begin{longtable}{lll}
+\toprule
+Arreglo & Forma & En el ejemplo habitual\\
+\midrule
+\endhead
+\code{nodes} & $(N,2)$ & $(16,2)$\\
+\code{conn} & $(N_e,3)$ & $(8,3)$\\
+\code{cn} & $(3,)$ & Tres \'indices enteros\\
+\code{eta}, \code{wq}, \code{J} & $(n_q,)$ & $(16,)$ o $(32,)$\\
+\code{Pn}, \code{dP}, \code{W} & $(n_q,3)$ & $(16,3)$ o $(32,3)$\\
+\code{X}, \code{dX}, normal de cuadratura & $(n_q,2)$ & $(16,2)$ o $(32,2)$\\
+\code{U}, \code{T}, \code{Ts} & $(n_q,2,2)$ & Un tensor $2\times2$ por punto\\
+\code{Gb}, \code{Hb} & $(3,2,2)$ & Un bloque por nodo local\\
+\code{Hs}, \code{H}, \code{G} & $(2N,2N)$ & $(32,32)$\\
+Normal nodal en \code{resolver} & $(N,2)$ & $(16,2)$\\
+\code{t}, \code{G @ t} & $(2N,)$ & $(32,)$\\
+\code{u}, tras \code{reshape} & $(N,2)$ & $(16,2)$\\
+Resultado de \code{resolver} & $(N,)$ & $(16,)$ complejo\\
+\bottomrule
+\end{longtable}
+
+\section{Constructor: guardar par\'ametros y crear la malla}
+\label{sec:inicio}
+\subsection{L\'ineas 1--3: clase, constructor y atributos}
+\begin{lstlisting}
+class BEMCilindro:
+    def __init__(self, R, ne, m):
+        self.R, self.ne, self.m = R, ne, m
+\end{lstlisting}
+\code{class} define el tipo de objeto. \code{__init__} es su
+inicializador; no es una funci\'on que el usuario deba llamar
+separadamente despu\'es de crear la instancia.
+
+La asignaci\'on m\'ultiple equivale a:
+\begin{lstlisting}
+self.R = R
+self.ne = ne
+self.m = m
+\end{lstlisting}
+\code{m} es un diccionario con propiedades tales como
+\code{m["nu"]}, \code{m["mu"]}, \code{m["lam"]},
+\code{m["rho"]}, \code{m["cs"]} y \code{m["cp"]}.
+La clase guarda una referencia al diccionario, no una copia independiente.
+
+\begin{cuidado}
+No se debe cambiar arbitrariamente la geometr\'ia o el material del
+objeto despu\'es del prec\'alculo. Por ejemplo, modificar $\nu$
+sin reconstruirlo deja $T^s$ y $H^s$ almacenados con el valor anterior.
+Para otro problema es m\'as seguro crear otra instancia.
+\end{cuidado}
+
+\subsection{L\'inea 4: nodos y conectividad}
+\begin{lstlisting}
+self.nodes, self.conn = malla_circulo(R, ne)
+\end{lstlisting}
+La funci\'on devuelve dos arreglos. El primero contiene coordenadas;
+el segundo indica qu\'e tres nodos globales forman cada elemento.
+Para ocho elementos:
+\begin{lstlisting}[language={}]
+conn =
+[[ 0,  1,  2],
+ [ 2,  3,  4],
+ [ 4,  5,  6],
+ [ 6,  7,  8],
+ [ 8,  9, 10],
+ [10, 11, 12],
+ [12, 13, 14],
+ [14, 15,  0]]
+\end{lstlisting}
+Cada elemento tiene dos extremos compartidos y un nodo intermedio.
+El \'ultimo elemento cierra el c\'irculo volviendo al nodo cero.
+
+Los primeros tres nodos, en metros, son aproximadamente
+\begin{equation}
+ \code{nodes[:3]}=
+ \begin{bmatrix}
+ 6&0\\
+ 5.54327720&2.29610059\\
+ 4.24264069&4.24264069
+ \end{bmatrix}.
+\end{equation}
+
+\subsection{L\'inea 5: contar nodos}
+\begin{lstlisting}
+self.N = len(self.nodes)
+\end{lstlisting}
+\code{len} de un arreglo bidimensional devuelve el n\'umero de filas.
+Por eso aqu\'i da 16, no 32. Hay 16 nodos, y cada uno tiene
+dos componentes de desplazamiento: existen 32 inc\'ognitas escalares.
+
+\subsection{L\'ineas 6--8: preparar almacenamiento}
+La l\'inea 6 es un comentario; no ejecuta c\'alculos.
+\begin{lstlisting}
+self.quad = []
+Hs = np.zeros((2*self.N, 2*self.N))
+\end{lstlisting}
+\code{self.quad} es una lista vac\'ia donde se guardar\'a informaci\'on
+de cuadratura para reutilizarla. No es una matriz NumPy.
+
+\code{Hs} es una matriz real de ceros, aqu\'i $32\times32$.
+Es real porque el n\'ucleo de tracci\'on est\'atico usado depende de
+la geometr\'ia y del Poisson real. Las matrices din\'amicas se
+crear\'an como complejas m\'as adelante.
+
+\begin{idea}
+Esta l\'inea solo reserva espacio. Una matriz inicial de ceros no
+significa que la matriz BEM final sea nula ni dispersa.
+Sus bloques se ir\'an acumulando durante los bucles.
+\end{idea}
+
+\section{Constructor: recorrer pares nodo--elemento}
+\subsection{L\'ineas 9--11: el significado de los bucles anidados}
+\begin{lstlisting}
+for ic, xi in enumerate(self.nodes):
+    fila = []
+    for cn in self.conn:
+\end{lstlisting}
+\code{enumerate} devuelve simult\'aneamente un contador y un valor:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Iteraci\'on & \code{ic} & \code{xi}\\
+\midrule
+Primera & 0 & Coordenadas del nodo 0\\
+Segunda & 1 & Coordenadas del nodo 1\\
+$\cdots$ & $\cdots$ & $\cdots$\\
+\'Ultima & 15 & Coordenadas del nodo 15\\
+\bottomrule
+\end{tabular}
+\end{center}
+Para cada uno de esos nodos, el bucle interior recorre los ocho elementos.
+As\'i se consideran $16(8)=128$ pares.
+\code{fila} se crea de nuevo para cada nodo y almacenar\'a los datos
+de sus ocho pares con los elementos.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,
+ box/.style={draw,rounded corners,align=left,fill=blue!3,
+ text width=11.6cm,minimum height=0.7cm},node distance=0.3cm]
+ \node[box] (a){Fijar nodo de colocaci\'on: \code{ic = 0},
+ $\vect\xi=(6,0)$};
+ \node[box,below=of a] (b){Elemento 0: \code{cn = [0,1,2]}\\
+ Contiene la fuente en el extremo izquierdo.};
+ \node[box,below=of b] (c){Elemento 1: \code{cn = [2,3,4]}\\
+ No contiene la fuente.};
+ \node[box,below=of c] (d){$\cdots$};
+ \node[box,below=of d] (e){Elemento 7: \code{cn = [14,15,0]}\\
+ Contiene la fuente en el extremo derecho.};
+ \node[box,below=of e] (f){Guardar esa fila; repetir ahora con
+ \code{ic = 1}.};
+ \foreach \s/\t in {a/b,b/c,c/d,d/e,e/f}
+   \draw[->] (\s)--(\t);
+\end{tikzpicture}
+\caption{Una vuelta del bucle exterior. El nodo fuente permanece fijo
+mientras se integran todos los elementos.}
+\end{figure}
+
+\subsection{L\'inea 12: buscar el nodo de colocaci\'on en el elemento}
+\begin{lstlisting}
+loc = np.where(cn == ic)[0]
+\end{lstlisting}
+Primero se compara cada entrada de \code{cn} con \code{ic}.
+Con \code{ic=0} y \code{cn=[0,1,2]}:
+\begin{lstlisting}[language={}]
+cn == ic                 -> [True, False, False]
+np.where(cn == ic)        -> (array([0]),)
+np.where(cn == ic)[0]     -> array([0])
+\end{lstlisting}
+El primer \code{[0]} toma el arreglo de \'indices dentro de la
+tupla que devuelve \code{np.where}. No selecciona todav\'ia
+el primer \'indice contenido en ese arreglo.
+
+Otros dos casos:
+\begin{lstlisting}[language={}]
+ic=0, cn=[2,3,4]    -> loc=array([])
+ic=0, cn=[14,15,0]  -> loc=array([2])
+\end{lstlisting}
+Con la conectividad v\'alida del notebook, hay una coincidencia o ninguna.
+
+\subsection{L\'inea 13: convertir posici\'on local en coordenada local}
+\begin{lstlisting}
+eta_s = [-1.0, 0.0, 1.0][loc[0]] if len(loc) else None
+\end{lstlisting}
+Se puede leer como:
+\begin{lstlisting}
+if len(loc):
+    eta_s = [-1.0, 0.0, 1.0][loc[0]]
+else:
+    eta_s = None
+\end{lstlisting}
+Si \code{loc} est\'a vac\'io, no se eval\'ua \code{loc[0]},
+evitando un error de \'indice. Las tres posibilidades locales son
+\begin{equation}
+ 0\longmapsto-1,\qquad1\longmapsto0,\qquad2\longmapsto1.
+\end{equation}
+\code{None} significa que el elemento no contiene el nodo fuente;
+no significa que la fuente est\'e en $\eta=0$.
+
+\subsection{L\'inea 14: elegir la cuadratura adecuada}
+\begin{lstlisting}
+eta, wq = puntos_cuadratura(eta_s)
+\end{lstlisting}
+Se obtienen coordenadas locales y pesos.
+La funci\'on auxiliar utiliza:
+\begin{itemize}
+ \item \code{None}: Gauss-Legendre ordinario, 16 puntos.
+ \item $\eta_s=-1$ o $1$: mapeo cuadr\'atico hacia el extremo,
+ 16 puntos.
+ \item $\eta_s=0$: dos subintervalos con 16 puntos cada uno,
+ 32 puntos en total.
+\end{itemize}
+No es una cuadratura adaptativa arbitraria: estas reglas est\'an
+fijadas en la funci\'on auxiliar del notebook.
+
+La fuente provoca singularidades al integrar su propio elemento.
+El mapeo concentra puntos cerca de ella, pero los puntos de Gauss
+no coinciden exactamente con la fuente.
+El tratamiento de la singularidad fuerte requiere adem\'as
+la construcci\'on especial de $H^s$ explicada m\'as adelante.
+
+\section{Constructor: geometr\'ia y pesos de integraci\'on}
+\subsection{L\'inea 15: evaluar la base y sus derivadas}
+\begin{lstlisting}
+Pn, dP = shape(eta), dshape(eta)
+\end{lstlisting}
+La fila $q$ de \code{Pn} contiene
+\begin{equation}
+ \left[P_1(\eta_q),P_2(\eta_q),P_3(\eta_q)\right],
+\end{equation}
+con
+\begin{equation}
+ P_1=\tfrac12\eta(\eta-1),\quad P_2=1-\eta^2,\quad
+ P_3=\tfrac12\eta(\eta+1).
+\end{equation}
+\code{dP} contiene sus derivadas:
+\begin{equation}
+ \left[\eta_q-\tfrac12,\ -2\eta_q,\ \eta_q+\tfrac12\right].
+\end{equation}
+Ambos arreglos tienen forma $(n_q,3)$.
+Estas derivadas son respecto a $\eta$, no respecto a $x$ o a $y$.
+
+\subsection{L\'inea 16: multiplicar matrices para obtener la curva}
+\begin{lstlisting}
+X, dX = Pn @ self.nodes[cn], dP @ self.nodes[cn]
+\end{lstlisting}
+\code{self.nodes[cn]} selecciona las tres filas de coordenadas del
+elemento; su forma es $(3,2)$.
+El operador \code{@} es producto matricial:
+\begin{equation}
+ (n_q,3)\ @\ (3,2)\longrightarrow(n_q,2).
+\end{equation}
+En componentes:
+\begin{align}
+ X_{q,j}&=\sum_{a=0}^2P_a(\eta_q)x_{g(a),j},\\
+ dX_{q,j}&=\sum_{a=0}^2P_a'(\eta_q)x_{g(a),j}.
+\end{align}
+Por tanto, \code{X[q]} es un punto sobre la curva interpolada y
+\code{dX[q]} su tangente no normalizada.
+
+\begin{cuidado}
+\code{dX} no es la distancia desde la fuente hasta \code{X}.
+Es la derivada geom\'etrica $\dd\vect x/\dd\eta$.
+La distancia a la fuente la calculan los n\'ucleos a partir de
+\code{X} y \code{xi}.
+\end{cuidado}
+
+\subsection{Ejemplo sencillo en el punto medio local}
+Para el primer elemento, en $\eta=0$:
+\begin{equation}
+ P=[0,1,0],\qquad P'=[-1/2,0,1/2].
+\end{equation}
+Entonces
+\begin{align}
+ \vect X(0)&=\vect x_1=(5.54327720,\ 2.29610059)\ {\rm m},\\
+ \vect x'(0)&=\frac{\vect x_2-\vect x_0}{2}
+       =(-0.87867966,\ 2.12132034)\ {\rm m}.
+\end{align}
+Este es un punto did\'actico para comprobar la interpolaci\'on;
+no se afirma que $\eta=0$ sea uno de los puntos de Gauss utilizados.
+
+\subsection{L\'inea 17: jacobiano por cada fila}
+\begin{lstlisting}
+J = np.linalg.norm(dX, axis=-1)
+\end{lstlisting}
+En un arreglo $(n_q,2)$, el \'ultimo eje es el de las dos componentes.
+Por eso:
+\begin{equation}
+ J_q=\sqrt{dX_{q,0}^2+dX_{q,1}^2}.
+\end{equation}
+La forma de salida es $(n_q,)$, no un solo n\'umero.
+F\'isicamente:
+\begin{equation}
+ \dd\Gamma=J(\eta)\dd\eta.
+\end{equation}
+El jacobiano convierte un intervalo local adimensional en una longitud
+del elemento f\'isico.
+
+\subsection{L\'inea 18: normal exterior y \textit{broadcasting}}
+\begin{lstlisting}
+nrm = np.stack([dX[:, 1], -dX[:, 0]], -1)/J[:, None]
+\end{lstlisting}
+Se realizan tres operaciones:
+\begin{enumerate}
+ \item \code{dX[:,1]} toma todas las derivadas $y'$;
+ \code{-dX[:,0]} toma todas las derivadas $-x'$.
+ \item \code{np.stack(...,-1)} las coloca como dos columnas:
+ $(y',-x')$.
+ \item Se divide cada fila por su longitud $J_q$.
+\end{enumerate}
+Para un contorno antihorario:
+\begin{equation}
+ \vect n_q=\frac{(y_q',-x_q')}{J_q}.
+\end{equation}
+La rotaci\'on hacia la derecha da la normal exterior.
+
+\code{J[:,None]} transforma la forma $(n_q,)$ en $(n_q,1)$:
+\begin{equation}
+ \begin{bmatrix}J_0\\J_1\\\vdots\end{bmatrix}.
+\end{equation}
+NumPy extiende esa columna sobre las dos componentes para efectuar la
+divisi\'on. Eso es \emph{broadcasting}; no hay una suma oculta.
+Sin \code{None}, las formas no describir\'ian la divisi\'on
+por filas pretendida.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=0.95]
+ \draw[thick,blue] (0,0.5)..controls(1.7,-0.8)and(3,-0.8)..(4.5,0.4);
+ \fill (2.2,-0.48)circle(2pt);
+ \draw[->,green!40!black,thick] (2.2,-0.48)--(3.6,-0.48)
+ node[right]{$(x',y')/J$};
+ \draw[->,red!65!black,thick] (2.2,-0.48)--(2.2,-1.7)
+ node[below]{$(y',-x')/J$};
+ \node[align=left] at (7.4,-0.4){Tangente hacia la derecha\\
+ Interior del cuerpo arriba\\Normal exterior hacia abajo};
+\end{tikzpicture}
+\caption{Orientaci\'on en un tramo inferior de una frontera antihoraria.
+Invertir el recorrido sin cambiar la f\'ormula invierte la normal.}
+\end{figure}
+
+\subsection{L\'inea 19: combinar los factores que se repetir\'an}
+\begin{lstlisting}
+W = Pn*(J*wq)[:, None]
+\end{lstlisting}
+Aqu\'i \code{*} es producto entrada por entrada, no producto matricial.
+Primero se forma $J_qw_q$. Luego \code{[:,None]} lo convierte en
+columna y se multiplica por las tres funciones de forma:
+\begin{equation}
+ \boxed{W_{qa}=P_a(\eta_q)J_qw_q.}
+ \label{eq:W}
+\end{equation}
+As\'i la integral de un n\'ucleo $K$ queda aproximadamente
+\begin{equation}
+ \int_{-1}^1K(\eta)P_a(\eta)J(\eta)\dd\eta
+       \simeq\sum_qW_{qa}K(\eta_q).
+\end{equation}
+Los pesos \code{wq} ya incluyen, cuando corresponde, el cambio de
+variable de la cuadratura singular. No hay que multiplicar
+otra vez por ese cambio de variable.
+
+Aunque los pesos de Gauss sean positivos, alguna entrada de \code{W}
+puede ser negativa porque una funci\'on de forma cuadr\'atica
+puede ser negativa entre nodos.
+
+\subsection{Una fila de cuadratura real, comprobada}
+Con \code{ic=0}, primer elemento y primer punto transformado:
+\begin{align}
+ \eta_0&\simeq-0.999943829910,\\
+ w_0&\simeq2.87790682442\times10^{-4},\\
+ P(\eta_0)&\simeq
+ [0.9999157464,\ 1.123370240\times10^{-4},\
+   -2.808346722\times10^{-5}],\\
+ \vect X_0&\simeq
+ (5.9999980459,\ 1.387890468\times10^{-4})\ {\rm m},\\
+ \vect x'_0&\simeq(-0.0348133561,\ 2.4708612100)\ {\rm m},\\
+ J_0&\simeq2.4711064503\ {\rm m},\\
+ \vect n_0&\simeq(0.9999007569,\ 0.0140881653),\\
+ W_{0,:}&\simeq
+ [7.111014938\times10^{-4},\
+  7.988975656\times10^{-8},\
+ -1.997187820\times10^{-8}]\ {\rm m}.
+\end{align}
+Se observa directamente que el punto est\'a muy cerca de la fuente
+$(6,0)$, sin coincidir con ella.
+La normal es la de la curva cuadr\'atica aproximada, no necesariamente
+la normal radial exacta del c\'irculo.
+
+\section{Constructor: integrar Kelvin y completar la diagonal}
+\label{sec:estatica}
+\subsection{L\'inea 20: evaluar el n\'ucleo, no la matriz global}
+\begin{lstlisting}
+Ts = kernel_Ts(X, xi, nrm, m["nu"])
+\end{lstlisting}
+Por cada punto \code{X[q]} se eval\'ua un bloque:
+\begin{equation}
+ \code{Ts[q,i,j]}=T^s_{ij}(\vect X_q,\vect\xi,\vect n_q).
+\end{equation}
+La forma de \code{Ts} es $(n_q,2,2)$.
+\code{m["nu"]} suministra el Poisson.
+El n\'ucleo est\'atico de tracci\'on utilizado no depende de la
+frecuencia; de ah\'i que pueda guardarse.
+
+\subsection{L\'inea 21: pasar de nodo local a nodo global}
+\begin{lstlisting}
+for a, g in enumerate(cn):
+\end{lstlisting}
+Con \code{cn=[2,3,4]} se obtiene:
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\code{a} & \code{g} & Lectura\\
+\midrule
+0 & 2 & Primer nodo local, nodo global 2\\
+1 & 3 & Segundo nodo local, nodo global 3\\
+2 & 4 & Tercer nodo local, nodo global 4\\
+\bottomrule
+\end{tabular}
+\end{center}
+\code{a} selecciona una funci\'on de forma en \code{W}.
+\code{g} selecciona un bloque de columnas en la matriz global.
+Intercambiarlos produce un ensamblaje incorrecto.
+
+\subsection{L\'inea 22: posponer el bloque diagonal}
+\begin{lstlisting}
+if g != ic:
+\end{lstlisting}
+El bloque diagonal global corresponde a que el nodo de columna sea
+el mismo nodo de colocaci\'on.
+Se omite \emph{solo por ahora} porque contiene la contribuci\'on
+singular fuerte y el t\'ermino libre.
+No se est\'a suponiendo que ese bloque sea cero.
+
+Los bloques no diagonales que proceden de elementos con fuente
+tienen una funci\'on de forma que se anula en ella, lo cual compensa
+la singularidad principal del integrando.
+
+\subsection{L\'inea 23: entender primero la suma de cuadratura}
+\begin{lstlisting}
+np.einsum("q,qij->ij", W[:, a], Ts)
+\end{lstlisting}
+Se lee:
+\begin{equation}
+ B_{ij}=\sum_qW_{qa}T^s_{qij}.
+ \label{eq:einsum-estatico}
+\end{equation}
+\code{W[:,a]} tiene forma $(n_q,)$ y \code{Ts} forma $(n_q,2,2)$.
+El corte \code{W[:,a]} toma todas las filas y solo la columna del nodo
+local \code{a}.
+La letra \code{q} desaparece despu\'es de la flecha:
+ese es el \'indice que se suma.
+Las letras \code{i,j} permanecen y producen un bloque $(2,2)$.
+
+Un equivalente explicativo es:
+\begin{lstlisting}
+bloque = np.zeros((2, 2))
+for q in range(len(W)):
+    bloque += W[q, a]*Ts[q]
+\end{lstlisting}
+No hay un determinante ni una inversi\'on escondidos en \code{einsum}.
+Es una contracci\'on de \'indices.
+
+\subsection{L\'inea 23: entender despu\'es los cortes de la matriz}
+\begin{lstlisting}
+Hs[2*ic:2*ic+2, 2*g:2*g+2] += bloque
+\end{lstlisting}
+En Python, el extremo superior de un corte no se incluye.
+Por ejemplo, con \code{ic=3} y \code{g=5}:
+\begin{lstlisting}
+Hs[6:8, 10:12]
+\end{lstlisting}
+selecciona filas 6 y 7, columnas 10 y 11:
+un bloque de dos por dos.
+La regla proviene del orden de componentes
+\begin{equation}
+ (u_{0x},u_{0y},u_{1x},u_{1y},\ldots).
+\end{equation}
+El operador \code{+=} suma una contribuci\'on al valor ya almacenado.
+No debe sustituirse por \code{=}, porque nodos compartidos reciben
+contribuciones de m\'as de un elemento.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.78]
+ \draw[step=0.5,gray!45] (0,0)grid(6,6);
+ \foreach \v in {0,1,...,6}{
+   \draw[thick] (\v,0)--(\v,6);
+   \draw[thick] (0,\v)--(6,\v);}
+ \fill[blue!30,opacity=0.7] (4,2)rectangle(5,3);
+ \draw[very thick,blue!70!black] (4,2)rectangle(5,3);
+ \node[above] at (4.5,6.15){Nodo global de columna $g$};
+ \draw[->,thick] (4.5,6.05)--(4.5,3.15);
+ \node[align=right,left] at (-0.25,2.5){Nodo de\\colocaci\'on $c$};
+ \node at (7.1,2.5){Bloque $2\times2$};
+\end{tikzpicture}
+\caption{Cada bloque conecta dos ecuaciones de un nodo con dos
+componentes de otro. El esquema representa bloques, no un tama\~no
+concreto de malla.}
+\end{figure}
+
+\subsection{L\'ineas 24--25: almacenar el prec\'alculo}
+\begin{lstlisting}
+fila.append((cn, X, nrm, W, Ts))
+self.quad.append(fila)
+\end{lstlisting}
+La primera instrucci\'on est\'a dentro del bucle de elementos:
+agrega una tupla de cinco objetos para un par concreto.
+La segunda est\'a fuera de ese bucle y dentro del bucle de nodos:
+agrega la fila completa.
+
+La estructura puede imaginarse as\'i:
+\begin{lstlisting}[language={}]
+self.quad
+  [0]  -> datos de todos los elementos para la fuente 0
+      [0] -> (cn, X, nrm, W, Ts) del elemento 0
+      [1] -> (cn, X, nrm, W, Ts) del elemento 1
+      ...
+  [1]  -> datos de todos los elementos para la fuente 1
+      ...
+\end{lstlisting}
+Con ocho elementos:
+\begin{equation}
+ \code{len(self.quad)}=16,\qquad
+ \code{len(self.quad[ic])}=8.
+\end{equation}
+Hay 128 tuplas, no 128 nodos.
+
+\begin{cuidado}
+\code{fila} es una fila de la \emph{lista de datos de cuadratura}.
+No es una fila num\'erica de $H$.
+Adem\'as, los datos se guardan por par nodo--elemento, no solamente
+por elemento: la cuadratura depende de d\'onde est\'a la fuente.
+\end{cuidado}
+
+\subsection{Cu\'antos puntos se guardan en total}
+En esta malla, cada nodo extremo pertenece a dos elementos:
+ambos usan 16 puntos; los otros seis tambi\'en usan 16.
+Esa fila almacena $8(16)=128$ puntos.
+
+Cada nodo intermedio pertenece a un elemento que usa 32 puntos,
+mientras que los otros siete usan 16:
+$32+7(16)=144$.
+Como hay ocho nodos de cada tipo:
+\begin{equation}
+ 8(128)+8(144)=2176
+\end{equation}
+evaluaciones geom\'etricas almacenadas, contando todos los pares.
+No son 2176 puntos f\'isicos necesariamente distintos.
+
+\subsection{L\'ineas 26--27: construir los bloques diagonales}
+\begin{lstlisting}
+for ic in range(self.N):
+    Hs[2*ic:2*ic+2, 2*ic:2*ic+2] = -sum(
+        Hs[2*ic:2*ic+2, 2*g:2*g+2]
+        for g in range(self.N) if g != ic
+    )
+\end{lstlisting}
+El salto de l\'inea anterior es solo para facilitar la lectura.
+La expresi\'on usa \code{sum} de Python sobre un generador de
+matrices $2\times2$.
+Para cada fila de bloques:
+\begin{equation}
+ \boxed{H^s_{cc}=-\sum_{g\ne c}H^s_{cg}.}
+ \label{eq:diagonal}
+\end{equation}
+\textbf{Justificaci\'on:} una traslaci\'on est\'atica constante no
+deforma el cuerpo y no genera tracciones. Como las funciones de forma
+suman uno, el BEM est\'atico debe satisfacer
+\begin{equation}
+ \sum_gH^s_{cg}=0.
+\end{equation}
+Se despeja el bloque diagonal y se obtiene \eqref{eq:diagonal}.
+Esta operaci\'on incorpora el t\'ermino libre y el valor principal
+est\'atico sin calcularlos por separado.
+
+\begin{cuidado}[Dos errores muy frecuentes]
+La suma se hace por \emph{bloques} $2\times2$, no sumando todas las
+entradas escalares de una fila.
+Tampoco debe agregarse un $I/2$ adicional: ya est\'a incorporado
+en esta construcci\'on de la diagonal.
+\end{cuidado}
+
+En la ejecuci\'on del ejemplo:
+\begin{equation}
+ H^s_{00}\simeq
+ \begin{bmatrix}
+ 0.492760151&0\\
+ 0&0.461415868
+ \end{bmatrix}.
+ \label{eq:diag-ejemplo}
+\end{equation}
+Las entradas fuera de esa diagonal son del orden de $10^{-16}$.
+Este bloque no es exactamente $I/2$: contiene m\'as que el t\'ermino
+libre aislado.
+
+\subsection{L\'inea 28: conservar la matriz para otras frecuencias}
+\begin{lstlisting}
+self.Hs = Hs
+\end{lstlisting}
+El nombre local \code{Hs} se guarda como atributo.
+Al terminar el constructor, los datos importantes quedan en el objeto:
+\begin{equation}
+ \code{R},\ \code{ne},\ \code{m},\ \code{nodes},\
+ \code{conn},\ \code{N},\ \code{quad},\ \code{Hs}.
+\end{equation}
+La l\'inea 29 est\'a en blanco: separa visualmente m\'etodos,
+sin efectuar ninguna operaci\'on.
+
+\section{\texttt{matrices(w)}: ensamblar una frecuencia}
+\label{sec:matrices}
+\subsection{L\'ineas 30--31: entrada y abreviatura local}
+\begin{lstlisting}
+def matrices(self, w):
+    N = self.N
+\end{lstlisting}
+\code{w} es una frecuencia angular escalar. La clase no convierte
+autom\'aticamente de Hz a rad/s.
+\code{N} es una abreviatura local para no escribir repetidamente
+\code{self.N}; no vuelve a contar los nodos ni cambia la malla.
+
+\subsection{L\'inea 32: empezar \texorpdfstring{$G$}{G} desde cero}
+\begin{lstlisting}
+G = np.zeros((2*N, 2*N), complex)
+\end{lstlisting}
+Se reserva una matriz compleja de $32\times32$ en el ejemplo.
+Se integrar\'a $U$ para construirla. Se necesita tipo complejo porque
+los n\'ucleos arm\'onicos contienen amplitud y fase.
+
+\subsection{L\'inea 33: partir de una copia compleja de \texorpdfstring{$H^s$}{Hs}}
+\begin{lstlisting}
+H = self.Hs.astype(complex)
+\end{lstlisting}
+La matriz \code{self.Hs} es real. La conversi\'on crea un arreglo
+complejo separado. Por eso las sumas posteriores sobre \code{H}
+no cambian la matriz est\'atica guardada.
+
+El esquema es
+\begin{equation}
+ H(\omega)=H^s+\Delta H(\omega),\qquad
+ \Delta H^e_{ca}\simeq\sum_qW_{qa}
+       [T(\vect X_q,\vect\xi_c,\omega)-T^s(\vect X_q,\vect\xi_c)].
+ \label{eq:correccion}
+\end{equation}
+Se comprob\'o que \code{matrices(40.0)} conserva \code{self.Hs}.
+
+\begin{cuidado}
+Si se escribiera \code{H = self.Hs}, ambos nombres se referir\'ian
+al mismo arreglo. No ser\'ia una copia.
+Adem\'as de los problemas de tipo al sumar complejos, se podr\'ia
+corromper el prec\'alculo entre frecuencias.
+\end{cuidado}
+
+\subsection{L\'ineas 34--35: recuperar datos ya preparados}
+\begin{lstlisting}
+for ic, xi in enumerate(self.nodes):
+    for cn, X, nrm, W, Ts in self.quad[ic]:
+\end{lstlisting}
+Se recorre nuevamente cada nodo de colocaci\'on.
+Dentro se leen las tuplas guardadas para esa fuente.
+El desempaquetado asigna sus cinco objetos a los cinco nombres.
+
+No se vuelven a calcular \code{shape}, \code{dshape},
+\code{J} ni la cuadratura. Esa es la utilidad del constructor:
+evitar repetir geometr\'ia para cada frecuencia.
+Los \'indices de los puntos de cuadratura est\'an impl\'icitos
+en las filas de los arreglos.
+
+\subsection{L\'inea 36: evaluar los n\'ucleos din\'amicos}
+\begin{lstlisting}
+U, T = kernels(X, xi, nrm, w, self.m)
+\end{lstlisting}
+Se eval\'uan:
+\begin{equation}
+ U_{qij}=U_{ij}(\vect X_q,\vect\xi,\omega),\qquad
+ T_{qij}=T_{ij}(\vect X_q,\vect\xi,\vect n_q,\omega).
+\end{equation}
+Ambos arreglos tienen forma $(n_q,2,2)$.
+La frecuencia y las propiedades complejas del material entran en
+esta operaci\'on.
+$U$ no depende de la normal, pero la funci\'on recibe la normal
+porque tambi\'en calcula $T$.
+
+\subsection{L\'inea 37: integrar los tres bloques de \texorpdfstring{$G$}{G}}
+\begin{lstlisting}
+Gb = np.einsum("qa,qij->aij", W, U)
+\end{lstlisting}
+La expresi\'on significa
+\begin{equation}
+ \boxed{(G_b)_{aij}=\sum_qW_{qa}U_{qij}.}
+ \label{eq:Gb}
+\end{equation}
+El \'indice \code{q} desaparece; \code{a,i,j} permanecen.
+Por tanto, la salida tiene forma $(3,2,2)$.
+No se suman los tres nodos locales: se conservan tres bloques distintos
+porque cada uno debe ir a una columna global diferente.
+
+Un equivalente para comprenderlo:
+\begin{lstlisting}
+Gb = np.zeros((3, 2, 2), complex)
+for a in range(3):
+    for q in range(len(W)):
+        Gb[a] += W[q, a]*U[q]
+\end{lstlisting}
+
+\subsection{L\'inea 38: integrar la correcci\'on din\'amica}
+\begin{lstlisting}
+Hb = np.einsum("qa,qij->aij", W, T - Ts)
+\end{lstlisting}
+La operaci\'on es la misma que en \eqref{eq:Gb}, con otro n\'ucleo:
+\begin{equation}
+ (H_b)_{aij}=\sum_qW_{qa}(T_{qij}-T^s_{qij}).
+\end{equation}
+Se resta $T^s$ porque la singularidad principal de $T$ coincide
+con la de Kelvin. La parte est\'atica ya est\'a en \code{self.Hs}.
+
+\begin{idea}[Por qu\'e no se integra simplemente $T$ y se suma a $H^s$]
+Eso contar\'ia dos veces la parte est\'atica.
+La separaci\'on correcta es
+$T=T^s+(T-T^s)$: una parte en la matriz precalculada y la otra en
+la correcci\'on din\'amica.
+\end{idea}
+
+La diferencia es regularizada en sentido anal\'itico. Esto no significa
+que restar los n\'ucleos en doble precisi\'on sea siempre inocuo:
+a distancias extremadamente peque\~nas puede haber cancelaci\'on.
+La gu\'ia general contiene el estudio num\'erico de esa limitaci\'on.
+
+\subsection{L\'ineas 39--41: sumar los bloques en su posici\'on global}
+\begin{lstlisting}
+for a, g in enumerate(cn):
+    G[2*ic:2*ic+2, 2*g:2*g+2] += Gb[a]
+    H[2*ic:2*ic+2, 2*g:2*g+2] += Hb[a]
+\end{lstlisting}
+Son las mismas reglas local--global del constructor.
+Hay una diferencia importante: aqu\'i no aparece
+\code{if g != ic}. Se incluyen tambi\'en los bloques diagonales,
+porque se est\'a integrando la diferencia regularizada $T-T^s$.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Momento & N\'ucleo & Tratamiento del bloque diagonal\\
+\midrule
+Constructor & $T^s$ & Se omite y reconstruye por traslaci\'on\\
+\code{matrices} & $T-T^s$ & Se integra y suma normalmente\\
+\code{matrices} & $U$ & Se integra con la cuadratura preparada\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Ejemplo real de dos elementos que comparten un nodo}
+Fijemos \code{ic=0} y el nodo global de columna \code{g=2}.
+Ese nodo pertenece a:
+\begin{itemize}
+ \item Elemento 0, \code{cn=[0,1,2]}, con \code{a=2}.
+ \item Elemento 1, \code{cn=[2,3,4]}, con \code{a=0}.
+\end{itemize}
+Por tanto:
+\begin{equation}
+ G_{0,2}=G^{e=0}_{b,\,a=2}+G^{e=1}_{b,\,a=0}.
+\end{equation}
+En el ejemplo, la entrada superior izquierda de esos bloques es
+\begin{align}
+ (G^{e=0}_{b,2})_{00}
+ &\simeq-8.384184254\times10^{-8}
+         -\ii\,2.994329428\times10^{-8},\\
+ (G^{e=1}_{b,0})_{00}
+ &\simeq-6.683467359\times10^{-8}
+         -\ii\,2.253818621\times10^{-8}.
+\end{align}
+La entrada ensamblada es la suma:
+\begin{equation}
+ G_{0,2;\,00}\simeq
+ -1.506765161\times10^{-7}
+ -\ii\,5.248148049\times10^{-8}\ {\rm m/Pa}.
+\end{equation}
+En \'indices escalares de NumPy, el bloque completo es
+\code{G[0:2,4:6]}; su entrada superior izquierda es \code{G[0,4]}.
+Se comprob\'o num\'ericamente el bloque completo, no solo esa entrada.
+
+\subsection{L\'inea 42: devolver dos matrices, no desplazamientos}
+\begin{lstlisting}
+return H, G
+\end{lstlisting}
+Python devuelve una tupla de dos arreglos.
+Todav\'ia no se aplic\'o la presi\'on en este m\'etodo.
+Cambiar $p$ no cambia las matrices si se mantienen geometr\'ia,
+material y frecuencia: solo cambia el segundo miembro.
+La l\'inea 43 es un separador en blanco.
+
+\section{\texttt{resolver(w,p)}: carga y sistema lineal}
+\label{sec:resolver}
+\subsection{L\'inea 44: frecuencia y presi\'on predeterminada}
+\begin{lstlisting}
+def resolver(self, w, p=P):
+\end{lstlisting}
+El usuario debe indicar \code{w}. Puede omitir \code{p};
+en ese caso se usa el valor de \code{P} existente cuando se defini\'o
+el m\'etodo.
+
+\begin{lstlisting}
+ur = bem.resolver(40.0)
+ur = bem.resolver(40.0, p=100.0)
+\end{lstlisting}
+Para la definici\'on original, ambas llamadas prescriben 100 Pa.
+En Python, los argumentos predeterminados se fijan al ejecutar la
+definici\'on, no se releen de la variable global en cada llamada.
+Para otra carga, pasar \code{p} expl\'icitamente evita ambig\"uedades.
+
+\subsection{L\'inea 45: construir las matrices de esa frecuencia}
+\begin{lstlisting}
+H, G = self.matrices(w)
+\end{lstlisting}
+Esta llamada ejecuta todo el ensamblaje explicado en la
+secci\'on~\ref{sec:matrices}. El constructor no se ejecuta otra vez.
+Se reutilizan sus datos precalculados, pero no se almacena una cach\'e
+de las matrices din\'amicas entre llamadas.
+
+\subsection{L\'inea 46: normal radial en cada nodo}
+\begin{lstlisting}
+nrm = self.nodes/self.R
+\end{lstlisting}
+Cada nodo est\'a sobre el c\'irculo de radio $R$:
+\begin{equation}
+ \vect n_g=\frac{\vect x_g}{R}
+          =(\cos\theta_g,\sin\theta_g).
+\end{equation}
+El resultado tiene forma $(N,2)$.
+
+\begin{cuidado}[La variable \texttt{nrm} tiene dos usos diferentes]
+En el constructor y en \code{matrices}, \code{nrm} contiene normales
+en puntos de \emph{cuadratura}, obtenidas de la curva interpolada.
+En \code{resolver}, contiene normales \emph{nodales} del c\'irculo exacto.
+Los nombres coinciden, pero los arreglos, su tama\~no y su papel son distintos.
+\end{cuidado}
+
+La normal nodal es apropiada para este c\'irculo centrado en el origen.
+Dividir coordenadas por \code{R} no es una receta general para obtener
+normales de cualquier geometr\'ia.
+Entre nodos, la presi\'on interpolada a partir de estos valores no es
+exactamente $-p$ por la normal geom\'etrica de la curva aproximada.
+
+\subsection{L\'inea 47: de presi\'on escalar a vector global de tracciones}
+\begin{lstlisting}
+t = (-p*nrm).ravel()
+\end{lstlisting}
+Primero, \code{-p*nrm} crea un arreglo $(N,2)$:
+cada fila contiene $(t_x,t_y)=-p(n_x,n_y)$.
+\code{ravel()} lo aplana por filas en el orden predeterminado:
+\begin{equation}
+ \vect t=(t_{0x},t_{0y},t_{1x},t_{1y},\ldots)^{\mathsf T}.
+\end{equation}
+No se est\'an sumando ni promediando componentes.
+
+Los primeros valores del ejemplo son
+\begin{equation}
+ \vect t_{0:6}\simeq
+ [-100,\ 0,\ -92.38795325,\ -38.26834324,\
+    -70.71067812,\ -70.71067812]^{\mathsf T}\ {\rm Pa}.
+\end{equation}
+Que la presi\'on sea uniforme no significa que todas las componentes
+cartesianas de tracci\'on sean iguales: la normal cambia alrededor del borde.
+
+\subsection{L\'inea 48, primera parte: formar el segundo miembro}
+\begin{lstlisting}
+G @ t
+\end{lstlisting}
+Las formas son
+\begin{equation}
+ (2N,2N)\ @\ (2N,)\longrightarrow(2N,).
+\end{equation}
+Se obtiene $\vect b=G\vect t$.
+La tracci\'on tiene unidades Pa y $G$ unidades m/Pa, por lo que
+$\vect b$ tiene unidades m. $H$ es adimensional.
+
+Para el ejemplo, las primeras dos entradas son aproximadamente
+\begin{equation}
+ \vect b_{0:2}=
+ \begin{bmatrix}
+ -6.98841584\times10^{-5}+\ii\,9.22332748\times10^{-5}\\
+ 0
+ \end{bmatrix}\ {\rm m}.
+\end{equation}
+La segunda entrada es del orden de $10^{-18}$ m, no exactamente cero
+en aritm\'etica de punto flotante.
+$\vect b$ no es a\'un el desplazamiento: debe resolverse el sistema.
+
+\subsection{L\'inea 48, segunda parte: resolver, no invertir expl\'icitamente}
+\begin{lstlisting}
+np.linalg.solve(H, G @ t)
+\end{lstlisting}
+Busca el vector $\vect u$ que satisface $H\vect u=\vect b$.
+No calcula una matriz inversa expl\'icita.
+La salida tiene $2N$ componentes complejas, en el mismo orden
+de nodos y direcciones que se us\'o al ensamblar.
+
+La clase no agrega restricciones ni valores prescritos de desplazamiento:
+en este problema todas las tracciones son conocidas.
+Si el sistema fuera singular, el solucionador podr\'ia generar una
+excepci\'on; el c\'odigo no la intercepta ni inventa una soluci\'on alternativa.
+
+\subsection{L\'inea 48, tercera parte: restaurar filas de dos componentes}
+\begin{lstlisting}
+.reshape(-1, 2)
+\end{lstlisting}
+\code{-1} indica a NumPy que deduzca cu\'antas filas hacen falta.
+Como hay $2N$ valores y dos columnas, resultan $N$ filas:
+\begin{equation}
+ [u_{0x},u_{0y},u_{1x},u_{1y},\ldots]
+ \longrightarrow
+ \begin{bmatrix}
+ u_{0x}&u_{0y}\\
+ u_{1x}&u_{1y}\\
+ \vdots&\vdots
+ \end{bmatrix}.
+\end{equation}
+No se resuelve otro sistema ni se cambian valores: solo se reorganiza
+su forma.
+
+Para el nodo cero del ejemplo:
+\begin{align}
+ u_{0x}&\simeq-2.395965868\times10^{-4}
+                 +\ii\,4.085472003\times10^{-5}\ {\rm m},\\
+ u_{0y}&\simeq2.883762378\times10^{-10}
+                 +\ii\,2.193549058\times10^{-11}\ {\rm m}.
+\end{align}
+La componente $y$ es peque\~na frente a la radial, como se espera
+cerca del eje $x$, pero no exactamente cero en el c\'alculo discreto.
+
+\subsection{L\'inea 49: proyectar radialmente}
+\begin{lstlisting}
+return (u*nrm).sum(-1)
+\end{lstlisting}
+Primero se multiplican entradas correspondientes:
+\begin{equation}
+ \code{u*nrm}=
+ \begin{bmatrix}
+ u_{0x}n_{0x}&u_{0y}n_{0y}\\
+ u_{1x}n_{1x}&u_{1y}n_{1y}\\
+ \vdots&\vdots
+ \end{bmatrix}.
+\end{equation}
+Despu\'es, \code{sum(-1)} suma el \'ultimo eje, las dos columnas:
+\begin{equation}
+ \boxed{u_{r,g}=u_{x,g}n_{x,g}+u_{y,g}n_{y,g}.}
+ \label{eq:proyeccion}
+\end{equation}
+La salida tiene forma $(N,)$ y sigue siendo compleja.
+No hay conjugaci\'on, valor absoluto ni promedio en esa l\'inea.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,scale=1.05]
+ \draw[->,gray] (0,0)--(4,0)node[right]{$x$};
+ \draw[->,gray] (0,0)--(0,3)node[above]{$y$};
+ \draw[->,thick,blue] (0,0)--(3,2)node[right]{$\vect n$};
+ \draw[->,thick,red!65!black] (0,0)--(0.9,2.4)node[above]{$\vect u$};
+ \draw[dashed] (0.9,2.4)--(1.7308,1.1538);
+ \draw[->,very thick,green!40!black] (0,0)--(1.7308,1.1538)
+ node[below right]{$u_r\vect n$};
+ \node[align=left] at (6.6,1.5){Proyecci\'on geom\'etrica\\
+ $\vect u\cdot\vect n=u_r$\\
+ Aplicada tambi\'en a amplitudes complejas};
+\end{tikzpicture}
+\caption{Interpretaci\'on de la proyecci\'on. El dibujo ilustra
+vectores reales; en el c\'odigo las dos componentes de desplazamiento
+son complejas y la normal es real.}
+\end{figure}
+
+\section{Qu\'e recibe finalmente el usuario}
+\subsection{Valores radiales, amplitudes y fases}
+Los primeros resultados calculados son aproximadamente
+\begin{equation}
+ \vect u_r\simeq
+ \begin{bmatrix}
+ -2.395965868\times10^{-4}+\ii\,4.085472003\times10^{-5}\\
+ -2.396737370\times10^{-4}+\ii\,4.087055508\times10^{-5}\\
+ -2.395968718\times10^{-4}+\ii\,4.085489956\times10^{-5}\\
+ \vdots
+ \end{bmatrix}{\rm m}.
+\end{equation}
+Para obtener cantidades diferentes:
+\begin{lstlisting}
+ur = bem.resolver(40.0)
+amplitud_por_nodo = np.abs(ur)
+fase_por_nodo = np.angle(ur)
+amplitud_media = np.abs(ur).mean()
+instantanea_t0 = ur.real
+\end{lstlisting}
+\code{np.angle} devuelve radianes salvo que se indique
+\code{deg=True}. La parte real es el desplazamiento f\'isico
+en $t=0$ para la convenci\'on temporal del notebook.
+
+\begin{cuidado}
+No es lo mismo \code{np.abs(ur).mean()} que
+\code{np.abs(ur.mean())}.
+La primera expresi\'on promedia amplitudes; la segunda toma
+la amplitud de un promedio complejo, que puede contener cancelaci\'on
+de fases.
+\end{cuidado}
+
+\subsection{Comparaci\'on num\'erica con la referencia}
+En el ejemplo:
+\begin{align}
+ \operatorname{media}|u_r^{\rm BEM}|
+       &\simeq2.4309427051\times10^{-4}\ {\rm m},\\
+ u_r^{\rm an}
+       &\simeq-2.3986692491\times10^{-4}
+                   +\ii\,4.0928186578\times10^{-5}\ {\rm m},\\
+ |u_r^{\rm an}|&\simeq2.4333363541\times10^{-4}\ {\rm m}.
+\end{align}
+El error relativo de amplitud promedio es
+\begin{equation}
+ e_A=
+ \frac{|\operatorname{media}|u_r^{\rm BEM}|-|u_r^{\rm an}||}
+ {|u_r^{\rm an}|}
+ \simeq9.83690\times10^{-4}
+ =0.0983690\,\%.
+\end{equation}
+No es una medida completa del error de fase ni del vector cartesiano.
+Se utiliza aqu\'i para comprobar que la lectura del c\'odigo coincide
+con la salida que muestra el notebook.
+
+\section{Resumen de todas las l\'ineas}
+\begin{longtable}{p{0.13\textwidth}p{0.77\textwidth}}
+\toprule
+L\'ineas & Operaci\'on\\
+\midrule
+\endhead
+1 & Definir la clase.\\
+2 & Definir el inicializador con radio, elementos y material.\\
+3 & Guardar par\'ametros como atributos.\\
+4 & Crear nodos y conectividad.\\
+5 & Guardar el n\'umero de nodos.\\
+6 & Comentario que anuncia el prec\'alculo.\\
+7 & Crear la lista global de datos de cuadratura.\\
+8 & Reservar la matriz est\'atica real.\\
+9 & Recorrer nodos de colocaci\'on y sus coordenadas.\\
+10 & Crear una lista para los elementos vistos desde esa fuente.\\
+11 & Recorrer las conectividades de los elementos.\\
+12 & Buscar si la fuente es uno de sus nodos.\\
+13 & Obtener su coordenada local o \code{None}.\\
+14 & Generar puntos y pesos adecuados al par.\\
+15 & Evaluar funciones de forma y derivadas.\\
+16 & Obtener curva y tangente en puntos de cuadratura.\\
+17 & Calcular el jacobiano en cada punto.\\
+18 & Calcular normales exteriores unitarias.\\
+19 & Combinar funciones de forma, jacobiano y pesos.\\
+20 & Evaluar el n\'ucleo est\'atico de tracci\'on.\\
+21 & Recorrer correspondencias local--global.\\
+22 & Posponer el bloque diagonal est\'atico.\\
+23 & Integrar y sumar un bloque no diagonal de $H^s$.\\
+24 & Guardar la tupla del par nodo--elemento.\\
+25 & Guardar la lista completa para esa fuente.\\
+26 & Recorrer todas las diagonales globales.\\
+27 & Reconstruir cada diagonal mediante traslaci\'on r\'igida.\\
+28 & Guardar $H^s$ en el objeto.\\
+29 & Separador visual, sin ejecuci\'on.\\
+30 & Definir el m\'etodo para matrices din\'amicas.\\
+31 & Crear una abreviatura local para el n\'umero de nodos.\\
+32 & Reservar $G$ compleja y nula.\\
+33 & Copiar $H^s$ a una matriz compleja.\\
+34 & Recorrer nodos de colocaci\'on.\\
+35 & Recuperar los datos guardados de sus elementos.\\
+36 & Evaluar $U$ y $T$ para esa frecuencia.\\
+37 & Integrar los tres bloques locales de $G$.\\
+38 & Integrar los tres bloques de la correcci\'on $T-T^s$.\\
+39 & Recorrer nuevamente los tres nodos locales.\\
+40 & Acumular bloques de $G$ en posiciones globales.\\
+41 & Acumular correcciones en $H$, incluidas las diagonales.\\
+42 & Entregar ambas matrices.\\
+43 & Separador visual, sin ejecuci\'on.\\
+44 & Definir el solucionador con presi\'on predeterminada.\\
+45 & Construir las matrices de la frecuencia solicitada.\\
+46 & Obtener normales radiales nodales.\\
+47 & Construir y aplanar las tracciones conocidas.\\
+48 & Formar el segundo miembro, resolver y reorganizar componentes.\\
+49 & Proyectar radialmente y devolver un valor complejo por nodo.\\
+\bottomrule
+\end{longtable}
+
+\section{Comprobaciones realizadas y l\'imites de interpretaci\'on}
+\label{sec:verificacion}
+\subsection{Qu\'e se comprob\'o realmente}
+Se ejecutaron las definiciones originales del notebook para la malla
+de ocho elementos y 40 rad/s. Se verific\'o:
+\begin{enumerate}
+ \item La coincidencia entre las instrucciones de la clase compartida
+ y la clase del notebook mediante sus \'arboles de sintaxis.
+ \item La equivalencia de las contracciones \code{einsum} con sumas
+ expl\'icitas sobre puntos de cuadratura.
+ \item La suma de los dos bloques elementales que contribuyen
+ a \code{G[0:2,4:6]}.
+ \item La reconstrucci\'on del bloque diagonal $H^s_{00}$.
+ \item Que \code{matrices} no modifica \code{self.Hs}.
+ \item La coincidencia entre resolver manualmente con $H,G$ y
+ utilizar \code{bem.resolver(40.0)}.
+ \item Que duplicar $p$ duplica el desplazamiento complejo, como exige
+ la linealidad.
+\end{enumerate}
+
+La suma de bloques de cada fila de $H^s$ es cero hasta errores
+aproximadamente de $1.18\times10^{-16}$ en magnitud m\'axima.
+El residuo hacia atr\'as de la soluci\'on es
+\begin{equation}
+ \eta=
+ \frac{\norm{H\vect u-G\vect t}_2}
+ {\norm H_F\norm{\vect u}_2+\norm{G\vect t}_2}
+ \simeq3.30\times10^{-17}.
+\end{equation}
+Un residuo peque\~no verifica la soluci\'on del sistema ensamblado;
+no elimina el error de malla o cuadratura.
+
+\subsection{Lo que la clase presupone}
+No es un programa gen\'erico que valide cualquier entrada.
+Supone radio positivo, malla v\'alida, material compatible y funciones
+auxiliares disponibles. El modelo es un c\'irculo centrado en el origen
+con presi\'on conocida en toda su frontera.
+
+A frecuencia cero, los n\'ucleos din\'amicos no se eval\'uan directamente
+de esta manera; el problema est\'atico libre tiene movimientos r\'igidos.
+Adem\'as, la resta de n\'ucleos cerca de la fuente puede perder precisi\'on.
+No se debe extrapolar el ejemplo comprobado a cualquier frecuencia,
+geometr\'ia o refinamiento.
+
+\subsection{Qu\'e cambios requerir\'ian reconsiderar el c\'odigo}
+\begin{itemize}
+ \item \textbf{Otra geometr\'ia:} cambiar malla y c\'alculo de normales
+ nodales; \code{nodes/R} no es general.
+ \item \textbf{Otro sentido de recorrido:} revisar el signo de las normales.
+ \item \textbf{Condiciones mixtas:} reorganizar las columnas conocidas y
+ desconocidas; no basta con usar el mismo vector de presi\'on.
+ \item \textbf{Materiales por zonas:} formular dominios e interfaces.
+ \item \textbf{Campo interior:} agregar una evaluaci\'on de la representaci\'on
+ integral despu\'es de resolver la frontera.
+\end{itemize}
+Son posibles ampliaciones, no funcionalidades implementadas por
+estas 49 l\'ineas.
+
+\section{Preguntas para comprobar que se entendi\'o}
+\subsection*{1. Por qu\'e \texttt{self.N} vale 16 y $H$ mide $32\times32$?}
+Hay 16 nodos y dos componentes por nodo. Cada nodo de colocaci\'on
+aporta dos ecuaciones y cada nodo de campo dos componentes desconocidas.
+
+\subsection*{2. \texttt{loc[0]} vale lo mismo que \texttt{ic}?}
+No. \code{ic} es un n\'umero de nodo global.
+\code{loc[0]} es la posici\'on local 0, 1 o 2 dentro de la conectividad,
+si existe una coincidencia.
+
+\subsection*{3. Por qu\'e se usa \texttt{J[:,None]}?}
+Para convertir el vector de longitudes en una columna que divide
+o multiplica cada fila del arreglo correspondiente.
+
+\subsection*{4. Qu\'e significa la letra \texttt{q} en \texttt{einsum}?}
+Es el punto de cuadratura. Si desaparece despu\'es de la flecha,
+se suma sobre todos esos puntos.
+
+\subsection*{5. Por qu\'e se usa \texttt{+=} en el ensamblaje?}
+Porque un bloque global puede recibir contribuciones de distintos
+elementos. Una asignaci\'on simple borrar\'ia contribuciones anteriores.
+
+\subsection*{6. La diagonal de $H^s$ se pone igual a $I/2$?}
+No. Se obtiene como menos la suma de los dem\'as bloques de su fila.
+Incluye t\'ermino libre y contribuci\'on integral est\'atica.
+
+\subsection*{7. Por qu\'e en la parte din\'amica no se omite la diagonal?}
+Porque all\'i se integra $T-T^s$, cuya singularidad principal ya fue
+retirada. La parte est\'atica diagonal se incorpor\'o por separado.
+
+\subsection*{8. \texttt{reshape(-1,2)} calcula desplazamientos nuevos?}
+No. Reorganiza el vector ya resuelto en filas de dos componentes.
+
+\subsection*{9. \texttt{resolver} devuelve una amplitud \'unica?}
+No. Devuelve un valor radial complejo por nodo.
+Tomar magnitudes o promediarlas son operaciones posteriores.
+
+\subsection*{10. Qu\'e se repite al pedir otra frecuencia?}
+Se eval\'uan de nuevo los n\'ucleos din\'amicos, se ensamblan las
+matrices y se resuelve. La geometr\'ia de cuadratura y $H^s$ se reutilizan.
+
+\section{C\'omo utilizar y compilar este documento}
+Este archivo \LaTeX{} es aut\'onomo: contiene el listado, los esquemas
+TikZ y los n\'umeros del ejemplo. No necesita cargar figuras de la gu\'ia
+anterior ni acceder al notebook para compilarse.
+
+Desde su carpeta:
+\begin{lstlisting}[language=bash]
+latexmk -pdf -interaction=nonstopmode -halt-on-error \
+  -outdir=.build explicacion_bem_cilindro.tex
+cp .build/explicacion_bem_cilindro.pdf explicacion_bem_cilindro.pdf
+\end{lstlisting}
+Se requiere una distribuci\'on \LaTeX{} con espa\~nol, TikZ,
+\code{listings}, \code{tcolorbox} y \code{latexmk}.
+La numeraci\'on del listado y las referencias se actualizan
+autom\'aticamente al compilar.
+
+\begin{idea}[La clase en una sola frase]
+El constructor prepara \emph{d\'onde y c\'omo integrar};
+\code{matrices(w)} integra \emph{las influencias de esa frecuencia};
+\code{resolver(w,p)} aplica \emph{la carga conocida},
+resuelve \emph{los desplazamientos desconocidos}
+y devuelve \emph{su componente radial}.
+\end{idea}
+
+\end{document}
