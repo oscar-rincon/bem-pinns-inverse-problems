@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+\newcommand{\paso}{2}
+\input{estilo}
+\begin{document}
+\inicio{El material complejo}{Convertir las propiedades del material en los
+coeficientes que necesita la elastodinámica: módulos de Lamé complejos y
+velocidades de ondas P y S. El objetivo es representar rigidez y disipación
+sin añadir nuevos grados de libertad al problema de frontera.}
+\base
+\mapa{Datos: \(\rho,\mu_0,\nu,\beta\)}
+{Constitución: \(\mu^*=\mu_0(1+2\ii\beta)\), \(\lambda^*=2\mu^*\nu/(1-2\nu)\)}
+{Propagación: \(c_s^2=\mu^*/\rho\), \(c_p^2=(\lambda^*+2\mu^*)/\rho\)}
+
+\section*{1. Qué significa cada dato}
+\begin{center}
+\begin{tabular}{p{0.17\linewidth}p{0.70\linewidth}}
+\toprule
+Dato & Interpretación\\
+\midrule
+\(\rho>0\) & Masa por volumen. Controla la resistencia a acelerar.\\
+\(\mu_0>0\) & Módulo de corte de referencia [Pa].\\
+\(\nu\) & Coeficiente de Poisson real. Para el material estable usual:
+\(-1<\nu<1/2\).\\
+\(\beta\ge0\) & Parámetro adimensional de amortiguamiento del modelo.\\
+\bottomrule
+\end{tabular}
+\end{center}
+Los valores de referencia son
+\[
+ \rho=100\ \mathrm{kg/m^3},\quad \mu_0=10^6\ \mathrm{Pa},\quad
+ \nu=0.25,\quad\beta=0.05.
+\]
+\begin{idea}{Rigidez y disipación cumplen funciones distintas}
+La parte real del módulo relaciona la respuesta elástica con la deformación.
+La parte imaginaria representa el desfase disipativo en el régimen armónico.
+No significa que haya dos materiales distintos.
+\end{idea}
+
+\section*{2. Entrada y salida}
+Este paso recibe constantes físicas reales y devuelve parámetros que se
+reutilizan en cada frecuencia. En este modelo \(\mu^*\) y \(\lambda^*\) no
+dependen explícitamente de \(\omega\). La dependencia en frecuencia entra en
+los números de onda y en los núcleos del paso 4.
+
+\newpage
+\section*{3. Por qué un módulo complejo representa desfase}
+Para verlo sin notación tensorial, pensemos en un corte simple con
+deformación ingenieril \(\gamma(t)=\gamma_0\cos\omega t\). Su amplitud es real
+y el esfuerzo es
+\[
+ \tau(t)=\operatorname{Re}\{\mu^*\gamma_0e^{\ii\omega t}\}.
+\]
+Si \(\mu^*=\mu'+\ii\mu''\), al multiplicar:
+\[
+ \tau(t)=\mu'\gamma_0\cos\omega t-\mu''\gamma_0\sin\omega t.
+\]
+El término con seno no está en fase con la deformación. Integrando la potencia
+por unidad de volumen en un período \(T=2\pi/\omega\):
+\[
+ \Delta W=\int_0^T\tau(t)\dot\gamma(t)\dd t
+          =\pi\mu''\gamma_0^2.
+\]
+Con la convención \(e^{+\ii\omega t}\), \(\mu''>0\) da disipación positiva.
+
+\begin{resultado}{Cómo entra el parámetro del notebook}
+\[
+ \mu^*=\mu_0(1+2\ii\beta),\qquad
+ \mu'=\mu_0,\quad\mu''=2\beta\mu_0,\quad
+ \eta_{\text{pérdida}}=\frac{\mu''}{\mu'}=2\beta.
+\]
+Para \(\beta=0.05\), el factor de pérdida es \(0.10\).
+La identificación de \(\beta\) con una razón de amortiguamiento modal es
+aproximada y depende del contexto; no son definiciones universales idénticas.
+\end{resultado}
+
+\section*{4. De \(\mu^*,\nu\) a \(\lambda^*\)}
+En elasticidad isótropa,
+\[
+ \nu=\frac{\lambda^*}{2(\lambda^*+\mu^*)}.
+\]
+Despejando:
+\[
+ 2\nu\lambda^*+2\nu\mu^*=\lambda^*
+ \quad\Longrightarrow\quad
+ \boxed{\lambda^*=\frac{2\nu\mu^*}{1-2\nu}.}
+\]
+Como se conserva \(\nu\) real, ambos módulos comparten el mismo factor
+\(1+2\ii\beta\). Para \(\nu=0.25\), la fracción vale uno y
+\(\lambda^*=\mu^*\).
+
+\begin{alerta}{Cerca de la incompresibilidad}
+Si \(\nu\to1/2\), \(\lambda^*\) crece mucho. No se debe evaluar la fórmula en
+\(\nu=1/2\) ni confundir una división por cero con un detalle numérico.
+El límite incompresible requiere una formulación adecuada.
+\end{alerta}
+
+\newpage
+\section*{5. De dónde salen las dos velocidades}
+Tomemos una onda plana con vector de onda \(k\vct d\), donde \(\vct d\) es
+unitario:
+\[
+ \vct u=\vct a\,e^{\ii\omega t-\ii k\vct d\cdot\vct x}.
+\]
+Al sustituir en Navier:
+\[
+ (\rho\omega^2-\mu^*k^2)\vct a
+ -(\lambda^*+\mu^*)k^2\vct d(\vct d\cdot\vct a)=\vct0.
+\]
+\subsection*{5.1 Polarización transversal: onda S}
+Si \(\vct d\cdot\vct a=0\), se anula el segundo término:
+\[
+ \rho\omega^2=\mu^*k_s^2,\qquad
+ \boxed{c_s=\frac{\omega}{k_s}=\sqrt{\frac{\mu^*}{\rho}}.}
+\]
+\subsection*{5.2 Polarización longitudinal: onda P}
+Si \(\vct a\) es paralela a \(\vct d\), los términos elásticos se suman:
+\[
+ \rho\omega^2=(\lambda^*+2\mu^*)k_p^2,\qquad
+ \boxed{c_p=\sqrt{\frac{\lambda^*+2\mu^*}{\rho}}.}
+\]
+Las ondas S describen distorsión transversal; las P incluyen compresión
+longitudinal. Las dos intervienen en una solución fundamental elástica,
+aunque la respuesta global bajo esta carga sea radial.
+
+\section*{6. Raíces complejas y atenuación}
+Se usan raíces compatibles con la convención temporal y el campo saliente.
+En el caso de referencia, la raíz principal tiene partes real e imaginaria
+positivas. Por ello \(k=\omega/c\) tiene parte imaginaria negativa:
+\[
+ e^{-\ii kr}=e^{-\ii\operatorname{Re}(k)r}
+              e^{\operatorname{Im}(k)r}.
+\]
+La amplitud disminuye con \(r\). Elegir arbitrariamente el signo opuesto
+puede producir una onda entrante o creciente.
+
+\begin{alerta}{Una velocidad compleja no es una rapidez medible única}
+La rapidez de fase se asocia a \(\omega/\operatorname{Re}(k)\); la atenuación
+a \(-\operatorname{Im}(k)\). No se deben interpretar directamente
+\(\operatorname{Re}(c)\) y \(\operatorname{Im}(c)\) como dos velocidades físicas.
+\end{alerta}
+
+\newpage
+\section*{7. Ejemplo numérico completo}
+\[
+ \mu^*=10^6+\ii10^5\ \mathrm{Pa},\qquad
+ \lambda^*=10^6+\ii10^5\ \mathrm{Pa}.
+\]
+\[
+ \begin{aligned}
+ c_s&\simeq100.124611+\ii4.993777\ \mathrm{m/s},\\
+ c_p&\simeq173.420914+\ii8.649476\ \mathrm{m/s}.
+ \end{aligned}
+\]
+Una relación útil para los núcleos es
+\[
+ \gamma^2=\frac{c_s^2}{c_p^2}
+ =\frac{\mu^*}{\lambda^*+2\mu^*}
+ =\frac{1-2\nu}{2(1-\nu)}.
+\]
+Aquí \(\gamma^2=1/3\), pese a que las dos velocidades sean complejas.
+Esto ocurre porque los módulos tienen el mismo factor complejo.
+
+\section*{8. Controles y límites del procedimiento}
+\begin{itemize}
+ \item Con \(\beta=0\), los módulos y las velocidades vuelven a ser reales
+ positivos para el material estable considerado.
+ \item Comprobar \(\rho c_s^2=\mu^*\) y
+ \(\rho c_p^2=\lambda^*+2\mu^*\); no comparar solo partes reales.
+ \item Las unidades de \(c^2\) son \(\mathrm{m^2/s^2}\), pues
+ \([\mu/\rho]=\mathrm{Pa}/(\mathrm{kg/m^3})\).
+ \item No introducir \(\beta=5\) para indicar cinco por ciento:
+ el valor adimensional es \(0.05\).
+ \item Este es un modelo histerético de frecuencia positiva. Su extensión a
+ todo el eje de frecuencias y a una respuesta transitoria causal no se obtiene
+ usando sin más el mismo módulo complejo constante.
+ \item Cambiar a \(e^{-\ii\omega t}\) exige cambiar coherentemente los signos
+ imaginarios y la selección de ondas; no solo un exponente aislado.
+\end{itemize}
+
+\begin{resultado}{Qué se conserva para el siguiente paso}
+\(\rho,\nu,\mu^*,\lambda^*,c_s,c_p\) describen el medio auxiliar homogéneo.
+El paso 3 usa su reciprocidad; el paso 4 construye sus soluciones
+fundamentales con \(z_s=\ii\omega r/c_s\) y \(z_p=\ii\omega r/c_p\).
+\end{resultado}
+\fuentes
+\end{document}

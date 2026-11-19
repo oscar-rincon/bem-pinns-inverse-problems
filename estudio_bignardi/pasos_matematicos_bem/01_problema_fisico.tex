@@ -1,0 +1,198 @@
+\documentclass[11pt]{article}
+\newcommand{\paso}{1}
+\input{estilo}
+\begin{document}
+\inicio{El problema físico}{Traducir el cilindro sometido a presión en un
+problema matemático bien definido: qué región se estudia, qué campo se busca,
+qué ecuación cumple y qué se conoce en el borde. Todavía no se integra ni se
+construye ninguna matriz.}
+\base
+\section*{1. La pregunta de ingeniería}
+Se conoce la presión que comprime el contorno. Se busca cuánto se desplaza el
+material cuando esa presión oscila con frecuencia angular \(\omega\).
+El resultado no es necesariamente una contracción instantánea en fase con la
+carga: la inercia y el amortiguamiento producen amplitud y desfase.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85,>={Stealth[length=2mm]}]
+ \fill[blue!5] (0,0) circle(1.6);
+ \draw[thick,blue!65!black] (0,0) circle(1.6);
+ \foreach \a in {0,90,180,270}
+   \draw[->,thick,red!65!black] (\a:2.2)--(\a:1.65);
+ \draw[->,thick,teal!65!black] (1.13,1.13)--(1.85,1.85)
+   node[right]{$\vct n$ exterior};
+ \draw[->] (0,0)--(1.6,0) node[midway,below]{$R$};
+ \node at (-0.45,0.5){$\Omega$};
+ \node at (-1.6,1.5){$\Gamma$};
+ \node[red!65!black] at (0,-2.65){$\vct t=-p\vct n$};
+ \node[align=left,text width=7cm] at (6,0){
+   $\Omega=\{(x,y):x^2+y^2<R^2\}$\\[2mm]
+   $\Gamma=\partial\Omega$\\[2mm]
+   El área contiene material.\\
+   No se modela una cavidad ni el exterior.};
+\end{tikzpicture}
+\end{center}
+
+\mapa{Presión conocida \(p\), geometría \(R\), material y frecuencia \(\omega\)}
+{Equilibrio dinámico + deformación + ley constitutiva}
+{Campo buscado \(\vct u(x,y;\omega)\), en particular su valor radial en \(\Gamma\)}
+
+\section*{2. Qué entra y qué sale}
+\begin{tabular}{p{0.20\linewidth}p{0.70\linewidth}}
+\toprule
+Símbolo & Significado y unidad\\
+\midrule
+\(R,p,\rho\) & Radio [m], amplitud de presión [Pa], densidad [kg/m\(^{3}\)].\\
+\(\vct u\) & Desplazamiento complejo \((u_x,u_y)\), en metros.\\
+\(\boldsymbol\varepsilon\) & Deformación infinitesimal, adimensional.\\
+\(\boldsymbol\sigma,\vct t\) & Tensor de esfuerzos y vector de tracción [Pa].\\
+\(\omega\) & Frecuencia angular [rad/s]; no es frecuencia en Hz: \(\omega=2\pi f\).\\
+\bottomrule
+\end{tabular}
+
+\newpage
+\section*{3. Del desplazamiento a la ecuación de campo}
+\subsection*{3.1 La cinemática: cómo se deforma el material}
+Un desplazamiento constante mueve el sólido pero no lo deforma. Lo que genera
+deformación son las variaciones espaciales de \(\vct u\):
+\[
+ \varepsilon_{ij}=\frac12(u_{i,j}+u_{j,i}),\qquad
+ \varepsilon_{xx}=u_{x,x},\quad
+ \varepsilon_{yy}=u_{y,y},\quad
+ \varepsilon_{xy}=\frac12(u_{x,y}+u_{y,x}).
+\]
+La notación \(u_{i,j}\) significa \(\partial u_i/\partial x_j\).
+No confundir \(\varepsilon_{xy}\) con la deformación cortante ingenieril
+\(\gamma_{xy}=2\varepsilon_{xy}\).
+
+\subsection*{3.2 La constitución: cómo la deformación genera esfuerzo}
+Para elasticidad lineal isótropa, usando los módulos complejos del paso 2:
+\[
+ \boxed{\sigma_{ij}=\lambda^* \varepsilon_{kk}\delta_{ij}
+                  +2\mu^*\varepsilon_{ij}.}
+\]
+Un índice repetido implica suma. Aquí \(\delta_{ij}\) vale uno si \(i=j\)
+y cero en caso contrario. En deformación plana,
+\(\varepsilon_{zz}=\varepsilon_{xz}=\varepsilon_{yz}=0\), pero
+\[
+ \sigma_{zz}=\lambda^*(\varepsilon_{xx}+\varepsilon_{yy})
+\]
+puede ser distinto de cero: la restricción axial produce esfuerzo axial.
+
+\subsection*{3.3 El equilibrio: de Newton a Navier}
+Sin fuerzas de volumen, la segunda ley de Newton por unidad de volumen es
+\[
+ \sigma_{ij,j}=\rho\,\ddot u_i.
+\]
+Si \(u_{\text{fís},i}=\operatorname{Re}\{u_i e^{\ii\omega t}\}\), entonces
+\(\ddot u_{\text{fís},i}=\operatorname{Re}\{-\omega^2u_i e^{\ii\omega t}\}\).
+Por tanto,
+\[
+ \boxed{\sigma_{ij,j}+\rho\omega^2u_i=0.}
+\]
+Al sustituir Hooke y agrupar derivadas, para material homogéneo:
+\[
+ \boxed{\mu^*\nabla^2\vct u+
+ (\lambda^*+\mu^*)\nabla(\nabla\!\cdot\vct u)
+ +\rho\omega^2\vct u=\vct0.}
+\]
+\begin{alerta}{El signo de la inercia no se adivina}
+El término \(+\rho\omega^2\vct u\) aparece después de llevar
+\(-\rho\omega^2\vct u\) al lado izquierdo. El amortiguamiento está en los
+módulos; no se añade además un término viscoso que el modelo no contiene.
+\end{alerta}
+
+\newpage
+\section*{4. De la presión escalar a la condición vectorial}
+La tracción sobre una superficie orientada es
+\[
+ t_i=\sigma_{ij}n_j,\qquad \boxed{\vct t=-p\vct n\quad\text{en }\Gamma.}
+\]
+En el círculo, \(\vct x=(R\cos\theta,R\sin\theta)\) y
+\[
+ \vct n=(\cos\theta,\sin\theta),\qquad
+ \vct t=(-p\cos\theta,-p\sin\theta).
+\]
+Para \(p=100\) Pa:
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Punto & Normal exterior & Tracción [Pa]\\
+\midrule
+\((R,0)\)&\((1,0)\)&\((-100,0)\)\\
+\((0,R)\)&\((0,1)\)&\((0,-100)\)\\
+\((-R,0)\)&\((-1,0)\)&\((100,0)\)\\
+\((0,-R)\)&\((0,-1)\)&\((0,100)\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+La presión es uniforme, pero las componentes cartesianas de la tracción no
+son constantes: cambian con la orientación de la normal.
+
+\section*{5. Por qué el problema es bidimensional}
+Se considera una respuesta independiente de \(z\), con desplazamiento axial
+nulo. Esto representa la idealización de deformación plana de un cilindro
+largo axialmente restringido, o una región suficientemente alejada de sus
+extremos bajo esa hipótesis. No basta que el cilindro sea largo para
+justificar cualquier restricción axial.
+
+\begin{alerta}{Deformación plana no es esfuerzo plano}
+Aquí \(\varepsilon_{zz}=0\), no \(\sigma_{zz}=0\). Si los extremos y las
+condiciones axiales permiten otra respuesta, puede corresponder una
+formulación de deformación plana generalizada u otro modelo. No cambiar
+\(\lambda^*\) por una fórmula de esfuerzo plano sin cambiar el problema.
+\end{alerta}
+
+\section*{6. Unidades como comprobación}
+\[
+ [\nabla\!\cdot\boldsymbol\sigma]=\mathrm{Pa/m}
+ =\mathrm{N/m^3},\qquad
+ [\rho\omega^2\vct u]=\mathrm{kg/m^3}\,\mathrm{s^{-2}}\,\mathrm m
+ =\mathrm{N/m^3}.
+\]
+Ambos términos son fuerzas por unidad de volumen. La presión, en cambio,
+es fuerza por unidad de área y actúa en el borde.
+
+\newpage
+\section*{7. Qué implica la simetría y qué no}
+Para geometría circular, material isótropo y presión uniforme, la solución
+física es axisimétrica:
+\[
+ \vct u(r,\theta)=u_r(r)\vct e_r,\qquad u_\theta=0.
+\]
+Eso sirve para comprobar el resultado, pero el BEM empleado no reduce
+previamente el sistema a una sola incógnita radial: conserva las dos
+componentes cartesianas en todos los nodos.
+
+\begin{resultado}{Ejemplo estático que permite revisar los signos}
+En el límite estático, un campo \(u_r(r)=Ar\) tiene
+\(\varepsilon_{rr}=\varepsilon_{\theta\theta}=A\). Por Hooke:
+\[
+ \sigma_{rr}=2(\lambda^*+\mu^*)A=-p,
+ \qquad
+ \boxed{u_r(R)=-\frac{pR}{2(\lambda^*+\mu^*)}.}
+\]
+Sin amortiguamiento, con \(R=6\) m y
+\(\lambda=\mu=10^6\) Pa, resulta
+\(u_r(R)=-1.5\times10^{-4}\) m. El signo negativo indica contracción.
+Este es un control del modelo, no una evaluación directa de los núcleos
+dinámicos en \(\omega=0\).
+\end{resultado}
+
+\section*{8. Aclaraciones antes de continuar}
+\begin{itemize}
+ \item Una amplitud compleja no es una posición física compleja. La
+ posición física se obtiene tomando la parte real de la respuesta temporal.
+ \item La hipótesis lineal exige desplazamientos y gradientes de
+ desplazamiento suficientemente pequeños; no incluye grandes deformaciones.
+ \item Se conoce toda la tracción del borde. No se prescribe simultáneamente
+ todo el desplazamiento del mismo borde.
+ \item La solución fundamental usada después presupone homogeneidad e
+ isotropía dentro del dominio. Un material variable requiere otro tratamiento.
+\end{itemize}
+
+\mapa{Modelo físico definido: \(\Omega,\Gamma,\rho,p,\omega\)}
+{Paso 2: obtener \(\lambda^*,\mu^*,c_p,c_s\)}
+{Paso 3: sustituir la ecuación de campo por una identidad en \(\Gamma\)}
+\fuentes
+\end{document}

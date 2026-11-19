@@ -1,0 +1,68 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-noquoting,es-lcroman]{babel}
+\spanishplainpercent
+\usepackage{lmodern}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[most]{tcolorbox}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small BEM del cilindro: paso \paso}
+\fancyhead[R]{\small Guía matemática independiente}
+\fancyfoot[C]{\thepage}
+\newcommand{\vct}[1]{\bm{#1}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\VP}{\operatorname{VP}}
+\newcommand{\tr}{\operatorname{tr}}
+\newtcolorbox{idea}[1]{breakable,colback=blue!3,colframe=blue!50!black,
+  title={#1},fonttitle=\bfseries,boxrule=0.7pt}
+\newtcolorbox{alerta}[1]{breakable,colback=orange!4,colframe=orange!65!black,
+  title={#1},fonttitle=\bfseries,boxrule=0.7pt}
+\newtcolorbox{resultado}[1]{breakable,colback=teal!3,colframe=teal!55!black,
+  title={#1},fonttitle=\bfseries,boxrule=0.7pt}
+\newcommand{\inicio}[2]{%
+ {\small\color{blue!55!black}\bfseries SERIE: LOS SIETE PASOS MATEMÁTICOS DEL BEM}\par
+ {\LARGE\bfseries Paso \paso. #1\par}\vspace{3mm}
+ \begin{idea}{¿Qué busca este paso?}#2\end{idea}}
+\newcommand{\mapa}[3]{%
+ \begin{center}
+ \begin{tikzpicture}[node distance=4mm,
+   caja/.style={draw=blue!50!black,fill=blue!3,rounded corners=2pt,
+     text width=13cm,align=center,inner sep=6pt},
+   >={Stealth[length=2mm]}]
+ \node[caja] (a){#1};
+ \node[caja,below=of a] (b){#2};
+ \node[caja,below=of b] (c){#3};
+ \draw[->,thick,blue!60!black] (a)--(b);
+ \draw[->,thick,blue!60!black] (b)--(c);
+ \end{tikzpicture}
+ \end{center}}
+\newcommand{\base}{%
+ \smallskip{\footnotesize\color{black!65}
+ Modelo de referencia: cilindro sólido, material homogéneo e isótropo,
+ deformación plana, pequeñas deformaciones, sin fuerzas de volumen;
+ amplitudes complejas con \(e^{+\ii\omega t}\), \(\omega>0\).}\par}
+\newcommand{\fuentes}{%
+ \par\medskip\begingroup\footnotesize
+ \textbf{Referencia y continuación.}
+ Este documento desarrolla una etapa del esquema
+ \texttt{esquema\_ecuaciones\_bem.tex}. Las ecuaciones y los ejemplos se
+ contrastaron con \texttt{bem\_cilindro.py}, ambos en la carpeta superior.
+ La guía general y sus deducciones ampliadas se encuentran en
+ \texttt{../guia\_bem/guia\_bem.pdf}. No se modifica la implementación.
+ \par Para recompilar este documento, mantener \texttt{estilo.tex} en
+ la misma carpeta y ejecutar \texttt{pdflatex} sobre su archivo
+ \texttt{.tex}, desde esa carpeta.\par\endgroup}

@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\newcommand{\paso}{5}
+\input{estilo}
+\begin{document}
+\inicio{Discretizar e integrar}{Convertir una frontera continua y sus campos
+en elementos, valores nodales y sumas de cuadratura. Este paso decide
+cómo se representa la geometría, cómo varían los campos entre nodos y
+dónde se evalúan los núcleos del paso 4. Todavía no resuelve el sistema.}
+\base
+
+\mapa{Curva continua \(\Gamma\), desplazamiento \(\vct u(\vct x)\), tracción \(\vct t(\vct x)\)}
+{Elementos de tres nodos + funciones de forma cuadráticas en \(\eta\in[-1,1]\)}
+{Puntos \(\vct x_q\), normales \(\vct n_q\), jacobianos \(J_q\) y pesos \(W_{qa}\)}
+
+\section*{1. Qué significa discretizar el contorno}
+Se divide la circunferencia en \(n_e\) elementos. Cada elemento tiene un nodo
+en cada extremo y otro intermedio. Los elementos vecinos comparten sus
+extremos, y el último se conecta con el primero.
+Por eso hay \(N=2n_e\) nodos globales, no \(3n_e\).
+
+\begin{center}
+\begin{tikzpicture}[>={Stealth[length=2mm]}]
+ \draw[thick,blue!60!black] (-6,0)--(-2,0);
+ \foreach \x/\lab in {-6/-1,-4/0,-2/1}{
+   \fill (\x,0) circle(2pt);
+   \node[below] at (\x,0){$\eta=\lab$};}
+ \node at (-4,1){Elemento de referencia};
+ \draw[->,thick] (-1.6,0)--(-0.4,0);
+ \draw[thick,teal!60!black] (0,-0.2) .. controls (1.3,1) and (2.7,1) .. (4,-0.2);
+ \fill (0,-0.2) circle(2pt) node[below]{$\vct x_1$};
+ \fill (2,0.7) circle(2pt) node[above]{$\vct x_2$};
+ \fill (4,-0.2) circle(2pt) node[below]{$\vct x_3$};
+ \node at (2,1.5){Elemento físico};
+\end{tikzpicture}
+\end{center}
+El dibujo muestra el concepto de mapeo. En el modelo se usan polinomios
+cuadráticos para interpolar las coordenadas del círculo.
+
+\section*{2. Coordenadas, conectividad y componentes}
+Con índices globales \(g=0,\ldots,N-1\):
+\[
+ \theta_g=\frac{2\pi g}{N},\qquad
+ \vct x_g=R(\cos\theta_g,\sin\theta_g).
+\]
+Para el elemento \(e=0,\ldots,n_e-1\), los tres índices globales son
+\[
+ g(e,1)=2e,\qquad g(e,2)=2e+1,\qquad
+ g(e,3)=(2e+2)\bmod N.
+\]
+El índice local \(a=1,2,3\) no es un índice global.
+Cada nodo tiene dos componentes: con ocho elementos hay 16 nodos y
+32 incógnitas escalares de desplazamiento.
+
+\newpage
+\section*{3. Deducir las funciones de forma}
+Se buscan polinomios \(P_a\) de grado dos que valgan uno en su propio nodo y
+cero en los otros. Para los nodos locales \(\eta_1=-1,\eta_2=0,\eta_3=1\),
+la fórmula de Lagrange es
+\[
+ P_a(\eta)=\prod_{b\ne a}\frac{\eta-\eta_b}{\eta_a-\eta_b}.
+\]
+Al sustituir los tres valores:
+\[
+ \boxed{P_1=\tfrac12\eta(\eta-1),\qquad
+ P_2=1-\eta^2,\qquad P_3=\tfrac12\eta(\eta+1).}
+\]
+En el esquema general se llamaban \(N_a\); aquí usamos \(P_a\) para no
+confundirlas con el número \(N\) de nodos globales.
+
+\begin{center}
+\begin{tabular}{c|ccc}
+\toprule
+ & \(\eta=-1\)&\(\eta=0\)&\(\eta=1\)\\
+\midrule
+\(P_1\)&1&0&0\\
+\(P_2\)&0&1&0\\
+\(P_3\)&0&0&1\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[
+ P_1+P_2+P_3=1,\qquad
+ P_1'=\eta-\tfrac12,\quad P_2'=-2\eta,\quad
+ P_3'=\eta+\tfrac12.
+\]
+La suma uno es la partición de la unidad: permite representar exactamente
+un campo constante y será esencial para la traslación rígida del paso 6.
+
+\section*{4. Interpolar geometría y campos con la misma base}
+\[
+\begin{aligned}
+ \vct x_e(\eta)&=\sum_{a=1}^3P_a(\eta)\vct x_{g(e,a)},\\
+ \vct u_e(\eta)&\simeq\sum_{a=1}^3P_a(\eta)\vct u_{g(e,a)},\\
+ \vct t_e(\eta)&\simeq\sum_{a=1}^3P_a(\eta)\vct t_{g(e,a)}.
+\end{aligned}
+\]
+Se llama interpolación \emph{isoparamétrica} porque geometría y campos usan
+las mismas funciones. Los valores nodales no dependen de \(\eta\);
+por eso podrán salir de las integrales al ensamblar.
+
+\begin{alerta}{Interpolar no significa que todo sea un promedio positivo}
+Por ejemplo, en \(\eta=1/2\):
+\[
+ (P_1,P_2,P_3)=(-1/8,\,3/4,\,3/8).
+\]
+Una función de forma puede ser negativa y aun así interpolar correctamente.
+\end{alerta}
+
+\newpage
+\section*{5. Tangente, jacobiano y normal}
+La derivada de la curva interpolada es
+\[
+ \vct x'_e(\eta)=\sum_aP_a'(\eta)\vct x_{g(e,a)},\qquad
+ J=\norm{\vct x'_e},\qquad
+ \dd\Gamma=J\,\dd\eta.
+\]
+Como \(\eta\) es adimensional, \(J\) tiene unidades de longitud.
+La tangente unitaria y la normal exterior, para recorrido antihorario, son
+\[
+ \vct\tau=\frac{(x',y')}{J},\qquad
+ \boxed{\vct n=\frac{(y',-x')}{J}.}
+\]
+La normal es la tangente rotada \(90^\circ\) hacia la derecha.
+Al invertir la conectividad, la misma fórmula da la normal opuesta.
+
+\section*{6. Ejemplo geométrico del primer elemento}
+Para \(R=6\) m y ocho elementos:
+\[
+\begin{aligned}
+ \vct x_1&=(6,0),\\
+ \vct x_2&\simeq(5.543277,\,2.296101),\\
+ \vct x_3&\simeq(4.242641,\,4.242641).
+\end{aligned}
+\]
+En \(\eta=0\), \(P_2=1\), por lo que la posición es exactamente
+\(\vct x_2\). Además,
+\[
+ \vct x'(0)=\tfrac12(\vct x_3-\vct x_1),\quad
+ J(0)\simeq2.296101\ \mathrm m,\quad
+ \vct n(0)\simeq(0.923880,\,0.382683).
+\]
+En \(\eta=1/2\), la interpolación da
+\[
+ \vct x(1/2)=-\tfrac18\vct x_1+\tfrac34\vct x_2+\tfrac38\vct x_3
+ \simeq(4.998448,\,3.313066)\ \mathrm m.
+\]
+
+\begin{alerta}{Los nodos están en el círculo, la curva entre ellos es aproximada}
+La interpolación polinómica cuadrática no representa exactamente un arco
+circular. En el extremo inicial de este elemento, la normal geométrica es
+aproximadamente \((0.999901,0.014069)\), mientras que la normal circular
+nodal es \((1,0)\). La diferencia disminuye al refinar la malla.
+\end{alerta}
+
+\newpage
+\section*{7. Convertir una integral en una suma}
+Para una función regular:
+\[
+ \int_{\Gamma_e}f(\vct x)\dd\Gamma
+ =\int_{-1}^{1}f(\vct x_e(\eta))J(\eta)\dd\eta
+ \simeq\sum_{q=1}^{n_q}f(\vct x_q)J_qw_q.
+\]
+Los puntos \(\eta_q\) y pesos \(w_q\) de Gauss-Legendre no son uniformes.
+Para el aporte asociado al nodo local \(a\), conviene agrupar
+\[
+ \boxed{W_{qa}=P_a(\eta_q)J_qw_q.}
+\]
+De ese modo,
+\[
+ \int_{\Gamma_e}P_aU\,\dd\Gamma\simeq\sum_qW_{qa}U_q,\qquad
+ \int_{\Gamma_e}P_a(T-T^s)\,\dd\Gamma\simeq\sum_qW_{qa}(T_q-T_q^s).
+\]
+Los pesos no contienen el núcleo: se calculan a partir de geometría,
+funciones de forma y cuadratura.
+
+\section*{8. Si la fuente pertenece al elemento}
+Si el nodo de colocación es uno de sus tres nodos, la fuente está en
+\(\eta_s=-1,0\) o \(1\). Se divide el intervalo en
+\([-1,\eta_s]\) y \([\eta_s,1]\), descartando tramos de longitud cero.
+En un tramo \([a,b]\), usando \(t\in(0,1)\):
+\[
+\begin{array}{ll}
+\text{Fuente a la izquierda:}&
+\eta=a+(b-a)t^2,\quad \dd\eta=2(b-a)t\,\dd t,\\[1mm]
+\text{Fuente a la derecha:}&
+\eta=a+(b-a)[1-(1-t)^2],\\
+&\dd\eta=2(b-a)(1-t)\,\dd t.
+\end{array}
+\]
+Así se concentran puntos cerca de la fuente y el nuevo peso incluye la
+derivada del mapa.
+
+\begin{resultado}{Por qué ayuda para la singularidad logarítmica}
+Si \(\eta-a\propto t^2\), un factor
+\(\log|\eta-a|\dd\eta\) se transforma en un comportamiento proporcional a
+\(t\log t\,\dd t\), cuyo límite es cero. El integrando resulta más favorable,
+pero no se vuelve necesariamente un polinomio ni una función analítica.
+\end{resultado}
+
+\newpage
+\section*{9. Cuántos puntos se usan en este caso}
+\begin{center}
+\begin{tabular}{p{0.52\linewidth}p{0.34\linewidth}}
+\toprule
+Posición de la fuente respecto al elemento & Regla utilizada\\
+\midrule
+Fuera del elemento & 16 puntos de Gauss ordinarios.\\
+En un extremo & Un subintervalo transformado, 16 puntos.\\
+En el nodo intermedio & Dos subintervalos transformados, 32 puntos en total.\\
+\bottomrule
+\end{tabular}
+\end{center}
+Los puntos no coinciden con la singularidad. Pero esto no basta para
+definir el valor principal del término estático \(T^s\): se necesita
+la construcción diagonal del paso 6.
+
+\section*{10. Tres normales y campos que no deben confundirse}
+\begin{enumerate}
+ \item \textbf{Normal de cuadratura:} deriva de la curva interpolada y entra
+ en \(T\) y \(T^s\).
+ \item \textbf{Normal circular nodal:} \(\vct n_g=\vct x_g/R\);
+ se usa para fijar \(\vct t_g=-p\vct n_g\) y proyectar \(\vct u_g\).
+ \item \textbf{Tracción interpolada:}
+ \(\vct t_e(\eta)=\sum_aP_a(-p\vct x_a/R)\).
+ En general no coincide exactamente con \(-p\vct n_e(\eta)\).
+\end{enumerate}
+No es una contradicción en las definiciones, sino una aproximación
+geométrica y de interpolación del esquema existente.
+
+\section*{11. Comprobaciones antes de ensamblar}
+\begin{itemize}
+ \item \(P_a(\eta_b)=\delta_{ab}\), \(\sum_aP_a=1\) y \(\sum_aP_a'=0\).
+ \item \(J>0\), \(\norm{\vct n}=1\), \(\vct n\cdot\vct\tau=0\);
+ comprobar también que la normal apunte hacia afuera.
+ \item La conectividad debe cerrar el contorno sin duplicar indebidamente
+ el último nodo.
+ \item Los 16 puntos integran exactamente polinomios de grado hasta 31,
+ pero los núcleos no son polinomios: no hay exactitud automática.
+ \item Aumentar puntos no sustituye refinar elementos. Son errores
+ distintos; además la cancelación en los núcleos limita la precisión.
+\end{itemize}
+\begin{resultado}{Qué queda preparado}
+Para cada par fuente--elemento se dispone de
+\(\{\vct x_q,\vct n_q,W_{qa}\}\).
+Con ellos, el paso 6 transforma las integrales de influencia en bloques
+numéricos y los suma en el lugar global correspondiente.
+\end{resultado}
+\fuentes
+\end{document}

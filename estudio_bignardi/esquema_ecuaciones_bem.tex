@@ -1,0 +1,221 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-noquoting,es-lcroman]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,bm}
+\usepackage[paperwidth=297mm,paperheight=500mm,margin=12mm]{geometry}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{microtype}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\spanishplainpercent
+
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\Div}{\boldsymbol{\nabla}\!\cdot}
+\newcommand{\Grad}{\boldsymbol{\nabla}}
+\newtcolorbox{stepbox}[2][]{%
+  enhanced, sharp corners, boxrule=0.8pt, colback=blue!2,
+  colframe=blue!45!black, colbacktitle=blue!9,
+  fonttitle=\bfseries\large, coltitle=blue!45!black,
+  left=3mm, right=3mm, top=1.5mm, bottom=1.5mm,
+  before skip=0pt, after skip=0pt, #1,
+  title={#2}}
+\newcommand{\flow}{%
+  \begin{center}\vspace{-1mm}
+  \begin{tikzpicture}
+    \draw[-{Stealth[length=3mm]},line width=1.1pt,blue!60!black]
+      (0,0) -- (0,-3.5mm);
+  \end{tikzpicture}
+  \vspace{-1mm}\end{center}}
+
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries Del equilibrio al desplazamiento: las ecuaciones del BEM}\\[2mm]
+  {\large Cilindro sólido 2D en deformación plana, respuesta armónica}\\[1mm]
+  {\small Cada bloque transforma la ecuación anterior en la siguiente; las flechas indican el flujo matemático.}
+\end{center}
+\vspace{2mm}
+\begin{tcolorbox}[enhanced,sharp corners,colback=blue!6,colframe=blue!55!black,
+  boxrule=1pt,left=3mm,right=3mm,top=1mm,bottom=1mm]
+\centering\large
+\(\boxed{\text{ecuación de campo}}
+\ \longrightarrow\ \text{integrales en la frontera}
+\ \longrightarrow\ \text{sistema lineal}
+\ \longrightarrow\ \text{respuesta radial}\)
+\end{tcolorbox}
+\vspace{2mm}
+
+\begin{stepbox}{01 \quad Problema físico: elastodinámica en el interior \(\Omega\)}
+El cilindro es infinito en \(z\); se modela su sección circular en el plano
+\((x,y)\). El desplazamiento es \(\vect u=(u_x,u_y)\), con deformación plana
+\((u_z=0)\). Para la convención temporal
+\(u_{\text{fís}}(t)=\operatorname{Re}\{\vect u\,e^{\ii\omega t}\}\):
+\[
+\boxed{\Div\vect\sigma+\rho\omega^2\vect u=\vect 0\quad\text{en }\Omega},
+\qquad
+\boldsymbol\varepsilon(\vect u)=\tfrac12\bigl(\Grad\vect u+
+(\Grad\vect u)^{\mathsf T}\bigr),
+\qquad
+\vect\sigma=\lambda^*\,\operatorname{tr}(\boldsymbol\varepsilon)\,\vect I+
+2\mu^*\boldsymbol\varepsilon .
+\]
+En el borde \(\Gamma\), la normal \(\vect n\) apunta hacia afuera. La presión
+uniforme apunta hacia adentro, por eso la tracción prescrita es
+\(\boxed{\vect t=\vect\sigma\vect n=-p\,\vect n}\).
+\end{stepbox}
+\flow
+
+\begin{stepbox}[colback=violet!2,colframe=violet!55!black,
+  colbacktitle=violet!8,coltitle=violet!45!black]
+{02 \quad Material complejo: amortiguamiento y velocidades de onda}
+El amortiguamiento histerético se incorpora en el módulo de corte; los módulos
+y las velocidades pueden ser complejos:
+\[
+\mu^*=\mu_0(1+2\ii\beta),\qquad
+\lambda^*=\frac{2\mu^*\nu}{1-2\nu},\qquad
+c_s=\sqrt{\frac{\mu^*}{\rho}},\qquad
+c_p=\sqrt{\frac{\lambda^*+2\mu^*}{\rho}}.
+\]
+\(\rho\): densidad; \(\nu\): razón de Poisson; \(\beta\): amortiguamiento;
+\(c_s,c_p\): velocidades de ondas S y P. Estos parámetros determinan los
+núcleos fundamentales que aparecen más adelante.
+\end{stepbox}
+\flow
+
+\begin{stepbox}{03 \quad Identidad de Green: llevar el problema a la frontera}
+Al aplicar la identidad recíproca con las soluciones fundamentales, el valor
+del campo en un punto fuente \(\vect\xi\) del contorno se relaciona con
+desplazamientos y tracciones en todo \(\Gamma\):
+\[
+\boxed{c(\vect\xi)\vect u(\vect\xi)
++\operatorname{VP}\!\int_\Gamma \vect T(\vect\xi,\vect x)\vect u(\vect x)\,\dd\Gamma
+=\int_\Gamma \vect U(\vect\xi,\vect x)\vect t(\vect x)\,\dd\Gamma.}
+\]
+\(\vect U\) es el núcleo de desplazamiento fundamental y \(\vect T\), su núcleo
+de tracción. VP indica valor principal. En un borde suave \(c=\tfrac12\vect I\);
+en la implementación, el término libre y la parte estática principal se
+incorporan en la diagonal de \(H^s\): no se agrega otro \(\tfrac12\vect I\).
+\end{stepbox}
+\flow
+
+\begin{stepbox}[colback=violet!2,colframe=violet!55!black,
+  colbacktitle=violet!8,coltitle=violet!45!black]
+{04 \quad Núcleos dinámicos: cómo se propaga la influencia}
+Sea \(\vect r=\vect x-\vect\xi\), \(r=\|\vect r\|\),
+\(\vect e=\vect r/r\), \(\gamma=c_s/c_p\),
+\(z_s=\ii\omega r/c_s\), \(z_p=\ii\omega r/c_p\). Para \(K_j\), función de
+Bessel modificada de segunda especie:
+\[
+\psi(r)=K_0(z_s)+\frac{K_1(z_s)-\gamma K_1(z_p)}{z_s},
+\qquad
+\chi(r)=K_2(z_s)-\gamma^2K_2(z_p),
+\]
+\[
+\boxed{U_{ij}(\vect x,\vect\xi)=
+\frac{\psi(r)\delta_{ij}-\chi(r)e_i e_j}{2\pi\mu^*}.}
+\]
+El núcleo de tracción se obtiene aplicando la ley constitutiva al campo
+fundamental y proyectando el esfuerzo sobre la normal exterior en
+\(\vect x\):
+\[
+T_{ij}(\vect\xi,\vect x)=
+\bigl[\boldsymbol\sigma_{\vect x}(\vect U_{i\cdot})\bigr]_{jk}n_k(\vect x).
+\]
+Aquí \(i\) identifica la fuerza auxiliar y \(j\), la componente de tracción:
+se aplica el operador a la fila \(U_{i\cdot}\). En la identidad de frontera,
+\(U\) pondera las tracciones y \(T\), los desplazamientos.
+\end{stepbox}
+\flow
+
+\begin{stepbox}{05 \quad Discretizar \(\Gamma\): elementos cuadráticos e integración}
+Solo se divide el contorno; no se crea una malla del interior. Con \(n_e\)
+elementos hay \(N=2n_e\) nodos globales y dos componentes \((u_x,u_y)\) por nodo.
+En cada elemento, \(\eta\in[-1,1]\) y los nodos locales están en
+\((-1,0,1)\):
+\[
+N_1=\tfrac12\eta(\eta-1),\qquad N_2=1-\eta^2,\qquad
+N_3=\tfrac12\eta(\eta+1),\qquad
+\vect x(\eta)=\sum_{a=1}^3N_a(\eta)\vect x_a.
+\]
+La geometría curva aporta el jacobiano y la normal
+\[
+J=\left\|\frac{\dd\vect x}{\dd\eta}\right\|,\qquad
+\vect n=\frac{(y',-x')}{J},\qquad
+\dd\Gamma=J\,\dd\eta,\qquad
+\int_{\Gamma_e}f\,\dd\Gamma\ \approx\ \sum_q f(\vect x_q)J_qw_q.
+\]
+Para una función de forma, el peso integrado es
+\(W_{qa}=N_a(\eta_q)J_qw_q\). Cuando el punto fuente cae en el elemento, la
+cuadratura se adapta alrededor de esa singularidad.
+\end{stepbox}
+\flow
+
+\begin{stepbox}[colback=teal!2,colframe=teal!55!black,
+  colbacktitle=teal!8,coltitle=teal!45!black]
+{06 \quad Ensamblar \(H\) y \(G\): convertir integrales en bloques \(2\times2\)}
+Al evaluar la identidad en cada nodo de colocación \(i\), se interpola el campo
+con las funciones \(N_g\) de los nodos globales. La formulación discreta es
+\[
+H_{ig}=C_{ig}+\operatorname{VP}\!\int_\Gamma N_g(\vect x)\,T\,\dd\Gamma,
+\qquad
+G_{ig}=\int_\Gamma N_g(\vect x)\,U\,\dd\Gamma,\qquad
+C_{ig}=c(\vect\xi_i)\delta_{ig}.
+\]
+El código separa el operador estático singular de la corrección dinámica:
+\[
+H_{ig}=H^s_{ig}+\int_\Gamma N_g(T-T^s)\,\dd\Gamma,\qquad
+G_{ig}=\int_\Gamma N_gU\,\dd\Gamma,\qquad
+H^s_{ii}=-\sum_{g\ne i}H^s_{ig}.
+\]
+La última igualdad hace que cada fila de bloques de \(H^s\) sume cero
+(traslación rígida estática); la diagonal no se omite. Al final,
+\[
+\boxed{H(\omega)\vect u=G(\omega)\vect t},
+\qquad H,G\in\mathbb C^{\,2N\times2N},\quad
+\vect u,\vect t\in\mathbb C^{\,2N}.
+\]
+\end{stepbox}
+\flow
+
+\begin{stepbox}[colback=orange!3,colframe=orange!65!black,
+  colbacktitle=orange!10,coltitle=orange!55!black]
+{07 \quad Aplicar la carga, resolver y extraer la respuesta buscada}
+La presión da el vector conocido \(\vect t=-p\vect n\); se resuelve el sistema
+lineal para las dos componentes del desplazamiento complejo en cada nodo:
+\[
+\boxed{\vect u=\operatorname{solve}\!\left(H,G\vect t\right).}
+\]
+Para el círculo, en el nodo \(i\), \(\vect n_i=\vect x_i/R\). La salida radial es
+\[
+\boxed{u_{r,i}=\vect u_i\cdot\vect n_i
+=u_{x,i}n_{x,i}+u_{y,i}n_{y,i}.}
+\]
+\(u_{r,i}\) es complejo: \(|u_{r,i}|\) da la amplitud local y
+\(\arg(u_{r,i})\) su fase con la convención \(e^{\ii\omega t}\). La clase devuelve
+un valor radial por nodo; no devuelve solo un promedio.
+\end{stepbox}
+
+\vfill
+\begin{tcolorbox}[enhanced,sharp corners,colback=black!4,colframe=black!35,
+  boxrule=0.6pt,left=3mm,right=3mm,top=1mm,bottom=1mm]
+\centering\small
+\textbf{Lectura global:}\quad
+\(\Div\sigma+\rho\omega^2u=0\)
+\(\xrightarrow{\text{Green}}\)
+\(cu+\int_\Gamma Tu=\int_\Gamma Ut\)
+\(\xrightarrow{\text{elementos}}\)
+\(H(\omega)u=G(\omega)t\)
+\(\xrightarrow{t=-pn}\)
+\(u_r=u\cdot n\).
+\end{tcolorbox}
+\begin{center}\scriptsize
+Esquema matemático del modelo de \texttt{BEMCilindro}; fuente de ecuaciones:
+\texttt{estudio\_bignardi/bem\_cilindro.py}.
+\end{center}
+\end{document}
